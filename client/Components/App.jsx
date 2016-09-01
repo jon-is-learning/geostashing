@@ -12,7 +12,12 @@ class App extends React.Component {
       <div>
         <h1>Hi there, beard person.</h1>
         <GetLocation />
-        <Map />
+        <Map
+          lat={37.7837678}
+          lng={-122.40914660000001}
+          pins={[
+            { lat: 37.7837678, lng: -122.40914660000001 }
+          ]}/>
       </div>
     );
   }
