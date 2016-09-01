@@ -1,4 +1,5 @@
 import React from 'react';
+import GetLocation from './CurrentLocation.jsx';
 
 class App extends React.Component {
   constructor () {
@@ -7,7 +8,10 @@ class App extends React.Component {
 
   render () {
     return (
-      <h1>Hi there, beard person.</h1>
+      <div>
+        <h1>Hi there, beard person.</h1>
+        <GetLocation />
+      </div>
     )
   }
 }
