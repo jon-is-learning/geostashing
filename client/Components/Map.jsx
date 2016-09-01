@@ -6,23 +6,34 @@ class Map extends React.Component {
     super(props);
 
     this.state = {
-      lat: props.lat,
-      lng: props.lng,
-      zoom: props.zoom || 8
-    }
+      lat: props.lat   || 0,
+      lng: props.lng   || 0,
+      zoom: props.zoom || 8,
+      pins: props.pins || []
+    };
   }
 
   componentDidMount() {
-    console.log('mounted', ReactDOM.findDOMNode(this));
+    var pos = {
+      lat: this.state.lat,
+      lng: this.state.lng
+    };
 
     var map = new google.maps.Map(ReactDOM.findDOMNode(this), {
-      center: {lat: -34.397, lng: 150.644},
+      center: pos,
       zoom: 8
+    });
+
+    this.state.pins.forEach((pin) => {
+      var marker = new google.maps.Marker({
+        map: map,
+        position: pin
+      });
     });
   }
 
   render() {
-    return (<div className="map"></div>)
+    return (<div className="map"></div>);
   }
 }
 
