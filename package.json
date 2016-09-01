@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/DanCSnyder/geostashing#readme",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "webpack": "^1.13.2"
@@ -29,6 +30,8 @@
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "chai": "^3.5.0",
-    "mocha": "^3.0.2"
+    "express": "^4.14.0",
+    "mocha": "^3.0.2",
+    "morgan": "^1.7.0"
   }
 }
