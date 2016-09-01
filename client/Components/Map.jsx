@@ -9,7 +9,7 @@ class Map extends React.Component {
       lat: props.lat,
       lng: props.lng,
       zoom: props.zoom || 8
-    }
+    };
   }
 
   componentDidMount() {
@@ -20,7 +20,7 @@ class Map extends React.Component {
       center: pos,
       zoom: 8
     });
-    
+
     var infoWindow = new google.maps.InfoWindow({map: map});
     infoWindow.setContent('Location found.');
     infoWindow.setPosition(pos);
@@ -28,7 +28,7 @@ class Map extends React.Component {
   }
 
   render() {
-    return (<div className="map"></div>)
+    return (<div className="map"></div>);
   }
 }
 
