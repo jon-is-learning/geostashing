@@ -2,9 +2,9 @@
 var chai = require('chai');
 var should = chai.should();
 
-describe('truth', function() {
-  it('should pass this test', function() {
-	  true.should.be.true;
-	  false.should.be.false;
+describe('truth', () => {
+  it('should pass this test', () => {
+    true.should.be.true;
+    false.should.be.false;
   });
 });
