@@ -1,6 +1,7 @@
 var router = require('express').Router();
 
 //require all controllers here
-//router.get('/', indexhandler);
+
+//router.get('/', (req, res) => res.send());
 
 module.exports = router;
