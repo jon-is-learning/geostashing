@@ -1,0 +1,19 @@
+{
+  "name": "geostashing",
+  "version": "1.0.0",
+  "description": "Geocaching service",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanCSnyder/geostashing.git"
+  },
+  "author": "Dan Snyder, Jon Garrett, Steven Huynh, Mason Clayton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanCSnyder/geostashing/issues"
+  },
+  "homepage": "https://github.com/DanCSnyder/geostashing#readme"
+}
