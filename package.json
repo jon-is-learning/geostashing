@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/DanCSnyder/geostashing#readme",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "chai": "^3.5.0",
-    "mocha": "^3.0.2"
+    "express": "^4.14.0",
+    "mocha": "^3.0.2",
+    "morgan": "^1.7.0"
   }
 }
