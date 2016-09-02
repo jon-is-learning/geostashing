@@ -12,6 +12,7 @@ describe('server', () => {
           done();
       }).catch(done);
     });
+
     it('should GET / with valid html', (done) => {
       chai.request(server).get('/').then(res => {
         res.should.have.status(200);
@@ -19,6 +20,7 @@ describe('server', () => {
         done();
       }).catch(done);
     });
+
     it('should return 404 for /notafile', (done) => {
       chai.request(server).get('/notafile').then(done)
       .catch(res => {
@@ -27,6 +29,7 @@ describe('server', () => {
       });
     });
   });
+
   describe('geolocations api endpoint (/api/geolocations)', () => {
     it('should return json from GET /api/geolocations', (done) => {
       chai.request(server)
@@ -36,6 +39,7 @@ describe('server', () => {
           done();
         }).catch(done);
     });
+
     it('should return an array from GET /api/geolocations', (done) => {
       chai.request(server)
         .get('/api/geolocations').then(res => {
@@ -44,6 +48,7 @@ describe('server', () => {
           done();
         }).catch(done);
     });
+
     it('should accept post requests to /api/geolocations with valid data', (done) => {
       chai.request(server)
         .post('/api/geolocations')
@@ -54,6 +59,7 @@ describe('server', () => {
           done();
         }).catch(done);
     });
+
     it('should reject post requests to /api/geolocations with invalid data', (done) => {
       chai.request(server).post('/api/geolocations')
         .then(done)
@@ -70,6 +76,22 @@ describe('server', () => {
           res.should.have.status(400);
           done();
         });
+    });
+
+    xit('should persist and return posted geolocations', (done) => {
+      var reqData = { name: 'first test', lat: 123, lng: 321 };
+      chai.request(server).post('/api/geolocations')
+        .send(reqData)
+        .then(res => {
+          res.should.have.status(200);
+          return chai.request(server).get('/api/geolocations');
+        }).then(res => {
+          res.should.be.json;
+          res.body.should.be.an('array');
+          res.body.length.should.not.equal(0);
+          res.body.should.contain(reqData);
+          done();
+        }).catch(done);
     });
   });
 });
