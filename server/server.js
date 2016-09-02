@@ -1,13 +1,12 @@
-const express = require('express');
+var express = require('express');
 
-const middleware = require('./config/middleware.js');
-const router = require('./config/routes.js');
+var middleware = require('./config/middleware.js');
+var router = require('./config/routes.js');
 
-const app = express();
-
-app.use(router);
+var app = express();
 
 middleware(app, express);
+app.use(router);
 
 app.listen(3000, () => {
   console.log('listening on 3000');
