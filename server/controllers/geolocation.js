@@ -9,8 +9,8 @@ module.exports.getAll = (req, res) => {
 module.exports.addOne = (req, res) => {
   if ((typeof req.body !== 'object')
       || !('name' in req.body)
-      || !('lat' in req.body.lat)
-      || !('lng' in req.body.lng)) {
+      || !('lat' in req.body)
+      || !('lng' in req.body)) {
     res.status(400).end();
 
     return;
