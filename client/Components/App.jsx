@@ -3,10 +3,6 @@ import GetLocation from './CurrentLocation.jsx';
 import Map from './Map.jsx';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>

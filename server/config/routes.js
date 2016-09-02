@@ -1,8 +1,8 @@
-var router = require('express').Router();
+const express = require('express');
+const router = new express.Router();
 
-var geolocations = require('../controllers/geolocation.js');
+const geolocations = require('../controllers/geolocation.js');
 
-//router.get('/', (req, res) => res.send());
 router.get('/api/geolocations', geolocations.getAll);
 router.post('/api/geolocations', geolocations.addOne);
 

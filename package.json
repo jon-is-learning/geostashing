@@ -4,7 +4,7 @@
   "description": "Geocaching service",
   "main": "webpack.config.js",
   "scripts": {
-    "build": "eslint **/*.js* && webpack",
+    "build": "eslint . --ext .js --ext .jsx --ignore-path .gitignore && webpack",
     "dev": "webpack -d --watch",
     "test": "mocha",
     "start": "node server/server.js"
