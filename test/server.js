@@ -1,6 +1,6 @@
-var chai = require('chai');
-var chaiHttp = require('chai-http');
-var server = require('../server/server.js');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../server/server.js');
 
 chai.use(chaiHttp);
 
@@ -49,7 +49,7 @@ describe('server', () => {
         }).catch(done);
     });
 
-    it('should accept post requests to /api/geolocations with valid data', (done) => {
+    it('should accept post requests with valid data', (done) => {
       chai.request(server)
         .post('/api/geolocations')
         .send({ name: 'test', lat: 0, lng: 0 })
@@ -60,13 +60,14 @@ describe('server', () => {
         }).catch(done);
     });
 
-    it('should reject post requests to /api/geolocations with invalid data', (done) => {
+    it('should reject post requests with invalid data', (done) => {
       chai.request(server).post('/api/geolocations')
         .then(done)
         .catch((res) => {
           res.should.have.status(400);
 
-          return chai.request(server).post('/api/geolocations').send({ thisis: 'not valid', 'test': ['data']});
+          return chai.request(server).post('/api/geolocations')
+            .send({ thisis: 'not valid', test: ['data'] });
         }).catch((res) => {
           res.should.have.status(400);
 
@@ -74,7 +75,8 @@ describe('server', () => {
         }).catch((res) => {
           res.should.have.status(400);
 
-          return chai.request(server).post('/api/geolocations').send('also not valid');
+          return chai.request(server).post('/api/geolocations')
+            .send('also not valid');
         }).catch((res) => {
           res.should.have.status(400);
           done();
@@ -82,7 +84,8 @@ describe('server', () => {
     });
 
     xit('should persist and return posted geolocations', (done) => {
-      var reqData = { name: 'first test', lat: 123, lng: 321 };
+      const reqData = { name: 'first test', lat: 123, lng: 321 };
+
       chai.request(server).post('/api/geolocations')
       .send(reqData)
       .then((res) => {

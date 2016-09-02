@@ -1,5 +1,5 @@
 //for tests that don't fit into any other file
-var chai = require('chai');
+const chai = require('chai');
 
 chai.should();
 
