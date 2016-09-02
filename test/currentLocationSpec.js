@@ -1,7 +1,7 @@
-var chai = require('chai');
-var chaiHttp = require('chai-http');
-var server = require('../server/server.js');
-var should = chai.should();
+//var chai = require('chai');
+//var chaiHttp = require('chai-http');
+//var server = require('../server/server.js');
+//var should = chai.should();
 
 // describe('get location', () => {
 //   describe('button', () => {

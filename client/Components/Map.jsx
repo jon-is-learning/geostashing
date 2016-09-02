@@ -6,33 +6,29 @@ class Map extends React.Component {
     super(props);
 
     this.state = {
-      lat: props.lat,
-      lng: props.lng,
-      zoom: props.zoom || 8
+      lat: props.lat   || 0,
+      lng: props.lng   || 0,
+      zoom: props.zoom || 8,
+      pins: props.pins || []
     };
   }
 
   componentDidMount() {
-    console.log('mounted', ReactDOM.findDOMNode(this));
-
-    var pos = {lat: 37.7837678, lng: -122.40914660000001};
+    var pos = {
+      lat: this.state.lat,
+      lng: this.state.lng
+    };
 
     var map = new google.maps.Map(ReactDOM.findDOMNode(this), {
       center: pos,
       zoom: 8
     });
 
-    var infoWindow = new google.maps.InfoWindow({
-      map: map,
-      position: pos,
-      content: 'You Are Here'
-    });
-    console.log(infoWindow);
-    // We can have info windows and pins
-    // TODO: Use some fun emoji for our pins!
-    var marker = new google.maps.Marker({
-      map: map,
-      position: pos
+    this.state.pins.forEach((pin) => {
+      var marker = new google.maps.Marker({
+        map: map,
+        position: pin
+      });
     });
   }
 
