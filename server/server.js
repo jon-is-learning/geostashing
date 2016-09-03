@@ -4,13 +4,13 @@ const middleware = require('./config/middleware.js');
 const router = require('./config/routes.js');
 
 const app = express();
-
-app.use(router);
+const port = 3000;
 
 middleware(app, express);
+app.use(router);
 
-app.listen(3000, () => {
-  console.log('listening on 3000');
+app.listen(port, () => {
+  console.log('listening on ', port);
 });
 
 module.exports = app;
