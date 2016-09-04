@@ -24,7 +24,10 @@
         "accessor-pairs": "error",
         "array-bracket-spacing": "error",
         "array-callback-return": "error",
-        "arrow-body-style": "error",
+        "arrow-body-style": [
+          "error",
+          "as-needed"
+        ],
         "arrow-parens": [
             "error",
             "always"
@@ -90,7 +93,7 @@
             "error",
             "unix"
         ],
-        "lines-around-comment": "error",
+        "lines-around-comment": "off",
         "max-depth": "error",
         "max-len": "error",
         "max-lines": "error",
@@ -124,7 +127,7 @@
         "no-extend-native": "error",
         "no-extra-bind": "error",
         "no-extra-label": "error",
-        "no-extra-parens": "error",
+        "no-extra-parens": "off",
         "no-floating-decimal": "error",
         "no-global-assign": "error",
         "no-implicit-coercion": "error",
@@ -138,7 +141,10 @@
         "no-lone-blocks": "error",
         "no-lonely-if": "error",
         "no-loop-func": "error",
-        "no-magic-numbers": "error",
+        "no-magic-numbers": [
+          "error",
+          { "ignore": [0, 1, 200, 301, 302, 400, 500] }
+        ],
         "no-mixed-operators": "error",
         "no-mixed-requires": "error",
         "no-multi-spaces": "error",
@@ -195,7 +201,9 @@
         "no-warning-comments": "error",
         "no-whitespace-before-property": "error",
         "no-with": "error",
-        "object-curly-newline": "error",
+        "object-curly-newline": [
+          "error"
+        ],
         "object-curly-spacing": [
           "error",
           "always"
@@ -204,11 +212,11 @@
         "one-var": "off",
         "one-var-declaration-per-line": "error",
         "operator-assignment": "error",
-        "operator-linebreak": "error",
-        "padded-blocks": [
+        "operator-linebreak": [
           "error",
-          { "classes": "always" }
+          "before"
         ],
+        "padded-blocks": "off",
         "prefer-arrow-callback": "error",
         "prefer-const": "error",
         "prefer-reflect": "error",
@@ -230,7 +238,7 @@
         "semi-spacing": "error",
         "sort-vars": "error",
         "space-before-blocks": "error",
-        "space-before-function-paren": "error",
+        "space-before-function-paren": "off",
         "space-in-parens": [
             "error",
             "never"
