@@ -19,13 +19,12 @@ getAll (req, res) {
 
 
 addOne (req, res) {
-  console.log('POST request body in LOCATIONSCONTROLLER: ', req.body);
+  // console.log('POST request body in LOCATIONSCONTROLLER: ', req.body);
   if ((typeof req.body !== 'object')
       || !('name' in req.body)
       || !('lat' in req.body)
       || !('lng' in req.body)) {
-    res.status(400).end();
-    return;
+    throw 'Not enough data to create new location.';
   }
   LOCATION
     .create(req.body) // Create builds a new model instance and calls save on it
