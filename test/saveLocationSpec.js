@@ -3,3 +3,8 @@
 // Should successfully add value
 // Should return value previously added <----- Different spec?
 // Should log errors
+
+const CHAI = require('chai');
+const CHAIHTTP = require('chai-http');
+
+CHAI.use(CHAIHTTP);
