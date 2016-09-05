@@ -7,7 +7,7 @@
     "build": "eslint . --ext .js --ext .jsx --ignore-path .gitignore && webpack",
     "dev": "webpack -d --watch",
     "test": "mocha",
-    "start": "node server/server.js"
+    "start": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
