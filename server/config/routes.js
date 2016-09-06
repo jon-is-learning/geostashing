@@ -7,7 +7,7 @@ const user = require('../controllers/user');
 router.get('/api/locations', locations.getAll);
 router.post('/api/locations', locations.addOne);
 
-router.get('/api/users', user.getOne);
-router.post('api/users', user.addOne);
+router.get('/api/users/:name', user.getOne);
+router.post('/api/users', user.addOne);
 
 module.exports = router;
