@@ -102,7 +102,7 @@
         "max-statements": "error",
         "max-statements-per-line": "error",
         "multiline-ternary": "error",
-        "new-cap": "0",
+        "new-cap": 0,
         "new-parens": "error",
         "newline-after-var": [
             "error",
