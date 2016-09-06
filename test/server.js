@@ -55,9 +55,8 @@ describe('server', () => {
         .send({ name: 'test', lat: 123.456789, lng: 123.456789 })
         .then((res) => {
           res.should.have.status(200);
-          res.body.name.should.equal('test');
-          res.body.lat.should.equal('123.456789');
-          res.body.lng.should.equal('123.456789');
+          //based on the spec
+          res.body.should.be.empty;
           done();
         }).catch(done);
     });

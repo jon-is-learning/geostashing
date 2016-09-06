@@ -16,6 +16,7 @@ const locationController = {
 
       return;
     }
+
     Location.create(req.body)
       .then(() => res.end())
       .catch((err) => res.status(500).send(err));
