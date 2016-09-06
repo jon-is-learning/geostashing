@@ -1,4 +1,4 @@
-const LOCATION = require('../models/locationModel.js');
+const LOCATION = require('../models/locationModel');
 
 const LOCATIONSCONTROLLER = {
 

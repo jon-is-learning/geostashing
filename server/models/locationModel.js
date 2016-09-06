@@ -1,16 +1,12 @@
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('geostash', 'postgres', '', {
-  host: 'localhost',
-  dialect: 'postgres'
-});
+const db = require('./db');
 
 const totalNumLength = 9;
 const decimalPlaces = 6;
 
-const Location = sequelize.define('location', {
-  name: Sequelize.STRING,
-  lat: Sequelize.DECIMAL(totalNumLength, decimalPlaces),
-  lng: Sequelize.DECIMAL(totalNumLength, decimalPlaces)
+const Location = db.sequelize.define('location', {
+  name: db.Sequelize.STRING,
+  lat: db.Sequelize.DECIMAL(totalNumLength, decimalPlaces),
+  lng: db.Sequelize.DECIMAL(totalNumLength, decimalPlaces)
 });
 
 Location.sync({ force: true })
