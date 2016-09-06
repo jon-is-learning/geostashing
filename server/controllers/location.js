@@ -1,12 +1,9 @@
-const LOCATION = require('../models/locationModel');
+const Location = require('../models/locationModel');
 
-const LOCATIONSCONTROLLER = {
-
+const locationController = {
   getAll (req, res) {
-    LOCATION
-      // .all() would also work I believe
-      .findAll()
-      .then((locations) => res.status(200).send(locations))
+    Location.findAll()
+      .then((locations) => res.send(locations))
       .catch((err) => res.status(400).send(err));
   },
 
@@ -19,13 +16,10 @@ const LOCATIONSCONTROLLER = {
 
       return;
     }
-    LOCATION
-      // Create builds a new model instance and calls save on it
-      .create(req.body)
-      .then((location) => res.status(200).send(location))
-      .catch((err) => res.status(400).send(err));
+    Location.create(req.body)
+      .then(() => res.end())
+      .catch((err) => res.status(500).send(err));
   }
-
 };
 
-module.exports = LOCATIONSCONTROLLER;
+module.exports = locationController;

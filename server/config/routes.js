@@ -2,7 +2,7 @@ const express = require('express');
 const router = new express.Router();
 
 const locations = require('../controllers/location');
-const user = require('../controllers/userController');
+const user = require('../controllers/user');
 
 router.get('/api/locations', locations.getAll);
 router.post('/api/locations', locations.addOne);
