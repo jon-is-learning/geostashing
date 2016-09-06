@@ -3,7 +3,10 @@ const USER = require('../models/userModel');
 const USERSCONTROLLER = {
 
   getOne (req, res) {
-    res.status(200).send({ name: 'Jon' });
+    USER
+      .findOne(req.body)
+      .then((user) => res.status(200).send(user))
+      .catch((err) => res.status(400).send(err));
   },
 
   addOne (req, res) {
