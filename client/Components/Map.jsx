@@ -1,37 +1,37 @@
 import React from 'react';
 
 class Map extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      lat: props.lat,
-      lng: props.lng,
-      zoom: props.zoom,
-      pins: props.pins
-    };
-  }
-
   componentDidMount() {
     /* global google */
     //should be defined at this point
 
     const pos = {
-      lat: this.state.lat,
-      lng: this.state.lng
+      lat: this.props.lat,
+      lng: this.props.lng
     };
 
-    const map = new google.maps.Map(this.refs.map, {
-      center: pos,
-      zoom: 8
+    this.setState({
+      map: new google.maps.Map(this.refs.map, {
+        center: pos,
+        zoom: this.props.zoom
+      })
     });
 
-    this.state.pins.forEach((pin) =>
-      new google.maps.Marker({ map, position: pin }));
+    this.props.pins.forEach((pin) =>
+      new google.maps.Marker({ map: this.state.map, position: pin }));
+  }
+
+  componentWillUpdate(props) {
+    props.pins.map((pin) => ({
+      lat: parseFloat(pin.lat),
+      lng: parseFloat(pin.lng)
+    })).forEach((pin) =>
+      new google.maps.Marker({ map: this.state.map, position: pin }));
+
   }
 
   render() {
-    return (<div className="map" ref="map"></div>);
+    return <div className="map" ref="map"></div>;
   }
 }
 

@@ -1,17 +1,17 @@
 const Location = require('../models/locationModel');
 
 const locationController = {
-  getAll (req, res) {
-    Location.findAll()
+  getAll(req, res) {
+    Location.findAll({ attributes: ['name', 'lat', 'lng'] })
       .then((locations) => res.send(locations))
       .catch((err) => res.status(400).send(err));
   },
 
-  addOne (req, res) {
+  addOne(req, res) {
     if ((typeof req.body !== 'object')
-        || !('name' in req.body)
-        || !('lat' in req.body)
-        || !('lng' in req.body)) {
+        || typeof req.body.name !== 'string'
+        || typeof req.body.lng !== 'string'
+        || typeof req.body.lat !== 'string') {
       res.status(400).send('Not enough data to create new location.');
 
       return;
