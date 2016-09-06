@@ -85,7 +85,11 @@ describe('server', () => {
     });
 
     it('should persist and return posted locations', (done) => {
-      const reqData = { name: 'first test', lat: '123.456789', lng: '987.654321' };
+      const reqData = {
+        name: 'first test',
+        lat: '123.456789',
+        lng: '987.654321'
+      };
 
       chai.request(server).post('/api/locations')
       .send(reqData)
