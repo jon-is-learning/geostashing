@@ -15,7 +15,7 @@ class Map extends React.Component {
       zoom: this.props.zoom
     });
 
-    google.maps.event.addListener(map, 'click', (ev) =>
+    map.addListener('click', (ev) =>
       this.submitPin({
         lat: ev.latLng.lat().toString(),
         lng: ev.latLng.lng().toString(),
