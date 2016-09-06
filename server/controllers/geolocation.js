@@ -1,20 +1,31 @@
-module.exports.getAll = (req, res) => {
-  const fakeData = [
-    { name: 'hack reactor', lat: 37.7840795, lng: -122.4087025 }
-  ];
+const LOCATION = require('../models/locationModel');
 
-  res.json(fakeData);
-};
+const LOCATIONSCONTROLLER = {
 
-module.exports.addOne = (req, res) => {
-  if ((typeof req.body !== 'object')
-      || !('name' in req.body)
-      || !('lat' in req.body)
-      || !('lng' in req.body)) {
-    res.status(400).end();
+  getAll (req, res) {
+    LOCATION
+      // .all() would also work I believe
+      .findAll()
+      .then((locations) => res.status(200).send(locations))
+      .catch((err) => res.status(400).send(err));
+  },
 
-    return;
+  addOne (req, res) {
+    if ((typeof req.body !== 'object')
+        || !('name' in req.body)
+        || !('lat' in req.body)
+        || !('lng' in req.body)) {
+      res.status(400).send('Not enough data to create new location.');
+
+      return;
+    }
+    LOCATION
+      // Create builds a new model instance and calls save on it
+      .create(req.body)
+      .then((location) => res.status(200).send(location))
+      .catch((err) => res.status(400).send(err));
   }
 
-  res.end();
 };
+
+module.exports = LOCATIONSCONTROLLER;

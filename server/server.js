@@ -1,7 +1,7 @@
 const express = require('express');
 
-const middleware = require('./config/middleware.js');
-const router = require('./config/routes.js');
+const middleware = require('./config/middleware');
+const router = require('./config/routes');
 
 const app = express();
 const port = 3000;
