@@ -30,19 +30,19 @@ describe('server', () => {
     });
   });
 
-  describe('geolocations api endpoint (/api/geolocations)', () => {
-    it('should return json from GET /api/geolocations', (done) => {
+  describe('locations api endpoint (/api/locations)', () => {
+    it('should return json from GET /api/locations', (done) => {
       chai.request(server)
-        .get('/api/geolocations').then((res) => {
+        .get('/api/locations').then((res) => {
           res.should.have.status(200);
           res.should.be.json;
           done();
         }).catch(done);
     });
 
-    it('should return an array from GET /api/geolocations', (done) => {
+    it('should return an array from GET /api/locations', (done) => {
       chai.request(server)
-        .get('/api/geolocations').then((res) => {
+        .get('/api/locations').then((res) => {
           res.should.have.status(200);
           res.body.should.be.an('array');
           done();
@@ -51,7 +51,7 @@ describe('server', () => {
 
     it('should accept post requests with valid data', (done) => {
       chai.request(server)
-        .post('/api/geolocations')
+        .post('/api/locations')
         .send({ name: 'test', lat: 123.456789, lng: 123.456789 })
         .then((res) => {
           res.should.have.status(200);
@@ -63,21 +63,21 @@ describe('server', () => {
     });
 
     it('should reject post requests with invalid data', (done) => {
-      chai.request(server).post('/api/geolocations')
+      chai.request(server).post('/api/locations')
         .then(done)
         .catch((res) => {
           res.should.have.status(400);
 
-          return chai.request(server).post('/api/geolocations')
+          return chai.request(server).post('/api/locations')
             .send({ thisis: 'not valid', test: ['data'] });
         }).catch((res) => {
           res.should.have.status(400);
 
-          return chai.request(server).post('/api/geolocations').send({});
+          return chai.request(server).post('/api/locations').send({});
         }).catch((res) => {
           res.should.have.status(400);
 
-          return chai.request(server).post('/api/geolocations')
+          return chai.request(server).post('/api/locations')
             .send('also not valid');
         }).catch((res) => {
           res.should.have.status(400);
@@ -85,15 +85,15 @@ describe('server', () => {
         });
     });
 
-    it('should persist and return posted geolocations', (done) => {
+    it('should persist and return posted locations', (done) => {
       const reqData = { name: 'first test', lat: 123.456789, lng: 987.654321 };
 
-      chai.request(server).post('/api/geolocations')
+      chai.request(server).post('/api/locations')
       .send(reqData)
       .then((res) => {
         res.should.have.status(200);
 
-        return chai.request(server).get('/api/geolocations');
+        return chai.request(server).get('/api/locations');
       }).then((res) => {
         const mostRecent = res.body[res.body.length - 1];
 
