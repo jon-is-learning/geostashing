@@ -1,6 +1,18 @@
 const db = require('./db');
 
-const User = db.sequelize.define('user', { name: db.Sequelize.STRING });
+const User = db.sequelize.define('user',
+  {
+    id: {
+      type: db.Sequelize.UUID,
+      primaryKey: true,
+      defaultValue: db.Sequelize.UUIDV4
+    },
+    name: {
+      type: db.Sequelize.STRING,
+      unique: true
+    }
+  });
+
 
 User.sync({ force: true })
   .then(() =>

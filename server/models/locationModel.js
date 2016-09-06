@@ -1,10 +1,19 @@
 const db = require('./db');
+const User = require('./userModel');
 
 const totalNumLength = 9;
 const decimalPlaces = 6;
 
 const Location = db.sequelize.define('location', {
-  name: db.Sequelize.STRING,
+  id: {
+    type: db.Sequelize.UUID,
+    primaryKey: true,
+    defaultValue: db.Sequelize.UUIDV4
+  },
+  name: {
+    type: db.Sequelize.STRING,
+    unique: true
+  },
   lat: db.Sequelize.DECIMAL(totalNumLength, decimalPlaces),
   lng: db.Sequelize.DECIMAL(totalNumLength, decimalPlaces)
 });
