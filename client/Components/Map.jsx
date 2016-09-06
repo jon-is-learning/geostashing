@@ -10,24 +10,44 @@ class Map extends React.Component {
       lng: this.props.lng
     };
 
-    this.setState({
-      map: new google.maps.Map(this.refs.map, {
-        center: pos,
-        zoom: this.props.zoom
-      })
+    const map = new google.maps.Map(this.refs.map, {
+      center: pos,
+      zoom: this.props.zoom
     });
 
-    this.props.pins.forEach((pin) =>
-      new google.maps.Marker({ map: this.state.map, position: pin }));
+    google.maps.event.addListener(map, 'click', (ev) =>
+      this.submitPin({
+        lat: ev.latLng.lat().toString(),
+        lng: ev.latLng.lng().toString(),
+        name: 'test location'
+      }));
+
+    this.setState({ map });
+    this.drawPins(this.props.pins);
   }
 
-  componentWillUpdate(props) {
-    props.pins.map((pin) => ({
+  submitPin(pin) {
+    const pinReq = new Request('/api/locations', {
+      method: 'POST',
+      body: JSON.stringify(pin),
+      headers: { 'content-type': 'application/json' }
+    });
+
+    fetch(pinReq)
+      .then((res) => res.text())
+      .then(() => this.drawPins([pin]));
+  }
+
+  drawPins(pins) {
+    pins.map((pin) => ({
       lat: parseFloat(pin.lat),
       lng: parseFloat(pin.lng)
     })).forEach((pin) =>
       new google.maps.Marker({ map: this.state.map, position: pin }));
+  }
 
+  componentWillUpdate(props) {
+    this.drawPins(props.pins);
   }
 
   render() {
