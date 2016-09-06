@@ -36,7 +36,7 @@ describe('User Functionality', () => {
   });
 
   describe('SIGNUP: POST /api/users server routing and endpoint', () => {
-    it('should POST to /api/users',
+    it('should POST to /api/users and return new user',
       (done) => {
         chai
           .request(server)
@@ -60,7 +60,7 @@ describe('User Functionality', () => {
             done();
           })
           .catch(done);
-      })
+      });
 
   });
 
