@@ -1,10 +1,6 @@
 import React from 'react'; 
-import ReactDOM from 'react-dom'; 
 
-class Users extends React.Component {
-  
-
-  render() {
+var Users = (props) => {
 
     return (
       <div>
@@ -12,12 +8,23 @@ class Users extends React.Component {
         <h4>Username</h4>
         <input />
         <h4>Password</h4>
-        <input /><br></br>
+        <input />
         <a href='#'>Register</a>
         <button onClick=''>Login</button>
       </div>
     )
-  }
 }
 
 export default Users; 
+
+
+// var Pictures = (props) => {
+
+//     return (
+//       <div>
+//         <button onClick={function() {console.log(props.img); props.onClick()}}>PUPPIES</button>
+//         <img src={props.img} />
+//       </div>
+//     )
+// }
+
