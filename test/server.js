@@ -95,12 +95,17 @@ describe('server', () => {
 
         return chai.request(server).get('/api/geolocations');
       }).then((res) => {
+        const mostRecent = res.body[res.body.length - 1];
+
         res.should.be.json;
         res.body.should.be.an('array');
         res.body.length.should.not.equal(0);
-        var mostRecent = res.body[res.body.length - 1];
-        // postgreSQL returns decimal values as strings. This keeps accuracy intact from rounding problems. Not sure if this would be a problem for our uses, but I guess we should check on string before we make a call.
-        // We need to parse it somewhere, but for now let's change this test so it checks the name of the most recently added instance instead of deeply equals or contains values.
+        //PostgreSQL returns decimal values as strings.
+        //This keeps accuracy intact from rounding problems.
+        //Not sure if this would be a problem for our uses.
+        //We should check on string before we make a call.
+        //We can either turn decimals into integers for storage.
+        //Or call parseInt() on result of query.
         mostRecent.name.should.equal('first test');
         done();
       }).catch(done);

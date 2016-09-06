@@ -8,3 +8,5 @@ const CHAI = require('chai');
 const CHAIHTTP = require('chai-http');
 
 CHAI.use(CHAIHTTP);
+
+// These are mostly being done by server.js spec file
