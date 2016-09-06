@@ -1,13 +1,13 @@
 const express = require('express');
 const router = new express.Router();
 
-const geolocations = require('../controllers/geolocation');
-const USERS = require('../controllers/userController');
+const locations = require('../controllers/location');
+const user = require('../controllers/user');
 
-router.get('/api/geolocations', geolocations.getAll);
-router.post('/api/geolocations', geolocations.addOne);
+router.get('/api/locations', locations.getAll);
+router.post('/api/locations', locations.addOne);
 
-router.get('/api/users', USERS.getOne);
-router.post('api/users', USERS.addOne);
+router.get('/api/users', user.getOne);
+router.post('api/users', user.addOne);
 
 module.exports = router;
