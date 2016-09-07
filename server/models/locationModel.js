@@ -13,10 +13,17 @@ const Location = db.sequelize.define('location', {
   },
   name: {
     type: db.Sequelize.STRING,
-    unique: true
+    unique: true,
+    allowNull: false
   },
-  lat: db.Sequelize.DECIMAL(totalNumLength, decimalPlaces),
-  lng: db.Sequelize.DECIMAL(totalNumLength, decimalPlaces)
+  lat: {
+    type: db.Sequelize.DECIMAL(totalNumLength, decimalPlaces),
+    allowNull: false
+  }
+  lng: {
+    type: db.Sequelize.DECIMAL(totalNumLength, decimalPlaces),
+    allowNull: false
+  }
 });
 
 User.hasMany(Location, {
@@ -27,41 +34,41 @@ User.hasMany(Location, {
 });
 // Comment out the following to keep terminal from clutter:
 // Uncomment out the following to add tables to your db:
-User.sync({ force: true })
-  .then(() =>
-    User.create({ name: 'testOne' })
-  )
-  .then((user) => {
-    // console.log('User table create with test user: ', user.dataValues);
-    Location
-      .sync({ force: true })
-      .then(() =>
-        Location
-          .bulkCreate([
-            {
-              name: 'Jon\'s Test Location',
-              lat: 123.456789,
-              lng: 123.456789,
-              userId: user.dataValues.id
-            },
-            {
-              name: 'Hack Reactor',
-              lat: 37.7840795,
-              lng: -122.4087025,
-              userId: user.dataValues.id
-            }
-          ])
-      )
-      // .then((location) => {
-      //   console.log('locationModel.js. dataValues: ');
-      //   location.forEach((item) => {
-      //     console.log(item.dataValues);
-      //   });
-      // })
-  })
-  .catch((err) => {
-    console.log('Table could not be created. Error: ', err);
-  });
+// User.sync({ force: true })
+//   .then(() =>
+//     User.create({ name: 'testOne' })
+//   )
+//   .then((user) => {
+//     // console.log('User table create with test user: ', user.dataValues);
+//     Location
+//       .sync({ force: true })
+//       .then(() =>
+//         Location
+//           .bulkCreate([
+//             {
+//               name: 'Jon\'s Test Location',
+//               lat: 123.456789,
+//               lng: 123.456789,
+//               userId: user.dataValues.id
+//             },
+//             {
+//               name: 'Hack Reactor',
+//               lat: 37.7840795,
+//               lng: -122.4087025,
+//               userId: user.dataValues.id
+//             }
+//           ])
+//       )
+//       // .then((location) => {
+//       //   console.log('locationModel.js. dataValues: ');
+//       //   location.forEach((item) => {
+//       //     console.log(item.dataValues);
+//       //   });
+//       // })
+//   })
+//   .catch((err) => {
+//     console.log('Table could not be created. Error: ', err);
+//   });
 
 
 module.exports = Location;
