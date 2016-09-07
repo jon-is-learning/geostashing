@@ -13,7 +13,18 @@ class App extends React.Component {
   }
 
   registerClick() {
+    // Add the username and password into the database
+      // If the username already exists, route to register page again with error message. 
+      <p>Username already in use.</p>
+      // If username doesn't exist, store the pw and username and route to the main page. 
 
+  }
+
+  signInClick() {
+    // If username and password exists in the database, route to the main page
+
+    // If username and password does not exist, route to the login page again with error message. 
+      <p>Invalid username and/or password</p>
   }
 
   render() {
@@ -27,15 +38,19 @@ class App extends React.Component {
           pins={[
             { lat: 37.7837678, lng: -122.40914660000001 }
           ]}/>
-          
-        <SignIn />
-        <SignUp />
+
+        <SignIn onClick={this.registerClick.bind(this)} />
+        <SignUp onClick={this.registerClick.bind(this)} />
         
       </div>
     );
   }
 }
 
+// <Route path='/' component={Home} />
+// <Route path='/address' component={Address} />
+
 export default App;
 
+// onClick={this.onButtonClick.bind(this)
 

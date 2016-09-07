@@ -1,18 +1,18 @@
 import React from 'react'; 
+import { Router, Route, Link } from 'react-router'; 
 
-class SignUp extends React.Component {
-  render() {
+var SignUp = (props) => {
+
     return (
       <div>
         <h1>REGISTER</h1>
         <h4>Username</h4>
-        <input />
+        <input type='text' />
         <h4>Password</h4>
-        <input />
-        <button onClick=''>Sign Up</button>
+        <input type='password' />
+        <input type='submit' /> 
       </div>
     )
-  }
 }
 
 export default SignUp; 
