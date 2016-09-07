@@ -32,7 +32,10 @@ class Map extends React.Component {
       map: null
     };
 
-    this.state = { currentPin: null };
+    this.state = {
+      currentPin: null,
+      pins: props.pins
+    };
   }
 
   componentDidMount() {
@@ -57,7 +60,7 @@ class Map extends React.Component {
       }
     }));
 
-    this.drawPins(this.props.pins);
+    this.drawPins(this.state.pins);
   }
 
   drawPins(pins) {
@@ -92,9 +95,13 @@ class Map extends React.Component {
   }
 
   componentWillUpdate(newProps, newState) {
-    if (newProps.pins !== this.props.pins) {
-      console.log('redrawing all pins');
+    if (newState.pins !== this.state.pins) {
+      console.log('redrawing all pins from state');
+      this.drawPins(newState.pins);
+    } else if (newProps.pins !== this.props.pins) {
+      console.log('redrawing all pins from props');
       this.drawPins(newProps.pins);
+      this.setState({ pins: newProps.pins });
     }
 
     if (newState.currentPin !== this.state.currentPin) {
@@ -103,13 +110,24 @@ class Map extends React.Component {
     }
   }
 
+  pinAdded(pin) {
+    console.log('pin added', pin);
+    this.setState({
+      currentPin: null,
+      pins: this.state.pins.concat([pin])
+    });
+    this.data.currentPin.setMap(null);
+    this.data.currentPin = null;
+  }
+
   render() {
     let addLocation = '';
 
     if (this.state.currentPin) {
       addLocation = <AddLocation
         lng={this.state.currentPin.lng}
-        lat={this.state.currentPin.lat} />;
+        lat={this.state.currentPin.lat}
+        pinAdded={this.pinAdded.bind(this)}/>;
     }
 
     return (
