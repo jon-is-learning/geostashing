@@ -13,10 +13,7 @@ const userController = {
     // console.log('User controller addOne: ', req.body);
     User
       .create(req.body)
-      .then((user) => {
-        // console.log('Sending response of new user: ', user);
-        res.status(200).send(user.dataValues)
-      })
+      .then((user) => res.status(200).send(user.dataValues))
       .catch((err) => res.status(500).send(err));
   },
 
@@ -30,12 +27,8 @@ const userController = {
   deleteOne (req, res) {
     User
       .findOne({ where: req.params })
-      .then((user) => {
-        return user.destroy();
-      })
-      .then((data) => {
-        res.status(200).send(data)
-      })
+      .then((user) => user.destroy())
+      .then((data) => res.status(200).send(data))
       .catch((err) => res.status(500).send(err));
   }
 };

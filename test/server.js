@@ -3,9 +3,7 @@ const chaiHttp = require('chai-http');
 const server = require('../server/server.js');
 
 chai.use(chaiHttp);
-const curTestUser = {
-  model: null
-};
+const curTestUser = { model: null };
 
 // Let's create a new user so we can use its foreign key in below tests
 describe('server', () => {
@@ -74,12 +72,12 @@ describe('server', () => {
               lng: '123.456789',
               userId: curTestUser.model.id
             })
-            .then((res) => {
+            .then(() => {
               res.should.have.status(200);
               //based on the spec
               res.body.should.be.empty;
               done();
-            })
+            });
         }).catch(done);
     });
 
