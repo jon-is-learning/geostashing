@@ -8,6 +8,8 @@ router.get('/api/locations', locations.getAll);
 router.post('/api/locations', locations.addOne);
 
 router.get('/api/users/:name', user.getOne);
+router.get('/api/users', user.getAll);
 router.post('/api/users', user.addOne);
+router.delete('/api/users/:name', user.deleteOne);
 
 module.exports = router;

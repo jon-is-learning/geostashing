@@ -1,5 +1,4 @@
 const db = require('./db');
-const Location = require('./locationModel');
 
 const User = db.sequelize.define('user',
   {

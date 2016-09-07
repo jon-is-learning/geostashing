@@ -41,7 +41,7 @@ describe('User Functionality', () => {
         chai
           .request(server)
           .post('/api/users')
-          .send({ name: 'testUser' })
+          .field('name', 'testUser')
           .then((res) => {
             res.should.have.status(200);
             res.body.should.be.an('object');

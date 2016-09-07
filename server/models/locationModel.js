@@ -25,13 +25,14 @@ User.hasMany(Location, {
     allowNull: false
   }
 });
-
+// Comment out the following to keep terminal from clutter:
+// Uncomment out the following to add tables to your db:
 User.sync({ force: true })
   .then(() =>
     User.create({ name: 'testOne' })
   )
   .then((user) => {
-    console.log('User table create with test user: ', user.dataValues);
+    // console.log('User table create with test user: ', user.dataValues);
     Location
       .sync({ force: true })
       .then(() =>
@@ -51,18 +52,15 @@ User.sync({ force: true })
             }
           ])
       )
-      .then((location) => {
-        console.log('locationModel.js. dataValues: ');
-        location.forEach((item) => {
-          console.log(item.dataValues);
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      // .then((location) => {
+      //   console.log('locationModel.js. dataValues: ');
+      //   location.forEach((item) => {
+      //     console.log(item.dataValues);
+      //   });
+      // })
   })
   .catch((err) => {
-    console.log('User table could not be created. Error: ', err);
+    console.log('Table could not be created. Error: ', err);
   });
 
 

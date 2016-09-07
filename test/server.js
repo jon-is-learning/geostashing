@@ -3,7 +3,11 @@ const chaiHttp = require('chai-http');
 const server = require('../server/server.js');
 
 chai.use(chaiHttp);
+const curTestUser = {
+  model: null
+};
 
+// Let's create a new user so we can use its foreign key in below tests
 describe('server', () => {
   describe('static files', () => {
     it('should GET /', (done) => {
@@ -43,6 +47,7 @@ describe('server', () => {
     it('should return an array from GET /api/locations', (done) => {
       chai.request(server)
         .get('/api/locations').then((res) => {
+          // console.log(res.body);
           res.should.have.status(200);
           res.body.should.be.an('array');
           done();
@@ -50,19 +55,31 @@ describe('server', () => {
     });
 
     it('should accept post requests with valid data', (done) => {
-      chai.request(server)
-        .post('/api/locations')
-        .send({
-          name: 'test',
-          lat: '123.456789',
-          lng: '123.456789',
-          userId: '7f237ef1-28e4-4936-a8ed-834fb12a28e7'
-        })
+      // Since foreign keys are required and automatically generated:
+      // We need to create a user for the test and use resulting id.
+      chai
+        .request(server)
+        .post('/api/users')
+        .field('name', 'test')
         .then((res) => {
-          res.should.have.status(200);
-          //based on the spec
-          res.body.should.be.empty;
-          done();
+          console.log('This Test Suite User res.body: ', res.body);
+          curTestUser.model = res.body;
+          console.log('curTestUser value: ', curTestUser);
+          chai
+            .request(server)
+            .post('/api/locations')
+            .send({
+              name: 'test',
+              lat: '123.456789',
+              lng: '123.456789',
+              userId: curTestUser.model.id
+            })
+            .then((res) => {
+              res.should.have.status(200);
+              //based on the spec
+              res.body.should.be.empty;
+              done();
+            })
         }).catch(done);
     });
 
@@ -94,7 +111,7 @@ describe('server', () => {
         name: 'first test',
         lat: '123.456789',
         lng: '987.654321',
-        userId: '7f237ef1-28e4-4936-a8ed-834fb12a28e7'
+        userId: curTestUser.model.id
       };
 
       chai.request(server).post('/api/locations')
