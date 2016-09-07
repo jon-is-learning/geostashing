@@ -1,6 +1,43 @@
 import React from 'react';
+import AddLocation from './AddLocation.jsx';
+
+//the map component basically wraps around the google maps api
+//it can take a list of pins (in format specified by api) and display them
+//through the google maps api.
+
+//`props.pins` represents a simple json format for specifying pins while
+//`this.data.pins` contains the markers created by google maps api
+
+//lifecycle:
+//instantiation:
+//  pass down props and create an instance variable `data`
+//  holding data related to google maps api.
+//  -> triggers render
+//render:
+//  adds the div which will hold the map puts reference to map div in
+//  refs.gmap
+//  -> triggers componentDidMount
+//componentDidMount:
+//  now that a DOM element is available google maps can attach
+//  to this element and render a map. data.map should now be equal to a
+//  google maps object.
 
 class Map extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.data = {
+      pins: [],
+      currentPin: null,
+      map: null
+    };
+
+    this.state = {
+      currentPin: null,
+      pins: props.pins
+    };
+  }
+
   componentDidMount() {
     /* global google */
     //should be defined at this point
@@ -10,48 +47,95 @@ class Map extends React.Component {
       lng: this.props.lng
     };
 
-    const map = new google.maps.Map(this.refs.map, {
+    this.data.map = new google.maps.Map(this.refs.gmap, {
       center: pos,
       zoom: this.props.zoom
     });
 
-    google.maps.event.addListener(map, 'click', (ev) =>
-      this.submitPin({
-        lat: ev.latLng.lat().toString(),
-        lng: ev.latLng.lng().toString(),
-        name: 'test location'
-      }));
+    this.data.map.addListener('click', (ev) => this.setState({
+      currentPin: {
+        lat: ev.latLng.lat(),
+        lng: ev.latLng.lng(),
+        id: -1
+      }
+    }));
 
-    this.setState({ map });
-    this.drawPins(this.props.pins);
-  }
-
-  submitPin(pin) {
-    const pinReq = new Request('/api/locations', {
-      method: 'POST',
-      body: JSON.stringify(pin),
-      headers: { 'content-type': 'application/json' }
-    });
-
-    fetch(pinReq)
-      .then((res) => res.text())
-      .then(() => this.drawPins([pin]));
+    this.drawPins(this.state.pins);
   }
 
   drawPins(pins) {
-    pins.map((pin) => ({
+    //first remove all pins
+    this.data.pins.forEach((pin) => pin.setMap(null));
+
+    //next add all pins
+    this.data.pins = pins.map((pin) => ({
       lat: parseFloat(pin.lat),
-      lng: parseFloat(pin.lng)
-    })).forEach((pin) =>
-      new google.maps.Marker({ map: this.state.map, position: pin }));
+      lng: parseFloat(pin.lng),
+      name: pin.name
+    })).map((pin) =>
+      new google.maps.Marker({
+        map: this.data.map,
+        position: pin,
+        title: pin.name
+      }));
   }
 
-  componentWillUpdate(props) {
-    this.drawPins(props.pins);
+  updateCurrentPin(state) {
+    if (state.currentPin) {
+      if (this.data.currentPin) {
+        this.data.currentPin.setPosition(state.currentPin);
+      } else {
+        this.data.currentPin = new google.maps.Marker({
+          map: this.data.map,
+          position: state.currentPin,
+          title: 'current location'
+        });
+      }
+    }
+  }
+
+  componentWillUpdate(newProps, newState) {
+    if (newState.pins !== this.state.pins) {
+      console.log('redrawing all pins from state');
+      this.drawPins(newState.pins);
+    } else if (newProps.pins !== this.props.pins) {
+      console.log('redrawing all pins from props');
+      this.drawPins(newProps.pins);
+      this.setState({ pins: newProps.pins });
+    }
+
+    if (newState.currentPin !== this.state.currentPin) {
+      console.log('changing current pin');
+      this.updateCurrentPin(newState);
+    }
+  }
+
+  pinAdded(pin) {
+    console.log('pin added', pin);
+    this.setState({
+      currentPin: null,
+      pins: this.state.pins.concat([pin])
+    });
+    this.data.currentPin.setMap(null);
+    this.data.currentPin = null;
   }
 
   render() {
-    return <div className="map" ref="map"></div>;
+    let addLocation = '';
+
+    if (this.state.currentPin) {
+      addLocation = <AddLocation
+        lng={this.state.currentPin.lng}
+        lat={this.state.currentPin.lat}
+        pinAdded={this.pinAdded.bind(this)}/>;
+    }
+
+    return (
+      <div>
+        <div className="map" ref="gmap"></div>
+        {addLocation}
+      </div>
+    );
   }
 }
 
