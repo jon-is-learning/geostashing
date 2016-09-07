@@ -35,23 +35,23 @@ User.hasMany(Location, {
 // Comment out the following to keep terminal from clutter:
 // Uncomment out the following to add tables to your db:
 // Add {force: true} to .sync() if you want to drop existing tables
-User.sync({force: true})
+User.sync({ force: true })
   .then(() =>
     User.create({
       name: 'testThree',
-      id: "216d00fa-e94c-4d41-83b4-95dc57d11052"
+      id: '216d00fa-e94c-4d41-83b4-95dc57d11052'
     })
   )
   .then(() =>
     User.create({
       name: 'testTwo',
-      id: "df00ade3-bd8e-427d-8538-89f0b663dc00"
+      id: 'df00ade3-bd8e-427d-8538-89f0b663dc00'
     })
   )
-  .then((user) => {
+  .then(() => {
     // console.log('User table create with test user: ', user.dataValues);
     Location
-      .sync({force: true})
+      .sync({ force: true })
       .then(() =>
         Location
           .bulkCreate([
@@ -59,13 +59,13 @@ User.sync({force: true})
               name: 'Jon\'s Test Location',
               lat: 123.456789,
               lng: 123.456789,
-              userId: "df00ade3-bd8e-427d-8538-89f0b663dc00"
+              userId: 'df00ade3-bd8e-427d-8538-89f0b663dc00'
             },
             {
               name: 'Hack Reactor',
               lat: 37.7840795,
               lng: -122.4087025,
-              userId: "216d00fa-e94c-4d41-83b4-95dc57d11052"
+              userId: '216d00fa-e94c-4d41-83b4-95dc57d11052'
             }
           ])
       );
