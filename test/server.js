@@ -45,39 +45,42 @@ describe('server', () => {
     it('should return an array from GET /api/locations', (done) => {
       chai.request(server)
         .get('/api/locations').then((res) => {
-          // console.log(res.body);
+          // console.log('Inside server spec array from get: ', res.body);
           res.should.have.status(200);
           res.body.should.be.an('array');
           done();
         }).catch(done);
     });
-
-    it('should accept post requests with valid data', (done) => {
+    it('should create test user data with valid data', (done) => {
       // Since foreign keys are required and automatically generated:
       // We need to create a user for the test and use resulting id.
       chai
         .request(server)
         .post('/api/users')
-        .field('name', 'testUserServerSpec')
+        .set('Content-Type', 'application/json')
+        .send(JSON.stringify({ name: 'testUserServerSpec' }))
         .then((res) => {
           console.log('This Test Suite User res.body: ', res.body);
           curTestUser.model = res.body;
           console.log('curTestUser value: ', curTestUser);
-          chai
-            .request(server)
-            .post('/api/locations')
-            .send({
-              name: 'test',
-              lat: '123.456789',
-              lng: '123.456789',
-              userId: curTestUser.model.id
-            })
-            .then(() => {
-              res.should.have.status(200);
-              //based on the spec
-              res.body.should.be.empty;
-              done();
-            });
+          done();
+        }).catch(done);
+    });
+    it('should accept post requests with valid data', (done) => {
+      chai
+        .request(server)
+        .post('/api/locations')
+        .send({
+          name: 'test',
+          lat: '123.456789',
+          lng: '123.456789',
+          userId: curTestUser.model.id
+        })
+        .then((res) => {
+          res.should.have.status(200);
+          //based on the spec
+          res.body.should.be.empty;
+          done();
         }).catch(done);
     });
 
@@ -122,7 +125,7 @@ describe('server', () => {
         res.should.be.json;
         res.body.should.be.an('array');
         res.body.length.should.not.equal(0);
-        res.body[res.body.length - 1].name.should.eql('first test');
+        res.body[res.body.length - 1].name.should.eql('firstTest');
         done();
       }).catch(done);
     });
@@ -133,6 +136,7 @@ describe('server', () => {
         .delete('/api/locations/firstTest')
         .then((res) => {
           res.should.have.status(200);
+          res.body.should.eql([]);
         })
         .then((res) => {
           console.log('Delete location data response data: ', res);
@@ -147,6 +151,7 @@ describe('server', () => {
         .delete('/api/users/testUserServerSpec')
         .then((res) => {
           res.should.have.status(200);
+          res.body.should.eql([]);
         })
         .then((res) => {
           console.log('Delete user data response data: ', res);

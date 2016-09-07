@@ -41,7 +41,8 @@ describe('User Functionality', () => {
         chai
           .request(server)
           .post('/api/users')
-          .field('name', 'testUser')
+          .set('Content-Type', 'application/json')
+          .send(JSON.stringify({ name: 'testUser' }))
           .then((res) => {
             res.should.have.status(200);
             res.body.should.be.an('object');
@@ -57,6 +58,23 @@ describe('User Functionality', () => {
           .then((res) => {
             res.body.should.be.an('object');
             expect(res.body.name).to.equal('testUser');
+            done();
+          })
+          .catch(done);
+      });
+
+  });
+
+  describe('DELETE: DELETE /api/users server routing and endpoint', () => {
+    it('should DELETE a user with name queried',
+      (done) => {
+        chai
+          .request(server)
+          .delete('/api/users/testUser')
+          .then((res) => {
+            console.log(res.body);
+            res.should.have.status(200);
+            res.body.should.eql([]);
             done();
           })
           .catch(done);
