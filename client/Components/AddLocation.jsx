@@ -3,7 +3,7 @@ import React from 'react';
 class AddLocation extends React.Component {
   render() {
     return (
-      <form>
+      <form method="POST" action="/api/locations">
         <input
           name="name"
           type="text"

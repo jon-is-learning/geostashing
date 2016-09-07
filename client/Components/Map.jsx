@@ -28,6 +28,7 @@ class Map extends React.Component {
 
     this.data = {
       pins: [],
+      currentPin: null,
       map: null
     };
 
@@ -51,7 +52,8 @@ class Map extends React.Component {
     this.data.map.addListener('click', (ev) => this.setState({
       currentPin: {
         lat: ev.latLng.lat(),
-        lng: ev.latLng.lng()
+        lng: ev.latLng.lng(),
+        id: -1
       }
     }));
 
@@ -59,15 +61,46 @@ class Map extends React.Component {
   }
 
   drawPins(pins) {
-    pins.map((pin) => ({
+    //first remove all pins
+    this.data.pins.forEach((pin) => pin.setMap(null));
+
+    //next add all pins
+    this.data.pins = pins.map((pin) => ({
       lat: parseFloat(pin.lat),
-      lng: parseFloat(pin.lng)
-    })).forEach((pin) =>
-      new google.maps.Marker({ map: this.state.map, position: pin }));
+      lng: parseFloat(pin.lng),
+      name: pin.name
+    })).map((pin) =>
+      new google.maps.Marker({
+        map: this.data.map,
+        position: pin,
+        title: pin.name
+      }));
   }
 
-  componentWillUpdate(props) {
-    this.drawPins(props.pins);
+  updateCurrentPin(state) {
+    if (state.currentPin) {
+      if (this.data.currentPin) {
+        this.data.currentPin.setPosition(state.currentPin);
+      } else {
+        this.data.currentPin = new google.maps.Marker({
+          map: this.data.map,
+          position: state.currentPin,
+          title: 'current location'
+        });
+      }
+    }
+  }
+
+  componentWillUpdate(newProps, newState) {
+    if (newProps.pins !== this.props.pins) {
+      console.log('redrawing all pins');
+      this.drawPins(newProps.pins);
+    }
+
+    if (newState.currentPin !== this.state.currentPin) {
+      console.log('changing current pin');
+      this.updateCurrentPin(newState);
+    }
   }
 
   render() {
