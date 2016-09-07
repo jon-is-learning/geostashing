@@ -20,7 +20,21 @@ const locationController = {
     Location.create(req.body)
       .then(() => res.end())
       .catch((err) => res.status(500).send(err));
+  },
+
+  deleteOne (req, res) {
+    Location
+      .findOne({ where: req.params })
+      .then((location) => {
+        return location.destroy();
+      })
+      .then((data) => {
+        res.status(200).send(data)
+      })
+      .catch((err) => res.status(500).send(err));
+
   }
+
 };
 
 module.exports = locationController;

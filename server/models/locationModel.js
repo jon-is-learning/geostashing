@@ -7,9 +7,9 @@ const decimalPlaces = 6;
 const Location = db.sequelize.define('location', {
   id: {
     type: db.Sequelize.UUID,
+    unique: true
     primaryKey: true,
     defaultValue: db.Sequelize.UUIDV4,
-    unique: true
   },
   name: {
     type: db.Sequelize.STRING,

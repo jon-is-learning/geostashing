@@ -60,7 +60,7 @@ describe('server', () => {
       chai
         .request(server)
         .post('/api/users')
-        .field('name', 'test')
+        .field('name', 'testUserServerSpec')
         .then((res) => {
           console.log('This Test Suite User res.body: ', res.body);
           curTestUser.model = res.body;
@@ -108,7 +108,7 @@ describe('server', () => {
 
     it('should persist and return posted locations', (done) => {
       const reqData = {
-        name: 'first test',
+        name: 'firstTest',
         lat: '123.456789',
         lng: '987.654321',
         userId: curTestUser.model.id
@@ -128,5 +128,34 @@ describe('server', () => {
         done();
       }).catch(done);
     });
+
+    it('should delete test location data', (done) => {
+      chai
+        .request(server)
+        .delete('/api/locations/firstTest')
+        .then((res) => {
+          res.should.have.status(200);
+        })
+        .then((res) => {
+          console.log('Delete location data response data: ', res);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('should delete test user data', (done) => {
+      chai
+        .request(server)
+        .delete('/api/users/testUserServerSpec')
+        .then((res) => {
+          res.should.have.status(200);
+        })
+        .then((res) => {
+          console.log('Delete user data response data: ', res);
+          done();
+        })
+        .catch(done);
+    });
+
   });
 });

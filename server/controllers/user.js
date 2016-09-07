@@ -28,15 +28,15 @@ const userController = {
   },
 
   deleteOne (req, res) {
-  User
-    .findOne({ where: req.params })
-    .then((user) => {
-      return user.destroy();
-    })
-    .then((data) => {
-      res.status(200).send(data)
-    })
-    .catch((err) => res.status(500).send(err));
+    User
+      .findOne({ where: req.params })
+      .then((user) => {
+        return user.destroy();
+      })
+      .then((data) => {
+        res.status(200).send(data)
+      })
+      .catch((err) => res.status(500).send(err));
   }
 };
 
