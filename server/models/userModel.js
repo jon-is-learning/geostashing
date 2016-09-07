@@ -4,7 +4,7 @@ const User = db.sequelize.define('user', { name: db.Sequelize.STRING });
 
 User.sync({ force: true })
   .then(() =>
-    User.create({ name: 'Jon' })
+    User.create({ name: 'testOne' })
   )
   .then((user) => {
     console.log('User table create with test user: ', user.dataValues);
