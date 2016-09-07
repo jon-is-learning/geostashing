@@ -1,5 +1,6 @@
 import React from 'react';
 import AddLocation from './AddLocation.jsx';
+import LocationDetails from './LocationDetails.jsx';
 
 //the map component basically wraps around the google maps api
 //it can take a list of pins (in format specified by api) and display them
@@ -26,15 +27,20 @@ class Map extends React.Component {
   constructor(props) {
     super(props);
 
-    this.data = {
-      pins: [],
-      currentPin: null,
-      map: null
-    };
-
     this.state = {
       currentPin: null,
       pins: props.pins
+    };
+
+    this.data = {
+      //holds `state.pins` as google maps object
+      pins: [],
+
+      //holds `state.currentPin` as google maps object
+      currentPin: null,
+
+      //holds the google maps map object
+      map: null
     };
   }
 
@@ -56,7 +62,8 @@ class Map extends React.Component {
       currentPin: {
         lat: ev.latLng.lat(),
         lng: ev.latLng.lng(),
-        id: -1
+        id: -1,
+        creating: true
       }
     }));
 
@@ -77,11 +84,21 @@ class Map extends React.Component {
         map: this.data.map,
         position: pin,
         title: pin.name
-      }));
+      })
+    );
+
+    this.data.pins.forEach((pin, index) =>
+      pin.addListener(
+        'click',
+        this.showLocationDetails.bind(this, pin, pins[index])));
+  }
+
+  showLocationDetails(marker, pin) {
+    this.setState({ currentPin: pin });
   }
 
   updateCurrentPin(state) {
-    if (state.currentPin) {
+    if (state.currentPin && state.currentPin.creating) {
       if (this.data.currentPin) {
         this.data.currentPin.setPosition(state.currentPin);
       } else {
@@ -91,6 +108,9 @@ class Map extends React.Component {
           title: 'current location'
         });
       }
+    } else if (this.data.currentPin) {
+      this.data.currentPin.setMap(null);
+      this.data.currentPin = null;
     }
   }
 
@@ -116,24 +136,29 @@ class Map extends React.Component {
       currentPin: null,
       pins: this.state.pins.concat([pin])
     });
-    this.data.currentPin.setMap(null);
-    this.data.currentPin = null;
   }
 
   render() {
-    let addLocation = '';
+    let locationDetails = '';
 
     if (this.state.currentPin) {
-      addLocation = <AddLocation
-        lng={this.state.currentPin.lng}
-        lat={this.state.currentPin.lat}
-        pinAdded={this.pinAdded.bind(this)}/>;
+      if (this.state.currentPin.creating) {
+        locationDetails = <AddLocation
+          lng={this.state.currentPin.lng}
+          lat={this.state.currentPin.lat}
+          pinAdded={this.pinAdded.bind(this)}/>;
+      } else {
+        locationDetails = <LocationDetails
+          lng={this.state.currentPin.lng}
+          lat={this.state.currentPin.lat}
+          name={this.state.currentPin.name}/>;
+      }
     }
 
     return (
       <div>
         <div className="map" ref="gmap"></div>
-        {addLocation}
+        {locationDetails}
       </div>
     );
   }
