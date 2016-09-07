@@ -2,7 +2,7 @@ const Location = require('../models/locationModel');
 
 const locationController = {
   getAll(req, res) {
-    Location.findAll({ attributes: ['name', 'lat', 'lng'] })
+    Location.findAll({})
       .then((locations) => res.send(locations))
       .catch((err) => res.status(400).send(err));
   },

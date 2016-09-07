@@ -52,7 +52,12 @@ describe('server', () => {
     it('should accept post requests with valid data', (done) => {
       chai.request(server)
         .post('/api/locations')
-        .send({ name: 'test', lat: '123.456789', lng: '123.456789' })
+        .send({
+          name: 'test',
+          lat: '123.456789',
+          lng: '123.456789',
+          userId: '7f237ef1-28e4-4936-a8ed-834fb12a28e7'
+        })
         .then((res) => {
           res.should.have.status(200);
           //based on the spec
@@ -88,7 +93,8 @@ describe('server', () => {
       const reqData = {
         name: 'first test',
         lat: '123.456789',
-        lng: '987.654321'
+        lng: '987.654321',
+        userId: '7f237ef1-28e4-4936-a8ed-834fb12a28e7'
       };
 
       chai.request(server).post('/api/locations')
@@ -101,7 +107,7 @@ describe('server', () => {
         res.should.be.json;
         res.body.should.be.an('array');
         res.body.length.should.not.equal(0);
-        res.body[res.body.length - 1].should.eql(reqData);
+        res.body[res.body.length - 1].name.should.eql('first test');
         done();
       }).catch(done);
     });
