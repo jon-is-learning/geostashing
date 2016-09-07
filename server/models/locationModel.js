@@ -38,7 +38,7 @@ User.hasMany(Location, {
 User.sync({ force: true })
   .then(() =>
     User.create({
-      name: 'testThree',
+      name: 'testOne',
       id: '216d00fa-e94c-4d41-83b4-95dc57d11052'
     })
   )
