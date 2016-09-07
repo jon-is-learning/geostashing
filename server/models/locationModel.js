@@ -59,7 +59,7 @@ User.sync()
               userId: user.dataValues.id
             }
           ])
-      )
+      );
       // .then((location) => {
       //   console.log('locationModel.js. dataValues: ');
       //   location.forEach((item) => {
