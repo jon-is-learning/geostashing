@@ -1,16 +1,12 @@
 import React from 'react';
-<<<<<<< HEAD
 import GetLocation from './CurrentLocation.jsx';
 import SignIn from './SignIn.jsx'; 
 import SignUp from './SignUp.jsx'; 
-=======
->>>>>>> bbca4433c31d85ad8ac3513b9311ee833c491e9a
 import Map from './Map.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-<<<<<<< HEAD
     this.state = {
 
     }
@@ -29,7 +25,6 @@ class App extends React.Component {
 
     // If username and password does not exist, route to the login page again with error message. 
       <p>Invalid username and/or password</p>
-=======
 
     this.state = { pins: [] };
 
@@ -38,7 +33,6 @@ class App extends React.Component {
     fetch(getPins)
       .then((res) => res.json())
       .then((res) => this.setState({ pins: res }));
->>>>>>> bbca4433c31d85ad8ac3513b9311ee833c491e9a
   }
 
   render() {
@@ -48,7 +42,6 @@ class App extends React.Component {
         <Map
           lat={37.7837678}
           lng={-122.40914660000001}
-<<<<<<< HEAD
           pins={[
             { lat: 37.7837678, lng: -122.40914660000001 }
           ]}/>
@@ -56,9 +49,7 @@ class App extends React.Component {
         <SignIn onClick={this.registerClick.bind(this)} />
         <SignUp onClick={this.registerClick.bind(this)} />
         
-=======
           pins={this.state.pins}/>
->>>>>>> bbca4433c31d85ad8ac3513b9311ee833c491e9a
       </div>
     );
   }

@@ -26,12 +26,9 @@
     "pg": "^6.1.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
-<<<<<<< HEAD
     "react-router": "^2.7.0",
-    "webpack": "^1.13.2"
-=======
+    "webpack": "^1.13.2", 
     "sequelize": "^3.24.1"
->>>>>>> bbca4433c31d85ad8ac3513b9311ee833c491e9a
   },
   "devDependencies": {
     "babel-core": "^6.14.0",
