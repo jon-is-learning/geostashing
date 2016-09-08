@@ -5,36 +5,30 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('User Functionality', () => {
-  describe('LOGIN: GET /api/users server routing and endpoint', () => {
-    it('should GET /api/user/:name',
-      (done) => {
-        chai
-          .request(server)
-          .get('/api/users/testOne')
-          .then((res) => {
-            res.should.have.status(200);
-            done();
-          })
-          .catch(done);
-      });
-    it('response should be an object',
-      (done) => {
-        chai
-          .request(server)
-          .get('/api/users/testOne')
-          .then((res) => {
-            res.should.be.json;
-            res.body.should.be.an('object');
-            done();
-          })
-          .catch(done);
-      });
+describe('user api endpoint (/api/users)', () => {
+  describe('login', () => {
+    it('should GET /api/user/:name', (done) => {
+      chai.request(server)
+        .get('/api/users/testOne')
+        .then((res) => {
+          res.should.have.status(200);
+          done();
+        }).catch(done);
+    });
 
-
+    //this test relies on the database already containing an entry for `testOne`
+    xit('should respond with an object', (done) => {
+      chai.request(server)
+        .get('/api/users/testOne')
+        .then((res) => {
+          res.should.be.json;
+          res.should.be.an('object');
+          done();
+        }).catch(done);
+    });
   });
 
-  describe('SIGNUP: POST /api/users server routing and endpoint', () => {
+  describe('signup', () => {
     it('should POST to /api/users and return new user',
       (done) => {
         chai
@@ -64,20 +58,15 @@ describe('User Functionality', () => {
 
   });
 
-  describe('DELETE: DELETE /api/users server routing and endpoint', () => {
-    it('should DELETE a user with name queried',
-      (done) => {
-        chai
-          .request(server)
-          .delete('/api/users/testUser')
-          .then((res) => {
-            res.should.have.status(200);
-            res.body.should.eql([]);
-            done();
-          })
-          .catch(done);
-      });
-
+  describe('delete user', () => {
+    it('should DELETE a user with name queried', (done) => {
+      chai.request(server)
+        .delete('/api/users/testUser')
+        .then((res) => {
+          res.should.have.status(200);
+          res.body.should.eql([]);
+          done();
+        }).catch(done);
+    });
   });
-
 });
