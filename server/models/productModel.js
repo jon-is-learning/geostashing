@@ -30,7 +30,10 @@ const Product = db.define('product', {
   }
 });
 
-Product.belongsTo(Location);
-Product.belongsTo(User, { as: 'seller' });
+Product.belongsTo(Location, { foreignKey: { allowNull: false } });
+Product.belongsTo(User, {
+  as: 'seller',
+  foreignKey: { allowNull: false }
+});
 
 module.exports = Product;
