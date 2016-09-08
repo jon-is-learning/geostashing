@@ -1,34 +1,29 @@
+const Sequelize = require('sequelize');
 const db = require('./db');
 
 const totalNumLength = 9;
 const decimalPlaces = 6;
 
-const Location = db.sequelize.define('location', {
-  name: db.Sequelize.STRING,
-  lat: db.Sequelize.DECIMAL(totalNumLength, decimalPlaces),
-  lng: db.Sequelize.DECIMAL(totalNumLength, decimalPlaces)
+const Location = db.define('location', {
+  id: {
+    type: Sequelize.UUID,
+    unique: true,
+    primaryKey: true,
+    defaultValue: Sequelize.UUIDV4
+  },
+  name: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  },
+  lat: {
+    type: Sequelize.DECIMAL(totalNumLength, decimalPlaces),
+    allowNull: false
+  },
+  lng: {
+    type: Sequelize.DECIMAL(totalNumLength, decimalPlaces),
+    allowNull: false
+  }
 });
-
-Location.sync({ force: true })
-  .then(() =>
-    Location.bulkCreate([
-      {
-        name: 'Jon\'s Test Location',
-        lat: 123.456789,
-        lng: 123.456789
-      },
-      {
-        name: 'Hack Reactor',
-        lat: 37.7840795,
-        lng: -122.4087025
-      }
-    ])
-  )
-  .then((location) => {
-    console.log('locationModel.js. dataValues: ');
-    location.forEach((item) => {
-      console.log(item.dataValues);
-    });
-  });
 
 module.exports = Location;

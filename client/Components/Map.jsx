@@ -105,7 +105,8 @@ class Map extends React.Component {
         this.data.currentPin = new google.maps.Marker({
           map: this.data.map,
           position: state.currentPin,
-          title: 'current location'
+          title: 'current location',
+          label: '+'
         });
       }
     } else if (this.data.currentPin) {

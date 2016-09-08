@@ -5,43 +5,45 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('User Functionality', () => {
-  describe('LOGIN: GET /api/users server routing and endpoint', () => {
-    it('should GET /api/user/:name',
-      (done) => {
-        chai
-          .request(server)
-          .get('/api/users/testOne')
-          .then((res) => {
-            res.should.have.status(200);
-            done();
-          })
-          .catch(done);
-      });
-    it('response should be an object',
-      (done) => {
-        chai
-          .request(server)
-          .get('/api/users/testOne')
-          .then((res) => {
-            console.log(res.body);
-            res.should.be.json;
-            res.body.should.be.an('object');
-            done();
-          })
-          .catch(done);
-      });
+describe('user api endpoint (/api/users)', () => {
+  describe('login', () => {
+    xit('should log in a user and set session');
+    xit('should show a descriptive error if unable to login');
+    xit('');
+  });
+  describe('get user', () => {
+    xit('should get all users (/api/users)');
 
+    it('should get a single user (/api/users/:name)', (done) => {
+      chai.request(server)
+        .get('/api/users/testOne')
+        .then((res) => {
+          res.should.have.status(200);
+          done();
+        }).catch(done);
+    });
 
+    xit('should return an error if the user doesn\'t exist');
+
+    xit('should respond with an object when getting user', (done) => {
+      chai.request(server)
+        .get('/api/users/testOne')
+        .then((res) => {
+          res.should.be.json;
+          res.should.be.an('object');
+          done();
+        }).catch(done);
+    });
   });
 
-  describe('SIGNUP: POST /api/users server routing and endpoint', () => {
-    it('should POST to /api/users and return new user',
+  describe('signup', () => {
+    it('should create and return a new user (/api/users)',
       (done) => {
         chai
           .request(server)
           .post('/api/users')
-          .send({ name: 'testUser' })
+          .set('Content-Type', 'application/json')
+          .send(JSON.stringify({ name: 'testUser' }))
           .then((res) => {
             res.should.have.status(200);
             res.body.should.be.an('object');
@@ -49,6 +51,9 @@ describe('User Functionality', () => {
           })
           .catch(done);
       });
+
+    xit('should return a descriptive error if user is unable to sign up');
+
     it('should persist user data',
       (done) => {
         chai
@@ -61,7 +66,17 @@ describe('User Functionality', () => {
           })
           .catch(done);
       });
-
   });
 
+  describe('delete user', () => {
+    it('should a user with name queried (DELETE /api/users/:name)', (done) => {
+      chai.request(server)
+        .delete('/api/users/testUser')
+        .then((res) => {
+          res.should.have.status(200);
+          res.body.should.eql([]);
+          done();
+        }).catch(done);
+    });
+  });
 });
