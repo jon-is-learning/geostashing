@@ -2,7 +2,8 @@ import React from 'react';
 
 const Product = (props) => (
   <li className="catalog">
-      <p><h3>{props.info.name}</h3> {props.info.description}</p>
+      <h3>${props.info.price} - {props.info.name}</h3>
+      <p>{props.info.description}</p>
       <p>{props.info.seller.name} (rating...)</p>
       <p>
         {props.info.location.name} (

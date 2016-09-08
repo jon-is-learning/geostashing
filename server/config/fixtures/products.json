@@ -1,25 +1,29 @@
 [
   {
     "name": "package",
-    "description": "just your every day package",
+    "price": 4.2,
+    "description": "just your every day package, nothing to see here",
     "locationId": "eea678b1-07bd-458a-a64b-69ef7c0dd6ca",
     "sellerId": "216d00fa-e94c-4d41-83b4-95dc57d11052"
   },
   {
     "name": "action figure",
-    "description": "non-descript action figure",
+    "price": 12.99,
+    "description": "some nondescript action figure i found the other day",
     "locationId": "216d00fa-e94c-4d41-83b4-95dc57d11052",
     "sellerId": "216d00fa-e94c-4d41-83b4-95dc57d11052"
   },
   {
     "name": "rare cards",
-    "description": "idk... but they're cards",
+    "price": 9000.01,
+    "description": "very rare trading cards, probably worth a lot",
     "locationId": "b9d186da-b5bf-48cd-a5b7-914a4af91a39",
     "sellerId": "216d00fa-e94c-4d41-83b4-95dc57d11052"
   },
   {
     "name": "fancy boot",
-    "description": "placed it right next to someone's pair of rare cards",
+    "price": 55.50,
+    "description": "placed it right next to someone's rare cards",
     "locationId": "b9d186da-b5bf-48cd-a5b7-914a4af91a39",
     "sellerId": "df00ade3-bd8e-427d-8538-89f0b663dc00"
   }

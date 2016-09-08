@@ -4,6 +4,9 @@ const db = require('./db');
 const Location = require('./locationModel');
 const User = require('./userModel.js');
 
+const currencyDecimalPlaces = 2;
+const maxCurrencyLength = 10;
+
 const Product = db.define('product', {
   id: {
     type: Sequelize.UUID,
@@ -19,6 +22,10 @@ const Product = db.define('product', {
   description: {
     type: Sequelize.STRING,
     unique: false,
+    allowNull: false
+  },
+  price: {
+    type: Sequelize.DECIMAL(maxCurrencyLength, currencyDecimalPlaces),
     allowNull: false
   }
 });
