@@ -5,7 +5,7 @@ const Product = (props) => (
       <img src={
         props.info.image
         ? props.info.image.url
-        : '/default-image.png'
+        : '/default-image.svg'
       } />
       <h3>${props.info.price} - {props.info.name}</h3>
       <p>{props.info.description}</p>
