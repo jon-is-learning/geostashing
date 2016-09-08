@@ -3,6 +3,7 @@ import SignIn from './SignIn.jsx';
 import SignUp from './SignUp.jsx';
 import Map from './Map.jsx';
 import Catalog from './Catalog.jsx';
+import AddProduct from './AddProduct.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class App extends React.Component {
           lng={-122.40914660000001}
           pins={this.state.pins} />
 
+        <AddProduct products={this.state.products} />
         <SignIn />
         <SignUp />
         <Catalog products={this.state.products} />

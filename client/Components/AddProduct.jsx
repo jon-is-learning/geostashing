@@ -1,14 +1,29 @@
 import React from 'react';
+import Dropzone from 'react-dropzone';
+
 
 class AddProduct extends React.Component {
   render() {
     return (
       <form method="POST" action="/api/locations">
+        <h3>create new product</h3>
         <input
           ref="name"
           name="name"
           type="text"
-          placeholder="place name"/>
+          placeholder="item name"/>
+
+        <textarea
+          ref="description"
+          name="description"
+          placeholder="description"></textarea>
+
+        <input
+          ref="price"
+          name="price"
+          type="text"
+          placeholder="price"/>
+
         <input
           ref="lng"
           name="lng"
@@ -16,6 +31,7 @@ class AddProduct extends React.Component {
           readOnly="true"
           value={this.props.lng}
           placeholder="longitude"/>
+
         <input
           ref="lat"
           name="lat"
@@ -23,45 +39,32 @@ class AddProduct extends React.Component {
           readOnly="true"
           value={this.props.lat}
           placeholder="latitude"/>
+
+        <Dropzone onDrop={this.onFile}>
+          <div>drop images here or click to upload.</div>
+        </Dropzone>
+
         <input
           name="submit"
           type="submit"
-          onClick={this.submitLocation.bind(this)}/>
+          onClick={this.submit.bind(this)}/>
       </form>
     );
   }
 
-  submitLocation(ev) {
-    const newPin = {
-      name: this.refs.name.value,
-      lng: this.refs.lng.value,
-      lat: this.refs.lat.value
-    };
+  onFile(files) {
+    console.log('Received files: ', files);
+  }
 
-    const pinReq = new Request('/api/locations', {
-      method: 'POST',
-      body: JSON.stringify(newPin),
-      headers: { 'content-type': 'application/json' }
-    });
-
-    fetch(pinReq)
-      .then((res) => res.text())
-      .then(() => this.props.pinAdded(newPin));
-
-    ev.preventDefault();
+  submit() {
+    console.log('this should submit...');
   }
 }
 
 AddProduct.propTypes = {
   lat: React.PropTypes.number,
-  lng: React.PropTypes.number,
-  pinAdded: React.PropTypes.func
+  lng: React.PropTypes.number
 };
 
-AddProduct.defaultProps = {
-  lat: 0,
-  lng: 0,
-  pinAdded: console.log
-};
 
 export default AddProduct;
