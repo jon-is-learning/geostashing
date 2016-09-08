@@ -1,16 +1,17 @@
+const Sequelize = require('sequelize');
 const db = require('./db');
 
 const Location = require('./locationModel');
 
-const User = db.sequelize.define('user', {
+const User = db.define('user', {
   id: {
-    type: db.Sequelize.UUID,
+    type: Sequelize.UUID,
     unique: true,
     primaryKey: true,
-    defaultValue: db.Sequelize.UUIDV4
+    defaultValue: Sequelize.UUIDV4
   },
   name: {
-    type: db.Sequelize.STRING,
+    type: Sequelize.STRING,
     unique: true,
     allowNull: false
   }

@@ -24,7 +24,6 @@ describe('User Functionality', () => {
           .request(server)
           .get('/api/users/testOne')
           .then((res) => {
-            console.log(res.body);
             res.should.be.json;
             res.body.should.be.an('object');
             done();
@@ -72,7 +71,6 @@ describe('User Functionality', () => {
           .request(server)
           .delete('/api/users/testUser')
           .then((res) => {
-            console.log(res.body);
             res.should.have.status(200);
             res.body.should.eql([]);
             done();
