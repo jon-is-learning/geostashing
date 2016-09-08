@@ -37,8 +37,8 @@ class App extends React.Component {
             { lat: 37.7837678, lng: -122.40914660000001 }
           ]}/>
 
-        <SignIn onClick={this.registerClick.bind(this)} />
-        <SignUp onClick={this.registerClick.bind(this)} />
+        <SignIn />
+        <SignUp />
           pins={this.state.pins}/>
       </div>
     );
