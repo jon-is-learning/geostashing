@@ -1,84 +1,29 @@
+const Sequelize = require('sequelize');
 const db = require('./db');
-const User = require('./userModel');
 
 const totalNumLength = 9;
 const decimalPlaces = 6;
 
-const Location = db.sequelize.define('location', {
+const Location = db.define('location', {
   id: {
-    type: db.Sequelize.UUID,
+    type: Sequelize.UUID,
     unique: true,
     primaryKey: true,
-    defaultValue: db.Sequelize.UUIDV4
+    defaultValue: Sequelize.UUIDV4
   },
   name: {
-    type: db.Sequelize.STRING,
+    type: Sequelize.STRING,
     unique: true,
     allowNull: false
   },
   lat: {
-    type: db.Sequelize.DECIMAL(totalNumLength, decimalPlaces),
+    type: Sequelize.DECIMAL(totalNumLength, decimalPlaces),
     allowNull: false
   },
   lng: {
-    type: db.Sequelize.DECIMAL(totalNumLength, decimalPlaces),
+    type: Sequelize.DECIMAL(totalNumLength, decimalPlaces),
     allowNull: false
   }
 });
-
-User.hasMany(Location, {
-  foreignKey: {
-    name: 'userId',
-    allowNull: false
-  }
-});
-// Comment out the following to keep terminal from clutter:
-// Uncomment out the following to add tables to your db:
-// Add {force: true} to .sync() if you want to drop existing tables
-User.sync({ force: true })
-  .then(() =>
-    User.create({
-      name: 'testOne',
-      id: '216d00fa-e94c-4d41-83b4-95dc57d11052'
-    })
-  )
-  .then(() =>
-    User.create({
-      name: 'testTwo',
-      id: 'df00ade3-bd8e-427d-8538-89f0b663dc00'
-    })
-  )
-  .then(() => {
-    // console.log('User table create with test user: ', user.dataValues);
-    Location
-      .sync({ force: true })
-      .then(() =>
-        Location
-          .bulkCreate([
-            {
-              name: 'Jon\'s Test Location',
-              lat: 123.456789,
-              lng: 123.456789,
-              userId: 'df00ade3-bd8e-427d-8538-89f0b663dc00'
-            },
-            {
-              name: 'Hack Reactor',
-              lat: 37.7840795,
-              lng: -122.4087025,
-              userId: '216d00fa-e94c-4d41-83b4-95dc57d11052'
-            }
-          ])
-      );
-      // .then((location) => {
-      //   console.log('locationModel.js. dataValues: ');
-      //   location.forEach((item) => {
-      //     console.log(item.dataValues);
-      //   });
-      // })
-  })
-  .catch((err) => {
-    console.log('Table could not be created. Error: ', err);
-  });
-
 
 module.exports = Location;

@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize('geostash', 'postgres', '', {
   host: 'localhost',
-  dialect: 'postgres'
+  dialect: 'postgres',
+  logging: false
 });
 
-module.exports = { Sequelize, sequelize };
+module.exports = sequelize;
