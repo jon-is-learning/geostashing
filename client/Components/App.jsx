@@ -4,6 +4,7 @@ import SignIn from './SignIn.jsx';
 import SignUp from './SignUp.jsx';
 import Map from './Map.jsx';
 import Catalog from './Catalog.jsx';
+// import { Link } from 'react-router'; 
 
 class App extends React.Component {
   constructor(props) {
