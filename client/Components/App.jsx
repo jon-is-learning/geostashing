@@ -1,30 +1,21 @@
 import React from 'react';
-import GetLocation from './CurrentLocation.jsx';
-import SignIn from './SignIn.jsx'; 
-import SignUp from './SignUp.jsx'; 
+/* import GetLocation from './CurrentLocation.jsx'; */
+import SignIn from './SignIn.jsx';
+import SignUp from './SignUp.jsx';
 import Map from './Map.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    }
+    this.state = {};
   }
 
   registerClick() {
-    // Add the username and password into the database
-      // If the username already exists, route to register page again with error message. 
-      <p>Username already in use.</p>
-      // If username doesn't exist, store the pw and username and route to the main page. 
-
+    /* <p>Username already in use.</p> */
   }
 
   signInClick() {
-    // If username and password exists in the database, route to the main page
-
-    // If username and password does not exist, route to the login page again with error message. 
-      <p>Invalid username and/or password</p>
+      /* <p>Invalid username and/or password</p> */
 
     this.state = { pins: [] };
 
@@ -48,7 +39,6 @@ class App extends React.Component {
 
         <SignIn onClick={this.registerClick.bind(this)} />
         <SignUp onClick={this.registerClick.bind(this)} />
-        
           pins={this.state.pins}/>
       </div>
     );
