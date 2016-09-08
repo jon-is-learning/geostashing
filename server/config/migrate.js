@@ -4,11 +4,13 @@ const db = require('../models/db');
 const User = require('../models/userModel');
 const Location = require('../models/locationModel');
 const Product = require('../models/productModel');
+const Image = require('../models/imageModel');
 
 //fixtures
 const UserFixtures = require('./fixtures/users.json');
 const LocationFixtures = require('./fixtures/locations.json');
 const ProductFixtures = require('./fixtures/products.json');
+const ImageFixtures = require('./fixtures/images.json');
 
 //options
 const force = process.argv.includes('--force');
@@ -22,6 +24,8 @@ const addFixtures = () =>
   ).then(() =>
     console.log('CREATING USERS') || Location.bulkCreate(LocationFixtures)
   ).then(() =>
+    console.log('CREATING IMAGES') || Image.bulkCreate(ImageFixtures)
+  ).then(() =>
     console.log('CREATING PRODUCTS') || Product.bulkCreate(ProductFixtures)
   );
 
@@ -33,6 +37,8 @@ Promise.resolve().then(() =>
   console.log('SYNCING USER SCHEMA') || User.sync({ force })
 ).then(() =>
   console.log('SYNCING LOCATION SCHEMA') || Location.sync({ force })
+).then(() =>
+  console.log('SYNCING IMAGE SCHEMA') || Image.sync({ force })
 ).then(() =>
   console.log('SYNCING PRODUCT SCHEMA') || Product.sync({ force })
 ).then(() =>
