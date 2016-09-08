@@ -8,18 +8,10 @@ const locationController = {
   },
 
   addOne(req, res) {
-    if ((typeof req.body !== 'object')
-        || typeof req.body.name !== 'string'
-        || typeof req.body.lng !== 'string'
-        || typeof req.body.lat !== 'string') {
-      res.status(400).send('Not enough data to create new location.');
-
-      return;
-    }
-
+    console.log(req.body);
     Location.create(req.body)
       .then(() => res.end())
-      .catch((err) => res.status(500).send(err));
+      .catch((err) => res.status(400).send(err));
   },
 
   deleteOne(req, res) {
