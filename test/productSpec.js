@@ -41,9 +41,8 @@ describe('product api endpoint (/api/products)', () => {
         Location.findOrCreate({
           where: {
             name: 'product_test_location',
-            lat: 123.456,
-            lng: 123.456,
-            userId: sellerId
+            lat: '123.456',
+            lng: '123.456'
           }
         })
       ).then((locations) => {
