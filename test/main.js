@@ -1,6 +1,7 @@
 //for tests that don't fit into any other file
-var chai = require('chai');
-var should = chai.should();
+const chai = require('chai');
+
+chai.should();
 
 describe('truth', () => {
   it('should pass this test', () => {
