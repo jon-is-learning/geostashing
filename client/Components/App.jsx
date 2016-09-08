@@ -1,10 +1,22 @@
 import React from 'react';
+/* import GetLocation from './CurrentLocation.jsx'; */
+import SignIn from './SignIn.jsx';
+import SignUp from './SignUp.jsx';
 import Map from './Map.jsx';
 import Catalog from './Catalog.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
+  }
+
+  registerClick() {
+    /* <p>Username already in use.</p> */
+  }
+
+  signInClick() {
+      /* <p>Invalid username and/or password</p> */
 
     this.state = {
       pins: [],
@@ -31,6 +43,12 @@ class App extends React.Component {
         <Map
           lat={37.7837678}
           lng={-122.40914660000001}
+          pins={[
+            { lat: 37.7837678, lng: -122.40914660000001 }
+          ]}/>
+
+        <SignIn />
+        <SignUp />
           pins={this.state.pins}/>
         <Catalog products={this.state.products} />
       </div>
@@ -38,4 +56,10 @@ class App extends React.Component {
   }
 }
 
+// <Route path='/' component={Home} />
+// <Route path='/address' component={Address} />
+
 export default App;
+
+// onClick={this.onButtonClick.bind(this)
+
