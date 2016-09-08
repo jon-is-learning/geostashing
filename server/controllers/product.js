@@ -4,8 +4,12 @@ const Location = require('../models/locationModel');
 
 const productController = {
   getAll(req, res) {
-    Product.findAll({ include: [User, Location] })
-      .then((products) => res.json(products));
+    Product.findAll({
+      include: [
+        Location,
+        { model: User, as: 'seller' }
+      ]
+    }).then((products) => res.json(products));
   },
 
   addOne(req, res) {

@@ -24,6 +24,6 @@ const Product = db.define('product', {
 });
 
 Product.belongsTo(Location);
-Product.belongsTo(User);
+Product.belongsTo(User, { as: 'seller' });
 
 module.exports = Product;
