@@ -22,7 +22,7 @@ const locationController = {
       .catch((err) => res.status(500).send(err));
   },
 
-  deleteOne (req, res) {
+  deleteOne(req, res) {
     Location
       .findOne({ where: req.params })
       .then((location) => location.destroy())
