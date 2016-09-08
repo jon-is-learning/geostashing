@@ -1,16 +1,18 @@
 const db = require('./db');
 
-const User = db.sequelize.define('user', { name: db.Sequelize.STRING });
-
-User.sync({ force: true })
-  .then(() =>
-    User.create({ name: 'testOne' })
-  )
-  .then((user) => {
-    console.log('User table create with test user: ', user.dataValues);
-  })
-  .catch((err) => {
-    console.log('User table could not be created. Error: ', err);
+const User = db.sequelize.define('user',
+  {
+    id: {
+      type: db.Sequelize.UUID,
+      unique: true,
+      primaryKey: true,
+      defaultValue: db.Sequelize.UUIDV4
+    },
+    name: {
+      type: db.Sequelize.STRING,
+      unique: true,
+      allowNull: false
+    }
   });
 
 module.exports = User;
