@@ -37,6 +37,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <a href="#/signin">signin</a>
+        <a href="#/signup">signup</a>
         <h1>Hi there, beard person.</h1>
         <Map
           selectCoords={this.selectCoords.bind(this)}
@@ -45,8 +47,6 @@ class App extends React.Component {
           pins={this.state.pins} />
 
         <AddProduct lng={this.state.lng} lat={this.state.lat}/>
-        <SignIn />
-        <SignUp />
         <Catalog products={this.state.products} />
       </div>
     );

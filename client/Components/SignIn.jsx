@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router'; 
+import { Link } from 'react-router';
 
 const SignIn = () =>
     <div>
@@ -9,7 +9,7 @@ const SignIn = () =>
       <h4>Password</h4>
       <input type="password"/>
       <input type="submit"/>
-      <Link to='signup'>Register</Link>
+      <Link to="signup">Register</Link>
     </div>;
 
 export default SignIn;
