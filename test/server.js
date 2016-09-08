@@ -45,7 +45,6 @@ describe('server', () => {
     it('should return an array from GET /api/locations', (done) => {
       chai.request(server)
         .get('/api/locations').then((res) => {
-          // console.log('Inside server spec array from get: ', res.body);
           res.should.have.status(200);
           res.body.should.be.an('array');
           done();
@@ -60,9 +59,7 @@ describe('server', () => {
         .set('Content-Type', 'application/json')
         .send(JSON.stringify({ name: 'testUserServerSpec' }))
         .then((res) => {
-          console.log('This Test Suite User res.body: ', res.body);
           curTestUser.model = res.body;
-          console.log('curTestUser value: ', curTestUser);
           done();
         }).catch(done);
     });
@@ -139,7 +136,6 @@ describe('server', () => {
           res.body.should.eql([]);
         })
         .then((res) => {
-          console.log('Delete location data response data: ', res);
           done();
         })
         .catch(done);
@@ -154,7 +150,6 @@ describe('server', () => {
           res.body.should.eql([]);
         })
         .then((res) => {
-          console.log('Delete user data response data: ', res);
           done();
         })
         .catch(done);
