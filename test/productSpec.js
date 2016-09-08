@@ -75,8 +75,7 @@ describe('product api endpoint (/api/products)', () => {
     });
 
     it('should reject empty POSTs', (done) => {
-      const newProduct = {
-      };
+      const newProduct = {};
 
       chai.request(server)
         .post('/api/products')
