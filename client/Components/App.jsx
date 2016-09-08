@@ -1,17 +1,27 @@
 import React from 'react';
 import Map from './Map.jsx';
+import Catalog from './Catalog.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { pins: [] };
+    this.state = {
+      pins: [],
+      products: []
+    };
 
     const getPins = new Request('/api/locations');
 
     fetch(getPins)
       .then((res) => res.json())
       .then((res) => this.setState({ pins: res }));
+
+    const getProducts = new Request('/api/products');
+
+    fetch(getProducts)
+      .then((res) => res.json())
+      .then((res) => this.setState({ products: res }));
   }
 
   render() {
@@ -22,6 +32,7 @@ class App extends React.Component {
           lat={37.7837678}
           lng={-122.40914660000001}
           pins={this.state.pins}/>
+        <Catalog products={this.state.products} />
       </div>
     );
   }
