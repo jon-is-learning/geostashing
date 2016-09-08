@@ -1,7 +1,5 @@
 import React from 'react';
 /* import GetLocation from './CurrentLocation.jsx'; */
-import SignIn from './SignIn.jsx';
-import SignUp from './SignUp.jsx';
 import Map from './Map.jsx';
 import Catalog from './Catalog.jsx';
 
@@ -46,9 +44,6 @@ class App extends React.Component {
           pins={[
             { lat: 37.7837678, lng: -122.40914660000001 }
           ]}/>
-
-        <SignIn />
-        <SignUp />
           pins={this.state.pins}/>
         <Catalog products={this.state.products} />
       </div>

@@ -3,7 +3,7 @@ import React from 'react';
 
 const SignUp = () =>
     <div>
-      <h1>REGISTER</h1>
+      <h1>JOIN THE ADVENTURE</h1>
       <h4>Username</h4>
       <input type="text" />
       <h4>Password</h4>
