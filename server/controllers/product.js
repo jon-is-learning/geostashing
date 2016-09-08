@@ -1,12 +1,14 @@
 const Product = require('../models/productModel');
 const User = require('../models/userModel');
 const Location = require('../models/locationModel');
+const Image = require('../models/imageModel');
 
 const productController = {
   getAll(req, res) {
     Product.findAll({
       include: [
         Location,
+        Image,
         { model: User, as: 'seller' }
       ]
     }).then((products) => res.json(products));

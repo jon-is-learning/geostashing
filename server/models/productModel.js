@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 const db = require('./db');
 
 const Location = require('./locationModel');
-const User = require('./userModel.js');
+const User = require('./userModel');
+const Image = require('./imageModel');
 
 const currencyDecimalPlaces = 2;
 const maxCurrencyLength = 10;
@@ -30,6 +31,7 @@ const Product = db.define('product', {
   }
 });
 
+Product.belongsTo(Image);
 Product.belongsTo(Location, { foreignKey: { allowNull: false } });
 Product.belongsTo(User, {
   as: 'seller',
