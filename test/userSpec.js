@@ -7,7 +7,14 @@ chai.use(chaiHttp);
 
 describe('user api endpoint (/api/users)', () => {
   describe('login', () => {
-    it('should GET /api/user/:name', (done) => {
+    xit('should log in a user and set session');
+    xit('should show a descriptive error if unable to login');
+    xit('');
+  });
+  describe('get user', () => {
+    xit('should get all users (/api/users)');
+
+    it('should get a single user (/api/users/:name)', (done) => {
       chai.request(server)
         .get('/api/users/testOne')
         .then((res) => {
@@ -16,8 +23,9 @@ describe('user api endpoint (/api/users)', () => {
         }).catch(done);
     });
 
-    //this test relies on the database already containing an entry for `testOne`
-    xit('should respond with an object', (done) => {
+    xit('should return an error if the user doesn\'t exist');
+
+    xit('should respond with an object when getting user', (done) => {
       chai.request(server)
         .get('/api/users/testOne')
         .then((res) => {
@@ -29,7 +37,7 @@ describe('user api endpoint (/api/users)', () => {
   });
 
   describe('signup', () => {
-    it('should POST to /api/users and return new user',
+    it('should create and return a new user (/api/users)',
       (done) => {
         chai
           .request(server)
@@ -43,6 +51,9 @@ describe('user api endpoint (/api/users)', () => {
           })
           .catch(done);
       });
+
+    xit('should return a descriptive error if user is unable to sign up');
+
     it('should persist user data',
       (done) => {
         chai
@@ -55,11 +66,10 @@ describe('user api endpoint (/api/users)', () => {
           })
           .catch(done);
       });
-
   });
 
   describe('delete user', () => {
-    it('should DELETE a user with name queried', (done) => {
+    it('should a user with name queried (DELETE /api/users/:name)', (done) => {
       chai.request(server)
         .delete('/api/users/testUser')
         .then((res) => {
