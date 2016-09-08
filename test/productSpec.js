@@ -56,8 +56,8 @@ describe('product api endpoint (/api/products)', () => {
 
     it('should POST to /api/products', (done) => {
       const newProduct = {
-        name: 'a',
-        description: 'b',
+        name: 'test',
+        description: 'a test product',
         price: '12.34',
         locationId,
         sellerId
@@ -73,5 +73,86 @@ describe('product api endpoint (/api/products)', () => {
           done();
         }).catch(done);
     });
+
+    it('should reject empty POSTs', (done) => {
+      const newProduct = {
+      };
+
+      chai.request(server)
+        .post('/api/products')
+        .send(newProduct)
+        .then(done)
+        .catch((res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+
+    it('should reject POSTs with invalid data', (done) => {
+      const newProduct = {
+        this: 'is not',
+        real: 'data'
+      };
+
+      chai.request(server)
+        .post('/api/products')
+        .send(newProduct)
+        .then(done)
+        .catch((res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+
+    it('should reject POSTs with invalid id', (done) => {
+      const newProduct = {
+        name: 'test',
+        description: 'a test product',
+        price: '12.34',
+        locationId: 'not a real id',
+        sellerId
+      };
+
+      chai.request(server)
+        .post('/api/products')
+        .send(newProduct)
+        .then(done)
+        .catch((res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+
+    it('should reject POSTs missing id', (done) => {
+      const newProduct = {
+        name: 'test',
+        description: 'a test product',
+        price: '12.34',
+        locationId
+      };
+
+      chai.request(server)
+        .post('/api/products')
+        .send(newProduct)
+        .then(done)
+        .catch((res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+  });
+
+  describe('get one product (/api/products/:id)', () => {
+    xit('should GET product', (done) => {
+      chai.request(server)
+        .get('/api/products/test')
+        .then((res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          done();
+        }).catch(done);
+    });
+    xit('should not get GET with invalid id');
+    xit('should not get GET with nonexistant id');
   });
 });
