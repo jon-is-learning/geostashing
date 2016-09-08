@@ -34,22 +34,20 @@ describe('product api endpoint (/api/products)', () => {
 
     beforeEach((done) => {
       Promise.resolve().then(() =>
-        User.destroy({ where: {} }))
-      .then(() =>
-        Location.destroy({ where: {} }))
-      .then(() =>
-        User.create({ name: 'product_test_user' }))
-      .then((user) => {
-        sellerId = user.id;
+        User.findOrCreate({ where: { name: 'product_test_user' } }))
+      .then((users) => {
+        sellerId = users[0].id;
       }).then(() =>
-        Location.create({
-          name: 'product_test_location',
-          lat: 123.456,
-          lng: 123.456,
-          userId: sellerId
+        Location.findOrCreate({
+          where: {
+            name: 'product_test_location',
+            lat: 123.456,
+            lng: 123.456,
+            userId: sellerId
+          }
         })
-      ).then((location) => {
-        locationId = location.id;
+      ).then((locations) => {
+        locationId = locations[0].id;
         done();
       }).catch(done);
     });
