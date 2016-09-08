@@ -1,16 +1,27 @@
+const Sequelize = require('sequelize');
 const db = require('./db');
 
-const User = db.sequelize.define('user', { name: db.Sequelize.STRING });
+const Location = require('./locationModel');
 
-User.sync({ force: true })
-  .then(() =>
-    User.create({ name: 'testOne' })
-  )
-  .then((user) => {
-    console.log('User table create with test user: ', user.dataValues);
-  })
-  .catch((err) => {
-    console.log('User table could not be created. Error: ', err);
-  });
+const User = db.define('user', {
+  id: {
+    type: Sequelize.UUID,
+    unique: true,
+    primaryKey: true,
+    defaultValue: Sequelize.UUIDV4
+  },
+  name: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  }
+});
+
+User.hasMany(Location, {
+  foreignKey: {
+    name: 'userId',
+    allowNull: false
+  }
+});
 
 module.exports = User;
