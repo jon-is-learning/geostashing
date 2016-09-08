@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AddLocation extends React.Component {
+class AddProduct extends React.Component {
   render() {
     return (
       <form method="POST" action="/api/locations">
@@ -52,16 +52,16 @@ class AddLocation extends React.Component {
   }
 }
 
-AddLocation.propTypes = {
+AddProduct.propTypes = {
   lat: React.PropTypes.number,
   lng: React.PropTypes.number,
   pinAdded: React.PropTypes.func
 };
 
-AddLocation.defaultProps = {
+AddProduct.defaultProps = {
   lat: 0,
   lng: 0,
   pinAdded: console.log
 };
 
-export default AddLocation;
+export default AddProduct;

@@ -1,6 +1,4 @@
 import React from 'react';
-import AddLocation from './AddLocation.jsx';
-import LocationDetails from './LocationDetails.jsx';
 
 //the map component basically wraps around the google maps api
 //it can take a list of pins (in format specified by api) and display them
@@ -140,28 +138,7 @@ class Map extends React.Component {
   }
 
   render() {
-    let locationDetails = '';
-
-    if (this.state.currentPin) {
-      if (this.state.currentPin.creating) {
-        locationDetails = <AddLocation
-          lng={this.state.currentPin.lng}
-          lat={this.state.currentPin.lat}
-          pinAdded={this.pinAdded.bind(this)}/>;
-      } else {
-        locationDetails = <LocationDetails
-          lng={this.state.currentPin.lng}
-          lat={this.state.currentPin.lat}
-          name={this.state.currentPin.name}/>;
-      }
-    }
-
-    return (
-      <div>
-        <div className="map" ref="gmap"></div>
-        {locationDetails}
-      </div>
-    );
+    return (<div className="map" ref="gmap"></div>);
   }
 }
 
