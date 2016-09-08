@@ -8,7 +8,6 @@ const locationController = {
   },
 
   addOne(req, res) {
-    console.log(req.body);
     Location.create(req.body)
       .then(() => res.end())
       .catch((err) => res.status(400).send(err));
