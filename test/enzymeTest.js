@@ -1,3 +1,8 @@
+import React from 'react';
 import { shallow, mount, render } from 'enzyme';
+import {expect} from 'chai';
 
-const wrapper = shallow(<Foo />);
+import SignIn from './../client/Components/SignIn'
+
+const wrapper = shallow(<SignIn />);
+

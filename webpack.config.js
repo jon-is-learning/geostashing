@@ -1,11 +1,23 @@
 const path = require('path');
 
 module.exports = {
-  context: path.join(__dirname, './client'),
   entry: './index.jsx',
+  devServer: {
+    hot: true,
+    inline: true,
+    port: 7700,
+    historyApiFallback: true
+  },
+  context: path.join(__dirname, './client'),
   output: {
     path: path.join(__dirname, './client/public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: 'http://localhost:7700/dist'
+  },
+  externals: {
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
   },
   module: {
     loaders: [

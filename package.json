@@ -4,6 +4,8 @@
   "description": "Geocaching service",
   "main": "webpack.config.js",
   "scripts": {
+    "enzyme": "mocha -w test/helpers/browser.js test/enzymeTest.js",
+    "dev:hot": "webpack-dev-server --hot --inline --progress --colors --watch --display-error-details --display-cached --content-base ./",
     "build": "eslint . --ext .js --ext .jsx --ignore-path .gitignore && webpack",
     "dev": "webpack -d --watch",
     "test": "mocha",
@@ -42,8 +44,14 @@
     "eslint": "^3.4.0",
     "eslint-plugin-react": "^6.2.0",
     "eslint-plugin-requirejs": "^2.0.1",
+    "jsdom": "^9.5.0",
     "mocha": "^3.0.2",
     "morgan": "^1.7.0",
-    "webpack": "^1.13.2"
+    "react-addons-test-utils": "^15.3.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.1"
+  },
+  "engines": {
+    "node": ">=6.5.0"
   }
 }
