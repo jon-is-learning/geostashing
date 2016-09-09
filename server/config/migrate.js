@@ -38,9 +38,9 @@ Promise.resolve().then(() =>
 ).then(() =>
   console.log('SYNCING LOCATION SCHEMA') || Location.sync({ force })
 ).then(() =>
-  console.log('SYNCING IMAGE SCHEMA') || Image.sync({ force })
-).then(() =>
   console.log('SYNCING PRODUCT SCHEMA') || Product.sync({ force })
+).then(() =>
+  console.log('SYNCING IMAGE SCHEMA') || Image.sync({ force })
 ).then(() =>
   fixtures && addFixtures()
 ).then(() =>
