@@ -56,14 +56,17 @@ class Map extends React.Component {
       zoom: this.props.zoom
     });
 
-    this.data.map.addListener('click', (ev) => this.setState({
-      currentPin: {
-        lat: ev.latLng.lat(),
-        lng: ev.latLng.lng(),
-        id: -1,
-        creating: true
-      }
-    }));
+    this.data.map.addListener('click', (ev) => {
+      this.props.selectCoords(ev.latLng.lng(), ev.latLng.lat());
+      this.setState({
+        currentPin: {
+          lat: ev.latLng.lat(),
+          lng: ev.latLng.lng(),
+          id: -1,
+          creating: true
+        }
+      });
+    });
 
     this.drawPins(this.state.pins);
   }
@@ -146,7 +149,8 @@ Map.propTypes = {
   lat: React.PropTypes.number,
   lng: React.PropTypes.number,
   zoom: React.PropTypes.number,
-  pins: React.PropTypes.array
+  pins: React.PropTypes.array,
+  selectCoords: React.PropTypes.func
 };
 
 Map.defaultProps = {

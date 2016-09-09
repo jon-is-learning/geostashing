@@ -7,6 +7,11 @@ import Dropzone from 'react-dropzone';
 //immediately begin uploading to the server which returns an id. This id can
 //then be to the post request
 class AddProduct extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { images: [] };
+  }
+
   render() {
     return (
       <form method="POST" action="/api/locations">
@@ -46,6 +51,10 @@ class AddProduct extends React.Component {
 
         <Dropzone onDrop={this.onFile.bind(this)}>
           <div>drop images here or click to upload.</div>
+          {
+            this.state.images.map((image, index) =>
+                <img key={index} src={image.url} />)
+          }
         </Dropzone>
 
         <input
@@ -76,11 +85,35 @@ class AddProduct extends React.Component {
 
     fetch(postFiles)
       .then((res) => res.json())
-      .then((res) => console.log(res));
+      .then((res) =>
+        this.setState({ images: this.state.images.concat([res]) }));
   }
 
-  submit() {
-    console.log('this should submit...');
+  submit(event) {
+    const data = {
+      name: this.refs.name.value,
+      description: this.refs.description.value,
+      price: this.refs.price.value,
+      images: this.state.images.map((image) => image.id),
+      location: {
+        lat: this.refs.lat.value,
+        lng: this.refs.lng.value
+      }
+    };
+
+    console.log('submitting:', data);
+
+    const prodRequest = new Request('/api/products', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    fetch(prodRequest)
+      .then((res) => res.json())
+      .then((res) => console.log(res));
+
+    event.preventDefault();
   }
 }
 

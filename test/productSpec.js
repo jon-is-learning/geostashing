@@ -2,9 +2,6 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../server/server');
 
-const User = require('../server/models/userModel');
-const Location = require('../server/models/locationModel');
-
 chai.use(chaiHttp);
 
 describe('product api endpoint (/api/products)', () => {
@@ -29,35 +26,16 @@ describe('product api endpoint (/api/products)', () => {
   });
 
   describe('create product', () => {
-    let sellerId = '';
-    let locationId = '';
-
-    beforeEach((done) => {
-      Promise.resolve().then(() =>
-        User.findOrCreate({ where: { name: 'product_test_user' } }))
-      .then((users) => {
-        sellerId = users[0].id;
-      }).then(() =>
-        Location.findOrCreate({
-          where: {
-            name: 'product_test_location',
-            lat: '123.456',
-            lng: '123.456'
-          }
-        })
-      ).then((locations) => {
-        locationId = locations[0].id;
-        done();
-      }).catch(done);
-    });
-
     it('should POST to /api/products', (done) => {
       const newProduct = {
         name: 'test',
         description: 'a test product',
         price: '12.34',
-        locationId,
-        sellerId
+        location: {
+          name: 'test',
+          lng: '12.3',
+          lat: '12.123'
+        }
       };
 
       chai.request(server)
@@ -66,9 +44,12 @@ describe('product api endpoint (/api/products)', () => {
         .then((res) => {
           res.should.have.status(200);
           res.should.be.json;
-          res.body.should.contain(newProduct);
+          res.body.name.should.equal(newProduct.name);
+          res.body.description.should.equal(newProduct.description);
+          res.body.price.should.equal(newProduct.price);
+          res.body.should.include.keys(['sellerId', 'locationId']);
           done();
-        }).catch(done);
+        }).catch((res) => console.log(res) || done(res));
     });
 
     it('should reject empty POSTs', (done) => {
@@ -100,13 +81,11 @@ describe('product api endpoint (/api/products)', () => {
         });
     });
 
-    it('should reject POSTs with invalid id', (done) => {
+    it('should reject POSTs without location', (done) => {
       const newProduct = {
         name: 'test',
         description: 'a test product',
-        price: '12.34',
-        locationId: 'not a real id',
-        sellerId
+        price: '12.34'
       };
 
       chai.request(server)
@@ -119,23 +98,7 @@ describe('product api endpoint (/api/products)', () => {
         });
     });
 
-    it('should reject POSTs missing id', (done) => {
-      const newProduct = {
-        name: 'test',
-        description: 'a test product',
-        price: '12.34',
-        locationId
-      };
-
-      chai.request(server)
-        .post('/api/products')
-        .send(newProduct)
-        .then(done)
-        .catch((res) => {
-          res.should.have.status(400);
-          done();
-        });
-    });
+    xit('should reject POSTs without user logged in');
   });
 
   describe('get one product (/api/products/:id)', () => {
