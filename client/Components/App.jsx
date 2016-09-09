@@ -1,6 +1,4 @@
 import React from 'react';
-import SignIn from './SignIn.jsx';
-import SignUp from './SignUp.jsx';
 import Map from './Map.jsx';
 import Catalog from './Catalog.jsx';
 import AddProduct from './AddProduct.jsx';
