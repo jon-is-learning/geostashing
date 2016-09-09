@@ -6,16 +6,6 @@ import Catalog from './Catalog.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-  }
-
-  registerClick() {
-    /* <p>Username already in use.</p> */
-  }
-
-  signInClick() {
-      /* <p>Invalid username and/or password</p> */
-
     this.state = {
       pins: [],
       products: []
@@ -34,6 +24,15 @@ class App extends React.Component {
       .then((res) => this.setState({ products: res }));
   }
 
+  registerClick() {
+    /* <p>Username already in use.</p> */
+  }
+
+  signInClick() {
+      /* <p>Invalid username and/or password</p> */
+
+  }
+
   render() {
     return (
       <div>
@@ -41,9 +40,6 @@ class App extends React.Component {
         <Map
           lat={37.7837678}
           lng={-122.40914660000001}
-          pins={[
-            { lat: 37.7837678, lng: -122.40914660000001 }
-          ]}/>
           pins={this.state.pins}/>
         <Catalog products={this.state.products} />
       </div>
