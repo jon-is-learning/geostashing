@@ -6,16 +6,6 @@ import Catalog from './Catalog.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-  }
-
-  registerClick() {
-    /* <p>Username already in use.</p> */
-  }
-
-  signInClick() {
-      /* <p>Invalid username and/or password</p> */
-
     this.state = {
       pins: [],
       products: []

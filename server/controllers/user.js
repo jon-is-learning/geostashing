@@ -9,10 +9,13 @@ const userController = {
   },
 
   addOne (req, res) {
+    console.log(user.dataValues); 
     User
       .create(req.body)
       .then((user) => res.status(200).send(user.dataValues))
-      .catch((err) => res.status(500).send(err));
+      .catch((err) => {
+        console.log("Not working..."); 
+        res.status(500).send(err)});
   },
 
   getAll (req, res) {
