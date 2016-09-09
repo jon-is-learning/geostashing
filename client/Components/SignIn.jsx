@@ -7,7 +7,7 @@ const SignIn = withRouter (
   React.createClass({
     getInitialState() {
       return {
-        error: null,
+        error: false,
         username: '',
         password: ''
       }
@@ -25,8 +25,11 @@ const SignIn = withRouter (
       })
     },
 
-    checkLogin(e) {
+    checkLoginInfo(e) {
       e.preventDefault();
+
+
+      //We will check to see if they are logged in with the auth functionality
 
       console.log(this.state.username);
       console.log(this.state.password);
@@ -36,8 +39,8 @@ const SignIn = withRouter (
     render () {
       return (
         <div>
+          <h1>SIGN IN</h1>
           <form onSubmit={this.checkLogin}>
-            <h1>SIGN IN</h1>
             <h4>Username</h4>
             <input type="text" onChange={this.userNameInfoChange}/>
             <h4>Password</h4>
@@ -47,7 +50,6 @@ const SignIn = withRouter (
           <Link to="signup">Register</Link>
         </div>
       )
-
     }
   })
 
