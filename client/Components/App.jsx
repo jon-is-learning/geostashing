@@ -6,6 +6,7 @@ import Catalog from './Catalog.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       pins: [],
       products: []
@@ -22,6 +23,15 @@ class App extends React.Component {
     fetch(getProducts)
       .then((res) => res.json())
       .then((res) => this.setState({ products: res }));
+
+  }
+
+  registerClick() {
+    /* <p>Username already in use.</p> */
+  }
+
+  signInClick() {
+      /* <p>Invalid username and/or password</p> */
   }
 
   registerClick() {
