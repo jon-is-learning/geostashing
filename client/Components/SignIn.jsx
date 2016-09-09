@@ -7,8 +7,8 @@ const SignIn = () =>
       <h4>Username</h4>
       <input type="text" />
       <h4>Password</h4>
-      <input type="password"/>
-      <input type="submit"/>
+      <input type="password" />
+      <input type="submit" />
       <Link to="signup">Register</Link>
     </div>;
 
