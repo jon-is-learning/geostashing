@@ -11,6 +11,16 @@ module.exports = {
       return;
     }
 
+
+    // const usersSignUp = new Request ('api/users', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     username: username,
+    //     password: pass
+    //   }),
+    //   headers: { 'content-type' : 'application/json' }
+    // })
+
     // $.ajax({
     //   type:'POST',
     //   url: 'http://localhost:3000/users/signUp',
@@ -37,6 +47,7 @@ module.exports = {
   },
 
   login(username, pass, cb) {
+
     cb = arguments[arguments.length - 1];
     if (localStorage.token) {
       console.log('There is a token!');
@@ -47,6 +58,27 @@ module.exports = {
       this.onChange(true);
       return;
     }
+
+    // const usersSignIn = new Request('/api/users',
+    // {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     username: username,
+    //     password: pass
+    //   }),
+    //   headers: { 'content-type': 'application/json'}
+    // });
+
+    // fetch(usersSignIn)
+    //   .then((dbuser) => {
+    //     localStorage.token = dbuser;
+    //     if(cb) { cb(true); }
+    //     this.onChange(true);
+    //   })
+    //   .catch((err)=> {
+    //     if(cb) { cb(false); }
+    //     this.onChange(false);
+    //   })
 
     // $.ajax({
     //   type: 'POST',

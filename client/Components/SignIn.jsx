@@ -26,13 +26,24 @@ const SignIn = withRouter (
     },
 
     checkLoginInfo(e) {
+
       e.preventDefault();
 
+      auth.login(this.state.username, this.state.password, (loggedIn) => {
+        if (!loggedIn) {
+          console.log('Not loggedin')
+          return this.setState({ error: true })
+        }
 
+        const { location } = this.props
+
+        if (location.state && location.state.nextPathname) {
+          this.props.router.replace(location.state.nextPathname)
+        } else {
+          this.props.router.replace('/home')
+        }
+      })
       //We will check to see if they are logged in with the auth functionality
-
-      console.log(this.state.username);
-      console.log(this.state.password);
     },
 
 
@@ -40,7 +51,7 @@ const SignIn = withRouter (
       return (
         <div>
           <h1>SIGN IN</h1>
-          <form onSubmit={this.checkLogin}>
+          <form onSubmit={this.checkLoginInfo}>
             <h4>Username</h4>
             <input type="text" onChange={this.userNameInfoChange}/>
             <h4>Password</h4>

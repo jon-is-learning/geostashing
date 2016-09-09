@@ -1,9 +1,6 @@
 import React from 'react';
  import { Link, withRouter } from 'react-router'; 
 
-
-
-
 const SignUp = withRouter (
   React.createClass({
     getInitialState() {
@@ -34,10 +31,9 @@ const SignUp = withRouter (
     },
 
     checkSignUpInfo (e) {
-
       e.preventDefault();
 
-      console.log(this.state)
+
 
     },
 
