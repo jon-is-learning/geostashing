@@ -29,8 +29,10 @@ const productController = {
          (productData.locationId = productData.locationId || location.id))
       .then(() =>
         Product.create(productData))
-      .then((product) => res.json(product))
-      .catch((err) => res.status(400).send(err));
+      .then((product) => {
+        res.json(product);
+        product.setImages(productData.images);
+      }).catch((err) => res.status(400).send(err));
   }
 };
 
