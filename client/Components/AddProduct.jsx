@@ -1,7 +1,11 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 
-
+//for the most part this is really just a form which sends a post request on
+//submit
+//images are handled a bit differently. When an image is chosen it will
+//immediately begin uploading to the server which returns an id. This id can
+//then be to the post request
 class AddProduct extends React.Component {
   render() {
     return (
@@ -40,7 +44,7 @@ class AddProduct extends React.Component {
           value={this.props.lat}
           placeholder="latitude"/>
 
-        <Dropzone onDrop={this.onFile}>
+        <Dropzone onDrop={this.onFile.bind(this)}>
           <div>drop images here or click to upload.</div>
         </Dropzone>
 
@@ -53,7 +57,26 @@ class AddProduct extends React.Component {
   }
 
   onFile(files) {
-    console.log('Received files: ', files);
+    files.forEach((file) => {
+      const reader = new FileReader();
+
+      reader.onload = (event) => this.sendFile({
+        name: file.name,
+        data: event.target.result
+      });
+      reader.readAsDataURL(file);
+    });
+  }
+
+  sendFile(file) {
+    const postFiles = new Request('/api/images', {
+      method: 'POST',
+      body: file.data
+    });
+
+    fetch(postFiles)
+      .then((res) => res.json())
+      .then((res) => console.log(res));
   }
 
   submit() {
