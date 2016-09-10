@@ -1,7 +1,5 @@
 import React from 'react';
-import Map from './Map.jsx';
 import Catalog from './Catalog.jsx';
-import AddProduct from './AddProduct.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,13 +20,15 @@ class App extends React.Component {
     fetch(getProducts)
       .then((res) => res.json())
       .then((res) => this.setState({ products: res }));
+
   }
 
-  selectCoords(lng, lat) {
-    this.setState({
-      lng,
-      lat
-    });
+  registerClick() {
+    /* <p>Username already in use.</p> */
+  }
+
+  signInClick() {
+      /* <p>Invalid username and/or password</p> */
   }
 
   render() {
@@ -37,13 +37,7 @@ class App extends React.Component {
         <a href="#/signin">signin</a>
         <a href="#/signup">signup</a>
         <h1>Hi there, beard person.</h1>
-        <Map
-          selectCoords={this.selectCoords.bind(this)}
-          lat={37.7837678}
-          lng={-122.40914660000001}
-          pins={this.state.pins} />
 
-        <AddProduct lng={this.state.lng} lat={this.state.lat}/>
         <Catalog products={this.state.products} />
       </div>
     );
