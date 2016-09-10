@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
 
-import auth from './../auth.js';
+// import auth from './../auth.js';
 
-const SignIn = withRouter (
+const SignIn = withRouter(
   React.createClass({
     getInitialState() {
       return {
         error: false,
         username: '',
         password: ''
-      }
+      };
     },
 
     // userNameInfoChange (e) {
@@ -19,16 +19,13 @@ const SignIn = withRouter (
     //   })
     // },
 
-    userPasswordChange (e) {
-      this.setState({
-        password: e.target.value
-      })
+    userPasswordChange(event) {
+      this.setState({ password: event.target.value });
     },
 
-    checkLoginInfo(e) {
+    checkLoginInfo(event) {
 
-      e.preventDefault();
-      
+      event.preventDefault();
       console.log(this.refs.username.value);
 
       // auth.login(this.state.username, this.state.password, (loggedIn) => {
@@ -49,7 +46,7 @@ const SignIn = withRouter (
     },
 
 
-    render () {
+    render() {
       return (
         <div>
           <h1>SIGN IN</h1>
@@ -62,16 +59,13 @@ const SignIn = withRouter (
           </form>
           <Link to="signup">Register</Link>
         </div>
-      )
+      );
     }
   })
 
 );
 
 export default SignIn;
-
-
-
 // () =>
 //     <div>
 //       <h1>SIGN IN</h1>

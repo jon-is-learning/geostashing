@@ -15,9 +15,24 @@ const productController = {
   },
 
   addOne(req, res) {
-    Product.create(req.body)
-      .then((product) => res.json(product))
-      .catch((err) => res.status(400).send(err));
+    const productData = req.body;
+
+    //for now... until there are sessions
+    Promise.resolve()
+      .then(() =>
+        User.findOne())
+      .then((user) =>
+        (productData.sellerId = user.id))
+      .then(() =>
+        req.body.locationId || Location.create(req.body.location))
+      .then((location) =>
+         (productData.locationId = productData.locationId || location.id))
+      .then(() =>
+        Product.create(productData))
+      .then((product) => {
+        res.json(product);
+        product.setImages(productData.images);
+      }).catch((err) => res.status(400).send(err));
   }
 };
 

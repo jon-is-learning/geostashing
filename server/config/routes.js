@@ -4,6 +4,7 @@ const router = new express.Router();
 const locations = require('../controllers/location');
 const user = require('../controllers/user');
 const product = require('../controllers/product');
+const image = require('../controllers/image');
 
 router.get('/api/locations', locations.getAll);
 router.post('/api/locations', locations.addOne);
@@ -16,5 +17,7 @@ router.delete('/api/users/:name', user.deleteOne);
 
 router.get('/api/products', product.getAll);
 router.post('/api/products', product.addOne);
+
+router.post('/api/images', image.addOne);
 
 module.exports = router;

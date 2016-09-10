@@ -1,13 +1,18 @@
 module.exports = {
-  signup(username, pass, cb) {
-    cb = arguments[arguments.length - 1];
+  signup(username, pass, callback) {
+    const cb = callback;
+
     if (localStorage.token) {
       console.log('There is a token!');
-      if (cb) { 
+      if (cb) {
         console.log('There is a callback!');
-        cb(true); 
+        cb(true);
+
+        return;
       }
+
       this.onChange(true);
+
       return;
     }
 
@@ -20,20 +25,21 @@ module.exports = {
     //   }),
     //   headers: { 'content-type' : 'application/json' }
     // })
-
-  
   },
 
-  login(username, pass, cb) {
+  login(username, pass, callback) {
+    const cb = callback;
 
-    cb = arguments[arguments.length - 1];
     if (localStorage.token) {
       console.log('There is a token!');
-      if (cb) { 
+      if (cb) {
         console.log('There is a callback!');
-        cb(true); 
+        cb(true);
+
+        return;
       }
       this.onChange(true);
+
       return;
     }
 
@@ -66,15 +72,19 @@ module.exports = {
   },
 
   logout(cb) {
-    delete localStorage.token;
-    if (cb) { cb(); }
+    // delete localStorage.token;
+    if (cb) {
+      cb();
+
+      return;
+    }
     this.onChange(false);
+
+    return;
   },
 
   loggedIn() {
     //document.cookie instead of localStorage
-    return !!localStorage.token;
-  },
-
-  onChange() {}
+    // return !!localStorage.token;
+  }
 };

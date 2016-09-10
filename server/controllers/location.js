@@ -19,9 +19,7 @@ const locationController = {
       .then((location) => location.destroy())
       .then((data) => res.status(200).send(data))
       .catch((err) => res.status(500).send(err));
-
   }
-
 };
 
 module.exports = locationController;

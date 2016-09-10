@@ -1,7 +1,7 @@
 import React from 'react';
- import { Link, withRouter } from 'react-router'; 
+import { withRouter } from 'react-router';
 
-const SignUp = withRouter (
+const SignUp = withRouter(
   React.createClass({
     getInitialState() {
       return {
@@ -9,31 +9,23 @@ const SignUp = withRouter (
         username: '',
         password: '',
         confirmedPassword: ''
-      }
+      };
     },
 
-    userNameInfoChange (e) {
-      this.setState({
-        username : e.target.value
-      })
+    userNameInfoChange(event) {
+      this.setState({ username: event.target.value });
     },
 
-    userPasswordChange (e) {
-      this.setState({
-        password: e.target.value
-      })
+    userPasswordChange(event) {
+      this.setState({ password: event.target.value });
     },
 
-    confirmedPasswordChange (e) {
-      this.setState({
-        confirmedPassword: e.target.value
-      })
+    confirmedPasswordChange(event) {
+      this.setState({ confirmedPassword: event.target.value });
     },
 
-    checkSignUpInfo (e) {
-      e.preventDefault();
-
-
+    checkSignUpInfo(event) {
+      event.preventDefault();
 
     },
 
@@ -51,7 +43,7 @@ const SignUp = withRouter (
             <input type="submit" />
           </form>
         </div>
-      )
+      );
     }
   })
 );
