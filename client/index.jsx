@@ -6,10 +6,13 @@ import App from './Components/App.jsx';
 import SignIn from './Components/SignIn.jsx';
 import SignUp from './Components/SignUp.jsx';
 
-ReactDOM.render(
+const router = (
 <Router history={hashHistory}>
-  <Route path="/"component={App}></Route>
+  <Route path="/" component={App}></Route>
+  <Route path="/add" component={App}></Route>
   <Route path="signin" component={SignIn}></Route>
   <Route path="signup" component={SignUp}></Route>
-</Router>,
-document.getElementById('app'));
+</Router>
+);
+
+ReactDOM.render(router, document.getElementById('app'));
