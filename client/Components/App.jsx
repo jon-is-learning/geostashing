@@ -32,15 +32,6 @@ class App extends React.Component {
       /* <p>Invalid username and/or password</p> */
   }
 
-  registerClick() {
-    /* <p>Username already in use.</p> */
-  }
-
-  signInClick() {
-      /* <p>Invalid username and/or password</p> */
-
-  }
-
   render() {
     return (
       <div>
