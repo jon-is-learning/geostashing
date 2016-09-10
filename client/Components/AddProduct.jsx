@@ -14,28 +14,24 @@ class AddProduct extends React.Component {
 
   render() {
     return (
-      <form method="POST" action="/api/locations">
+      <form method="POST" action="/api/locations" className="new-product">
         <h3>create new product</h3>
         <input
           ref="name"
-          name="name"
           type="text"
           placeholder="item name"/>
 
         <textarea
           ref="description"
-          name="description"
           placeholder="description"></textarea>
 
         <input
           ref="price"
-          name="price"
           type="text"
           placeholder="price"/>
 
         <input
           ref="lng"
-          name="lng"
           type="text"
           readOnly="true"
           value={this.props.lng}
@@ -43,7 +39,6 @@ class AddProduct extends React.Component {
 
         <input
           ref="lat"
-          name="lat"
           type="text"
           readOnly="true"
           value={this.props.lat}
@@ -58,7 +53,6 @@ class AddProduct extends React.Component {
         </Dropzone>
 
         <input
-          name="submit"
           type="submit"
           onClick={this.submit.bind(this)}/>
       </form>

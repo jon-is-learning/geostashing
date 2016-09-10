@@ -1,3 +1,11 @@
 .map{
   height: 300px;
 }
+
+.new-product{
+
+}
+
+.new-product > *{
+  display: block;
+}
