@@ -22,9 +22,9 @@ class AppRouter extends React.Component {
     return (
       <Router history={hashHistory}>
         <Route path="/" component={App}></Route>
-          <Route path="home" component={App} onEnter={requireAuth}></Route>
-          <Route path="signIn" component={SignIn}></Route>
-          <Route path="signUp" component={SignUp}></Route>
+        <Route path="home" component={App} onEnter={requireAuth}></Route>
+        <Route path="signIn" component={SignIn}></Route>
+        <Route path="signUp" component={SignUp}></Route>
       </Router>
     );
   }
