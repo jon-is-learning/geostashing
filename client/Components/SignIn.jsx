@@ -13,11 +13,11 @@ const SignIn = withRouter (
       }
     },
 
-    userNameInfoChange (e) {
-      this.setState({
-        username: e.target.value
-      })
-    },
+    // userNameInfoChange (e) {
+    //   this.setState({
+    //     username: e.target.value
+    //   })
+    // },
 
     userPasswordChange (e) {
       this.setState({
@@ -28,21 +28,23 @@ const SignIn = withRouter (
     checkLoginInfo(e) {
 
       e.preventDefault();
+      
+      console.log(this.refs.username.value);
 
-      auth.login(this.state.username, this.state.password, (loggedIn) => {
-        if (!loggedIn) {
-          console.log('Not loggedin')
-          return this.setState({ error: true })
-        }
+      // auth.login(this.state.username, this.state.password, (loggedIn) => {
+      //   if (!loggedIn) {
+      //     console.log('Not loggedin')
+      //     return this.setState({ error: true })
+      //   }
 
-        const { location } = this.props
+      //   const { location } = this.props
 
-        if (location.state && location.state.nextPathname) {
-          this.props.router.replace(location.state.nextPathname)
-        } else {
-          this.props.router.replace('/home')
-        }
-      })
+      //   if (location.state && location.state.nextPathname) {
+      //     this.props.router.replace(location.state.nextPathname)
+      //   } else {
+      //     this.props.router.replace('/home')
+      //   }
+      // })
       //We will check to see if they are logged in with the auth functionality
     },
 
@@ -53,9 +55,9 @@ const SignIn = withRouter (
           <h1>SIGN IN</h1>
           <form onSubmit={this.checkLoginInfo}>
             <h4>Username</h4>
-            <input type="text" onChange={this.userNameInfoChange}/>
+            <input ref="username" type="text" />
             <h4>Password</h4>
-            <input type="password" onChange={this.userPasswordChange} />
+            <input ref="password" type="password" />
             <input type="submit" />
           </form>
           <Link to="signup">Register</Link>

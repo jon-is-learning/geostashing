@@ -21,29 +21,7 @@ module.exports = {
     //   headers: { 'content-type' : 'application/json' }
     // })
 
-    // $.ajax({
-    //   type:'POST',
-    //   url: 'http://localhost:3000/users/signUp',
-    //   data: JSON.stringify({
-    //     username: username,
-    //     password: pass
-    //   }),
-    //   contentType: 'application/json',
-    //   success: (dbuser) => {
-    //     console.log(dbuser);
-    //     if (dbuser) {
-    //       localStorage.token = dbuser;
-    //       if (cb) { 
-    //         cb(true); 
-    //       }
-    //       this.onChange(true);
-    //     } else {
-    //       if (cb) { cb(false); }
-    //       this.onChange(false);
-    //     }
-    //   }
-    // });
-
+  
   },
 
   login(username, pass, cb) {
@@ -80,27 +58,6 @@ module.exports = {
     //     this.onChange(false);
     //   })
 
-    // $.ajax({
-    //   type: 'POST',
-    //   url: 'http://localhost:3000/users/signIn',
-    //   data: JSON.stringify({
-    //     username: username,
-    //     password: pass
-    //   }),
-    //   contentType: 'application/json',
-    //   success: (dbuser) => {
-    //     if (dbuser) {
-    //       localStorage.token = dbuser;
-    //       if (cb) { 
-    //         cb(true); 
-    //       }
-    //       this.onChange(true);
-    //     } else {
-    //       if (cb) { cb(false); }
-    //       this.onChange(false);
-    //     }
-    //   }
-    // });
 
   },
 
@@ -115,6 +72,7 @@ module.exports = {
   },
 
   loggedIn() {
+    //document.cookie instead of localStorage
     return !!localStorage.token;
   },
 
