@@ -23,6 +23,15 @@ class App extends React.Component {
     fetch(getProducts)
       .then((res) => res.json())
       .then((res) => this.setState({ products: res }));
+
+  }
+
+  registerClick() {
+    /* <p>Username already in use.</p> */
+  }
+
+  signInClick() {
+      /* <p>Invalid username and/or password</p> */
   }
 
   selectCoords(lng, lat) {
