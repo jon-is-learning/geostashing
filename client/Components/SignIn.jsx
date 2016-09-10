@@ -40,14 +40,14 @@ const SignIn = withRouter (
       return (
         <div>
           <h1>SIGN IN</h1>
-          <form onSubmit={this.checkLogin}>
+          <form className="sign-in" onSubmit={this.checkLogin}>
             <h4>Username</h4>
             <input type="text" onChange={this.userNameInfoChange}/>
             <h4>Password</h4>
             <input type="password" onChange={this.userPasswordChange} />
             <input type="submit" />
           </form>
-          <Link to="signup">Register</Link>
+          <Link to="signup" className="link">Register</Link>
         </div>
       )
     }
