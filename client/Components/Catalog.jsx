@@ -5,7 +5,16 @@ class Catalog extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { filter: null };
+    this.state = {
+      products: [],
+      filter: null
+    };
+
+    const getProducts = new Request('/api/products');
+
+    fetch(getProducts)
+      .then((res) => res.json())
+      .then((res) => this.setState({ products: res }));
   }
 
   updateFilter(str) {
@@ -47,7 +56,7 @@ class Catalog extends React.Component {
           placeholder="search"/>
         <ul className="products">
           {
-            this.props.products
+            this.state.products
               .filter(this.filterProduct.bind(this))
               .map((product, index) =>
                 <Product key={index} info={product}/>)
@@ -58,7 +67,7 @@ class Catalog extends React.Component {
   }
 }
 
-Catalog.propTypes = { products: React.PropTypes.array };
-Catalog.defaultProps = { products: [] };
+Catalog.propTypes = { };
+Catalog.defaultProps = { };
 
 export default Catalog;
