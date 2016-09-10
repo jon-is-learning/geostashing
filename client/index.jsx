@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
 
 import App from './Components/App.jsx';
+import Welcome from './Components/Welcome.jsx';
 import SignIn from './Components/SignIn.jsx';
 import SignUp from './Components/SignUp.jsx';
+
 import auth from './auth.js';
 
 const requireAuth = (nextState, replace) => {
@@ -21,7 +23,7 @@ class AppRouter extends React.Component {
   render() {
     return (
       <Router history={hashHistory}>
-        <Route path="/" component={App}></Route>
+        <Route path="/" component={Welcome}></Route>
         <Route path="home" component={App} onEnter={requireAuth}></Route>
         <Route path="signIn" component={SignIn}></Route>
         <Route path="signUp" component={SignUp}></Route>
