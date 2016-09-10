@@ -1,5 +1,6 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
+import Map from './Map.jsx';
 
 //for the most part this is really just a form which sends a post request on
 //submit
@@ -14,47 +15,78 @@ class AddProduct extends React.Component {
 
   render() {
     return (
-      <form method="POST" action="/api/locations" className="new-product">
-        <h3>create new product</h3>
-        <input
-          ref="name"
-          type="text"
-          placeholder="item name"/>
+      <form method="POST" action="/api/locations" className="new-product row">
+        <h5>create new product</h5>
+        <div className="row">
+          <Map
+            selectCoords={this.selectCoords.bind(this)}
+            lat={37.7837678}
+            lng={-122.40914660000001} />
+        </div>
 
-        <textarea
-          ref="description"
-          placeholder="description"></textarea>
+        <div className="row">
+          <input
+            ref="name"
+            type="text"
+            placeholder="item name"/>
+        </div>
 
-        <input
-          ref="price"
-          type="text"
-          placeholder="price"/>
+        <div className="row">
+          <textarea
+            className="materialize-textarea"
+            ref="description"
+            placeholder="description"></textarea>
+        </div>
 
-        <input
-          ref="lng"
-          type="text"
-          readOnly="true"
-          value={this.props.lng}
-          placeholder="longitude"/>
+        <div className="row">
+          <input
+            ref="price"
+            type="text"
+            placeholder="price"/>
+        </div>
 
-        <input
-          ref="lat"
-          type="text"
-          readOnly="true"
-          value={this.props.lat}
-          placeholder="latitude"/>
+        <div className="row">
+          <input
+            className="col s6"
+            ref="lng"
+            type="text"
+            readOnly="true"
+            value={this.state.lng}
+            placeholder="longitude" />
+          <input
+            className="col s6"
+            ref="lat"
+            type="text"
+            readOnly="true"
+            value={this.state.lat}
+            placeholder="latitude" />
+          <div className="info">click map to set location</div>
+        </div>
 
-        <Dropzone onDrop={this.onFile.bind(this)}>
-          <div>drop images here or click to upload.</div>
+        <Dropzone
+          style={{}}
+          className="dropzone card-panel"
+          accept="image/*"
+          onDrop={this.onFile.bind(this)}>
+
+          {
+            this.state.images.length === 0
+              ? <div className="info">drop images here or click to upload.</div>
+              : ''
+          }
           {
             this.state.images.map((image, index) =>
                 <img key={index} src={image.url} />)
           }
         </Dropzone>
 
-        <input
-          type="submit"
-          onClick={this.submit.bind(this)}/>
+        <button
+            onClick={this.submit.bind(this)}
+            className="btn waves-effect waves-light"
+            type="submit"
+            name="action">
+          Submit<i className="material-icons right">send</i>
+        </button>
       </form>
     );
   }
@@ -81,6 +113,13 @@ class AddProduct extends React.Component {
       .then((res) => res.json())
       .then((res) =>
         this.setState({ images: this.state.images.concat([res]) }));
+  }
+
+  selectCoords(lng, lat) {
+    this.setState({
+      lng,
+      lat
+    });
   }
 
   submit(event) {
