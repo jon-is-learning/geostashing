@@ -4,8 +4,8 @@
   "description": "Geocaching service",
   "main": "webpack.config.js",
   "scripts": {
-    "enzyme": "mocha -w test/helpers/browser.js test/enzymeTest.js",
-    "dev:hot": "webpack-dev-server --hot --inline --progress --colors --watch --display-error-details --display-cached --content-base ./",
+    "enzyme": "mocha -w test/helpers/browser.js test/enzymeTest.jsx",
+    "dev:hot": "webpack-dev-server --watch --hot --inline --progress --colors --watch --display-error-details --display-cached --content-base ./test/helpers/",
     "build": "eslint . --ext .js --ext .jsx --ignore-path .gitignore && webpack",
     "dev": "webpack -d --watch",
     "test": "mocha",
@@ -38,6 +38,7 @@
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.14.0",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
