@@ -1,74 +1,69 @@
 module.exports = {
-  signup(username, pass, cb) {
-    cb = arguments[arguments.length - 1];
+  signup(username, pass, callback) {
+    const cb = callback;
+
     if (localStorage.token) {
       console.log('There is a token!');
-      if (cb) { 
+      if (cb) {
         console.log('There is a callback!');
-        cb(true); 
+        cb(true);
+
+        return;
       }
+
       this.onChange(true);
+
       return;
     }
 
-    // $.ajax({
-    //   type:'POST',
-    //   url: 'http://localhost:3000/users/signUp',
-    //   data: JSON.stringify({
+
+    // const usersSignUp = new Request ('api/users', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
     //     username: username,
     //     password: pass
     //   }),
-    //   contentType: 'application/json',
-    //   success: (dbuser) => {
-    //     console.log(dbuser);
-    //     if (dbuser) {
-    //       localStorage.token = dbuser;
-    //       if (cb) { 
-    //         cb(true); 
-    //       }
-    //       this.onChange(true);
-    //     } else {
-    //       if (cb) { cb(false); }
-    //       this.onChange(false);
-    //     }
-    //   }
-    // });
-
+    //   headers: { 'content-type' : 'application/json' }
+    // })
   },
 
-  login(username, pass, cb) {
-    cb = arguments[arguments.length - 1];
+  login(username, pass, callback) {
+    const cb = callback;
+
     if (localStorage.token) {
       console.log('There is a token!');
-      if (cb) { 
+      if (cb) {
         console.log('There is a callback!');
-        cb(true); 
+        cb(true);
+
+        return;
       }
       this.onChange(true);
+
       return;
     }
 
-    // $.ajax({
-    //   type: 'POST',
-    //   url: 'http://localhost:3000/users/signIn',
-    //   data: JSON.stringify({
+    // const usersSignIn = new Request('/api/users',
+    // {
+    //   method: 'POST',
+    //   body: JSON.stringify({
     //     username: username,
     //     password: pass
     //   }),
-    //   contentType: 'application/json',
-    //   success: (dbuser) => {
-    //     if (dbuser) {
-    //       localStorage.token = dbuser;
-    //       if (cb) { 
-    //         cb(true); 
-    //       }
-    //       this.onChange(true);
-    //     } else {
-    //       if (cb) { cb(false); }
-    //       this.onChange(false);
-    //     }
-    //   }
+    //   headers: { 'content-type': 'application/json'}
     // });
+
+    // fetch(usersSignIn)
+    //   .then((dbuser) => {
+    //     localStorage.token = dbuser;
+    //     if(cb) { cb(true); }
+    //     this.onChange(true);
+    //   })
+    //   .catch((err)=> {
+    //     if(cb) { cb(false); }
+    //     this.onChange(false);
+    //   })
+
 
   },
 
@@ -77,14 +72,19 @@ module.exports = {
   },
 
   logout(cb) {
-    delete localStorage.token;
-    if (cb) { cb(); }
+    // delete localStorage.token;
+    if (cb) {
+      cb();
+
+      return;
+    }
     this.onChange(false);
+
+    return;
   },
 
   loggedIn() {
-    return !!localStorage.token;
-  },
-
-  onChange() {}
+    //document.cookie instead of localStorage
+    // return !!localStorage.token;
+  }
 };

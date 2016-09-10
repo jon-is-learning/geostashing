@@ -1,3 +1,29 @@
 .map{
   height: 300px;
 }
+
+.new-product{
+}
+
+.info{
+  color: rgba(0, 0, 0, .25);
+  padding: 0 0.75rem;
+}
+
+.dropzone{
+  padding: 5em;
+  cursor: pointer;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.dropzone > img{
+  max-width: 100px;
+  max-height: 100px;
+  margin: 5px;
+}
+
+.new-product > *{
+  display: block;
+}
+

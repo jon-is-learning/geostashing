@@ -102,7 +102,7 @@
         "max-statements": "error",
         "max-statements-per-line": "error",
         "multiline-ternary": "error",
-        "new-cap": 0,
+        "new-cap": "off",
         "new-parens": "error",
         "newline-after-var": [
             "error",
@@ -209,7 +209,10 @@
           "always"
         ],
         "object-shorthand": "error",
-        "one-var": "off",
+        "one-var": [
+            "error",
+            "never"
+        ],
         "one-var-declaration-per-line": "error",
         "operator-assignment": "error",
         "operator-linebreak": [
@@ -238,7 +241,10 @@
         "semi-spacing": "error",
         "sort-vars": "error",
         "space-before-blocks": "error",
-        "space-before-function-paren": "off",
+        "space-before-function-paren": [
+            "error",
+            "never"
+        ],
         "space-in-parens": [
             "error",
             "never"

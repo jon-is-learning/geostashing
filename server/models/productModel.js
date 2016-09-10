@@ -31,7 +31,7 @@ const Product = db.define('product', {
   }
 });
 
-Product.belongsTo(Image);
+Product.hasMany(Image);
 Product.belongsTo(Location, { foreignKey: { allowNull: false } });
 Product.belongsTo(User, {
   as: 'seller',

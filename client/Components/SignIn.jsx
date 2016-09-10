@@ -1,64 +1,71 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
 
-import auth from './../auth.js';
+// import auth from './../auth.js';
 
-const SignIn = withRouter (
+const SignIn = withRouter(
   React.createClass({
     getInitialState() {
       return {
         error: false,
         username: '',
         password: ''
-      }
+      };
     },
 
-    userNameInfoChange (e) {
-      this.setState({
-        username: e.target.value
-      })
+    // userNameInfoChange (e) {
+    //   this.setState({
+    //     username: e.target.value
+    //   })
+    // },
+
+    userPasswordChange(event) {
+      this.setState({ password: event.target.value });
     },
 
-    userPasswordChange (e) {
-      this.setState({
-        password: e.target.value
-      })
-    },
+    checkLoginInfo(event) {
 
-    checkLoginInfo(e) {
-      e.preventDefault();
+      event.preventDefault();
+      console.log(this.refs.username.value);
 
+      // auth.login(this.state.username, this.state.password, (loggedIn) => {
+      //   if (!loggedIn) {
+      //     console.log('Not loggedin')
+      //     return this.setState({ error: true })
+      //   }
 
+      //   const { location } = this.props
+
+      //   if (location.state && location.state.nextPathname) {
+      //     this.props.router.replace(location.state.nextPathname)
+      //   } else {
+      //     this.props.router.replace('/home')
+      //   }
+      // })
       //We will check to see if they are logged in with the auth functionality
-
-      console.log(this.state.username);
-      console.log(this.state.password);
     },
 
 
-    render () {
+    render() {
       return (
         <div>
           <h1>SIGN IN</h1>
-          <form className="sign-in" onSubmit={this.checkLogin}>
+          <form onSubmit={this.checkLoginInfo}>
             <h4>Username</h4>
-            <input type="text" onChange={this.userNameInfoChange}/>
+            <input ref="username" type="text" />
             <h4>Password</h4>
-            <input type="password" onChange={this.userPasswordChange} />
+            <input ref="password" type="password" />
             <input type="submit" />
           </form>
           <Link to="signup" className="link">Register</Link>
         </div>
-      )
+      );
     }
   })
 
 );
 
 export default SignIn;
-
-
-
 // () =>
 //     <div>
 //       <h1>SIGN IN</h1>

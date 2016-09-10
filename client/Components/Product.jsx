@@ -3,9 +3,9 @@ import React from 'react';
 const Product = (props) => (
   <li className="catalog">
       <img src={
-        props.info.image
-        ? props.info.image.url
-        : '/default-image.png'
+        props.info.images[0]
+        ? props.info.images[0].url
+        : '/default-image.svg'
       } />
       <h3>${props.info.price} - {props.info.name}</h3>
       <p>{props.info.description}</p>
