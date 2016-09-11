@@ -1,8 +1,6 @@
 import React from 'react';
 import Moment from 'moment';
 
-console.log(Moment);
-
 const Product = (props) => (
   <li
     onClick={props.show.bind(null, props.info.id)}
