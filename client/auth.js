@@ -30,10 +30,9 @@ module.exports = {
   login(username, pass, callback) {
     const cb = callback;
 
-    if (localStorage.token) {
-      console.log('There is a token!');
+    //Look to see if a session(cookie) is assigned
+    if (document.cookie) {
       if (cb) {
-        console.log('There is a callback!');
         cb(true);
 
         return;
@@ -43,15 +42,29 @@ module.exports = {
       return;
     }
 
-    // const usersSignIn = new Request('/api/users',
-    // {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     username: username,
-    //     password: pass
-    //   }),
-    //   headers: { 'content-type': 'application/json'}
-    // });
+    //Make a request to endpoint /api/users/:name
+    const endpoint = `/api/users/${username}`;
+
+    $.ajax({
+          url: endpoint,
+          method: 'POST',
+          success: (dbuser) => {
+            
+          },
+          error: function(err) {
+            console.log(err);
+          }
+        });
+
+    // const usersSignIn = new Request(endpoint,
+    //   {
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //       username: username,
+    //       password: pass
+    //     }),
+    //     headers: { 'content-type': 'application/json' }
+    //   });
 
     // fetch(usersSignIn)
     //   .then((dbuser) => {
@@ -68,7 +81,8 @@ module.exports = {
   },
 
   getToken() {
-    return localStorage.token;
+    //This will be get session cookie
+    return document.cookie;
   },
 
   logout(cb) {
@@ -85,6 +99,6 @@ module.exports = {
 
   loggedIn() {
     //document.cookie instead of localStorage
-    // return !!localStorage.token;
+    return !!document.cookie;
   }
 };

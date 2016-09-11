@@ -1,50 +1,40 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
 
-// import auth from './../auth.js';
+import auth from './../auth.js';
 
 const SignIn = withRouter(
   React.createClass({
     getInitialState() {
-      return {
-        error: false,
-        username: '',
-        password: ''
-      };
-    },
-
-    // userNameInfoChange (e) {
-    //   this.setState({
-    //     username: e.target.value
-    //   })
-    // },
-
-    userPasswordChange(event) {
-      this.setState({ password: event.target.value });
+      return { error: false };
     },
 
     checkLoginInfo(event) {
 
       event.preventDefault();
-      console.log(this.refs.username.value);
+      const username = this.refs.username.value;
+      const password = this.refs.password.value;
 
-      // auth.login(this.state.username, this.state.password, (loggedIn) => {
-      //   if (!loggedIn) {
-      //     console.log('Not loggedin')
-      //     return this.setState({ error: true })
-      //   }
+      auth.login(username, password, (loggedIn) => {
+        if (!loggedIn) {
+          console.log('Not loggedin');
 
-      //   const { location } = this.props
+          return this.setState({ error: true });
+        }
 
-      //   if (location.state && location.state.nextPathname) {
-      //     this.props.router.replace(location.state.nextPathname)
-      //   } else {
-      //     this.props.router.replace('/home')
-      //   }
-      // })
-      //We will check to see if they are logged in with the auth functionality
+        const { location } = this.props;
+
+        if (location.state && location.state.nextPathname) {
+          this.props.router.replace(location.state.nextPathname);
+
+          return;
+        } else {
+          this.props.router.replace('/home');
+
+          return;
+        }
+      });
     },
-
 
     render() {
       return (
@@ -65,7 +55,13 @@ const SignIn = withRouter(
 
 );
 
+SignIn.propTypes = {
+  location: React.PropTypes.object,
+  router: React.PropTypes.object
+};
+
 export default SignIn;
+
 // () =>
 //     <div>
 //       <h1>SIGN IN</h1>
