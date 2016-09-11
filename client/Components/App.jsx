@@ -6,18 +6,32 @@ import Navbar from './Navbar.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { page: 'find' };
   }
 
-  addProduct() {
-    this.setState({ addProduct: !this.state.addProduct });
+  addProduct(ev) {
+    ev.preventDefault();
+    this.setState({
+      addProduct: !this.state.addProduct,
+      page: !this.state.addProduct 
+        ? 'create'
+        : 'find'
+    });
+  }
+
+  findProduct(ev) {
+    ev.preventDefault();
+    console.log('finding...');
+    this.setState({ page: 'find' });
   }
 
   render() {
     return (
       <div>
-        <Navbar page={{ find: 'active' }}/>
-        <a onClick={this.addProduct.bind(this)}>add product</a>
+        <Navbar
+          gotoCreate={this.addProduct.bind(this)}
+          gotoFind={this.findProduct.bind(this)}
+          page={this.state.page}/>
         <Catalog />
         {
           this.state.addProduct
