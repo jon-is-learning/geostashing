@@ -1,14 +1,16 @@
 import React from 'react';
 
 const Product = (props) => (
-  <li className="collection-item avatar">
-    <img src={
+  <li className="collection-item avatar product">
+    <img
+      src={
         props.info.images[0]
         ? props.info.images[0].url
         : '/default-image.svg'}
-        className="responsive-img circle"/>
-    <span className="title">${props.info.price} - {props.info.name}</span>
+      className="responsive-img circle" alt=""/>
+    <span className="title">{props.info.name}</span>
     <p>
+      <span className="price">${props.info.price}</span><br/>
       by {props.info.seller.name}<br/>
       {props.info.description}
     </p>
