@@ -39,3 +39,14 @@
 .nav-wrapper{
   padding-left: 1em;
 }
+
+.sidebar{
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  right: 0;
+
+  overflow-y: scroll;
+
+  background: #fff;
+}

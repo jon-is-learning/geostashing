@@ -34,7 +34,7 @@ class App extends React.Component {
         <Catalog />
         {
           this.state.page === 'create'
-          ? <AddProduct />
+          ? <div className="sidebar"><AddProduct /></div>
           : null
         }
       </div>
