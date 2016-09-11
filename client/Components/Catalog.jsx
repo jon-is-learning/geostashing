@@ -1,5 +1,6 @@
 import React from 'react';
 import Product from './Product.jsx';
+import Map from './Map.jsx';
 
 class Catalog extends React.Component {
   constructor(props) {
@@ -48,6 +49,10 @@ class Catalog extends React.Component {
   render() {
     return (
       <div className="catalog">
+        <Map
+          pins={this.state.products.map((product) => product.location)}
+          lat={37.7837678}
+          lng={-122.40914660000001} />
         <input
           onChange={() => this.updateFilter(this.refs.search.value)}
           ref="search"
@@ -61,7 +66,7 @@ class Catalog extends React.Component {
               .map((product, index) =>
                 <Product
                   key={index}
-                  info={product} 
+                  info={product}
                   show={this.props.showProduct}/>)
           }
         </ul>
