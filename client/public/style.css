@@ -2,7 +2,14 @@
   height: 300px;
 }
 
-.new-product{
+.new-product .title{
+  font-size: 1.75em;
+  text-align: center;
+}
+
+.new-product .back-arrow{
+  position: absolute;
+  cursor: pointer;
 }
 
 .info{
@@ -27,3 +34,28 @@
   display: block;
 }
 
+.product > .title{
+  font-size: 2em !important;
+  font-weight: 300;
+}
+
+.product .price{
+  font-weight: bold;
+}
+
+.nav-wrapper{
+  padding-left: 1em;
+}
+
+.sidebar{
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  right: 0;
+
+  padding: 0 1em;
+
+  overflow-y: scroll;
+
+  background: #fff;
+}

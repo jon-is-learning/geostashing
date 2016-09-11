@@ -24,9 +24,9 @@ const addFixtures = () =>
   ).then(() =>
     console.log('CREATING USERS') || Location.bulkCreate(LocationFixtures)
   ).then(() =>
-    console.log('CREATING IMAGES') || Image.bulkCreate(ImageFixtures)
-  ).then(() =>
     console.log('CREATING PRODUCTS') || Product.bulkCreate(ProductFixtures)
+  ).then(() =>
+    console.log('CREATING IMAGES') || Image.bulkCreate(ImageFixtures)
   );
 
 console.log('SYNCING', force
