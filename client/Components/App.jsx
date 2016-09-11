@@ -11,6 +11,7 @@ class App extends React.Component {
 
   addProduct(ev) {
     ev.preventDefault();
+
     this.setState({
       page: this.state.page === 'create'
         ? 'find'
@@ -20,8 +21,15 @@ class App extends React.Component {
 
   findProduct(ev) {
     ev.preventDefault();
+
     console.log('finding...');
     this.setState({ page: 'find' });
+  }
+
+  showProduct(prodId) {
+
+    console.log('showing product with id ', prodId);
+    this.setState({ page: 'show' });
   }
 
   render() {
@@ -31,7 +39,7 @@ class App extends React.Component {
           gotoCreate={this.addProduct.bind(this)}
           gotoFind={this.findProduct.bind(this)}
           page={this.state.page}/>
-        <Catalog />
+        <Catalog showProduct={this.showProduct.bind(this)}/>
         {
           this.state.page === 'create'
           ? <div className="sidebar z-depth-1">

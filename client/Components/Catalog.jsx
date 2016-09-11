@@ -59,7 +59,10 @@ class Catalog extends React.Component {
             this.state.products
               .filter(this.filterProduct.bind(this))
               .map((product, index) =>
-                <Product key={index} info={product}/>)
+                <Product
+                  key={index}
+                  info={product} 
+                  show={this.props.showProduct}/>)
           }
         </ul>
       </div>
@@ -67,7 +70,6 @@ class Catalog extends React.Component {
   }
 }
 
-Catalog.propTypes = { };
-Catalog.defaultProps = { };
+Catalog.propTypes = { showProduct: React.PropTypes.func };
 
 export default Catalog;

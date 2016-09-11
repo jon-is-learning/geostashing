@@ -1,7 +1,9 @@
 import React from 'react';
 
 const Product = (props) => (
-  <li className="collection-item avatar product">
+  <li
+    onClick={props.show.bind(null, props.info.id)}
+    className="collection-item avatar product">
     <img
       src={
         props.info.images[0]
@@ -24,6 +26,9 @@ const Product = (props) => (
   </li>
 );
 
-Product.propTypes = { info: React.PropTypes.object };
+Product.propTypes = {
+  info: React.PropTypes.object,
+  show: React.PropTypes.func
+};
 
 export default Product;
