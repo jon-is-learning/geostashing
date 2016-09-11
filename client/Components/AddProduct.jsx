@@ -16,7 +16,7 @@ class AddProduct extends React.Component {
   render() {
     return (
       <form method="POST" action="/api/locations" className="new-product row">
-        <h5>create new product</h5>
+        <h5>new stash</h5>
         <div className="row">
           <Map
             selectCoords={this.selectCoords.bind(this)}

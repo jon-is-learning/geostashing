@@ -1,23 +1,12 @@
 import React from 'react';
 import Catalog from './Catalog.jsx';
 import AddProduct from './AddProduct.jsx';
+import Navbar from './Navbar.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {};
-
-    //this.state = {
-      //pins: [],
-    //};
-
-    //const getPins = new Request('/api/locations');
-
-    //fetch(getPins)
-      //.then((res) => res.json())
-      //.then((res) => this.setState({ pins: res }));
-
   }
 
   addProduct() {
@@ -27,6 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Navbar />
         <a onClick={this.addProduct.bind(this)}>add product</a>
         <Catalog />
         {
