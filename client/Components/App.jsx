@@ -32,13 +32,27 @@ class App extends React.Component {
     this.setState({ page: 'show' });
   }
 
+  signOut() {
+    $.ajax({
+          url: '/api/users/signOut',
+          method: 'GET',
+          success: (data) => {
+            console.log('It went to the logout endpoint');
+          },
+          error: function(err) {
+            console.log(err);
+          }
+        });
+  }
+
   render() {
     return (
       <div>
         <Navbar
           gotoCreate={this.addProduct.bind(this)}
           gotoFind={this.findProduct.bind(this)}
-          page={this.state.page}/>
+          page={this.state.page}
+          signOut={this.signOut}/>
         <Catalog showProduct={this.showProduct.bind(this)}/>
         {
           this.state.page === 'create'

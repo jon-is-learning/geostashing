@@ -13,6 +13,7 @@ router.delete('/api/locations/:name', locations.deleteOne);
 // router.post('/api/users', user.getAll);
 router.post('/api/users/:name', user.getOne);
 router.post('/api/users', user.addOne);
+router.get('/api/users/signOut', user.signOut)
 // router.delete('/api/users/:name', user.deleteOne);
 
 router.get('/api/products', product.getAll);

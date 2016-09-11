@@ -32,7 +32,10 @@ const Navbar = (props) => (
             : ''}>
           <a href="#add"><i className="material-icons">add</i></a>
         </li>
-        <li>account...</li>
+        <li onClick={props.signOut} className={
+            props.page === 'create'
+            ? 'active'
+            : ''}> account...</li>
       </ul>
     </div>
   </nav>
