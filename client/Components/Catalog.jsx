@@ -1,6 +1,7 @@
 import React from 'react';
 import Product from './Product.jsx';
 import Map from './Map.jsx';
+import BuildSearch from './BuildSearch.jsx';
 
 class Catalog extends React.Component {
   constructor(props) {
@@ -49,6 +50,7 @@ class Catalog extends React.Component {
   render() {
     return (
       <div className="catalog">
+        <BuildSearch />
         <Map
           pins={this.state.products.map((product) => product.location)}
           lat={37.7837678}

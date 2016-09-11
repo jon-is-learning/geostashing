@@ -1,4 +1,7 @@
 import React from 'react';
+import Moment from 'moment';
+
+console.log(Moment);
 
 const Product = (props) => (
   <li
@@ -13,7 +16,11 @@ const Product = (props) => (
     <span className="title">{props.info.name}</span>
     <p>
       <span className="price">${props.info.price}</span><br/>
-      by {props.info.seller.name}<br/>
+      by {props.info.seller.name}
+      <span title={props.info.createdAt}>
+        {Moment().from(props.info.createdAt)} ago
+      </span>
+      <br/>
       {props.info.description}
     </p>
     <a href="#!" className="secondary-content">
