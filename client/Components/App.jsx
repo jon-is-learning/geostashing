@@ -12,10 +12,9 @@ class App extends React.Component {
   addProduct(ev) {
     ev.preventDefault();
     this.setState({
-      addProduct: !this.state.addProduct,
-      page: !this.state.addProduct 
-        ? 'create'
-        : 'find'
+      page: this.state.page === 'create'
+        ? 'find'
+        : 'create'
     });
   }
 
@@ -34,7 +33,7 @@ class App extends React.Component {
           page={this.state.page}/>
         <Catalog />
         {
-          this.state.addProduct
+          this.state.page === 'create'
           ? <AddProduct />
           : null
         }
