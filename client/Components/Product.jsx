@@ -1,20 +1,20 @@
 import React from 'react';
 
 const Product = (props) => (
-  <li className="catalog">
-      <img src={
+  <li className="collection-item avatar">
+    <img src={
         props.info.images[0]
         ? props.info.images[0].url
-        : '/default-image.svg'
-      } />
-      <h3>${props.info.price} - {props.info.name}</h3>
-      <p>{props.info.description}</p>
-      <p>{props.info.seller.name} (rating...)</p>
-      <p>
-        {props.info.location.name} (
-          {props.info.location.lng},
-          {props.info.location.lat})
-      </p>
+        : '/default-image.svg'}
+        className="responsive-img circle"/>
+    <span className="title">${props.info.price} - {props.info.name}</span>
+    <p>
+      by {props.info.seller.name}<br/>
+      {props.info.description}
+    </p>
+    <a href="#!" className="secondary-content">
+      {props.info.location.lng}, {props.info.location.lat}
+    </a>
   </li>
 );
 

@@ -54,7 +54,7 @@ class Catalog extends React.Component {
           type="text"
           name="search"
           placeholder="search"/>
-        <ul className="products">
+        <ul className="products collection">
           {
             this.state.products
               .filter(this.filterProduct.bind(this))
