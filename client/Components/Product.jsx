@@ -15,6 +15,7 @@ const Product = (props) => (
       {props.info.description}
     </p>
     <a href="#!" className="secondary-content">
+      <i className="material-icons">location_on</i>
       {props.info.location.lng}, {props.info.location.lat}
     </a>
   </li>
