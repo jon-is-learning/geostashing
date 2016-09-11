@@ -155,5 +155,4 @@ AddProduct.propTypes = {
   lng: React.PropTypes.number
 };
 
-
 export default AddProduct;

@@ -16,7 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar page={{ find: 'active' }}/>
         <a onClick={this.addProduct.bind(this)}>add product</a>
         <Catalog />
         {
