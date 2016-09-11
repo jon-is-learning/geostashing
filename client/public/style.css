@@ -47,8 +47,14 @@
   padding-left: 1em;
 }
 
+.navbar{
+  z-index: 1;
+  position: relative;
+}
+
 .sidebar{
   position: fixed;
+  z-index: 2;
   bottom: 0;
   top: 0;
   right: 0;

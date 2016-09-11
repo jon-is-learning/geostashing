@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Navbar = (props) => (
-  <nav className="teal">
+  <nav className="teal navbar">
     <div className="nav-wrapper">
       <a href="#" className="brand-logo">Geostashing</a>
       <ul className="right hide-on-med-and-down">
