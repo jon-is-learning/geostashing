@@ -34,7 +34,9 @@ class App extends React.Component {
         <Catalog />
         {
           this.state.page === 'create'
-          ? <div className="sidebar"><AddProduct /></div>
+          ? <div className="sidebar z-depth-1">
+              <AddProduct onClose={this.addProduct.bind(this)}/>
+            </div>
           : null
         }
       </div>
