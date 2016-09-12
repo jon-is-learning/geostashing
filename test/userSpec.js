@@ -36,7 +36,7 @@ describe('user api endpoint (/api/users)', () => {
     });
   });
 
-  describe('signup', () => {
+  xdescribe('signup', () => {
     it('should create and return a new user (/api/users)',
       (done) => {
         chai
