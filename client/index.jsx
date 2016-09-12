@@ -18,15 +18,18 @@ const requireAuth = (nextState, replace) => {
   }
 };
 
-
 class AppRouter extends React.Component {
   render() {
     return (
       <Router history={hashHistory}>
         <Route path="/" component={Welcome}></Route>
-        <Route path="home" component={App} onEnter={requireAuth}></Route>
-        <Route path="signIn" component={SignIn}></Route>
-        <Route path="signUp" component={SignUp}></Route>
+        {
+        //this just makes it easier to access the app without logging in
+        }
+        <Route path="/dash" component={App}></Route>
+        <Route path="/home" component={App} onEnter={requireAuth}></Route>
+        <Route path="/signIn" component={SignIn}></Route>
+        <Route path="/signUp" component={SignUp}></Route>
       </Router>
     );
   }

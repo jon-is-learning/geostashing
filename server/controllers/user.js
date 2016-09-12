@@ -1,5 +1,5 @@
 const User = require('../models/userModel');
-const db = require('../models/db.js'); 
+// const db = require('../models/db.js');
 
 const userController = {
   getOne(req, res) {
@@ -11,7 +11,7 @@ const userController = {
 
   addOne(req, res) {
     User.create({
-      name: req.body.username, 
+      name: req.body.username,
       password: req.body.password
     })
       .then(() => {

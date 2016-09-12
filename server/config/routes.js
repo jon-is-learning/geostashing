@@ -9,6 +9,7 @@ const image = require('../controllers/image');
 router.get('/api/locations', locations.getAll);
 router.post('/api/locations', locations.addOne);
 router.delete('/api/locations/:name', locations.deleteOne);
+router.post('/api/locations/suggestions/', locations.suggestions);
 
 router.get('/api/users', user.getAll);
 router.get('/api/users/:name', user.getOne);

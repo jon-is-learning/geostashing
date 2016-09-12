@@ -1,28 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
-
-// const SignIn = () =>
-//     <div>
-//       <h1>SIGN IN</h1>
-//       <form method="GET" action="/api/users/:name">
-//         <h4>Username</h4>
-//         <input
-//           type="text"
-//           ref="username"/>
-//         <h4>Password</h4>
-//         <input
-//           type="password"
-//           ref="password"/>
-//         <input
-//           name="Sign In"
-//           type="submit"
-//           onClick=""/>
-//         <Link to="signup">Register</Link>
-//       </form>
-//     </div>;
-
-
-// import auth from './../auth.js';
+import $ from 'jquery';
 
 const SignIn = withRouter(
   React.createClass({
@@ -34,38 +12,24 @@ const SignIn = withRouter(
       };
     },
 
-    // userNameInfoChange (e) {
-    //   this.setState({
-    //     username: e.target.value
-    //   })
-    // },
-
     userPasswordChange(event) {
       this.setState({ password: event.target.value });
     },
 
     checkLoginInfo(event) {
-
       event.preventDefault();
-      console.log(this.refs.username.value);
-
-      // auth.login(this.state.username, this.state.password, (loggedIn) => {
-      //   if (!loggedIn) {
-      //     console.log('Not loggedin')
-      //     return this.setState({ error: true })
-      //   }
-
-      //   const { location } = this.props
-
-      //   if (location.state && location.state.nextPathname) {
-      //     this.props.router.replace(location.state.nextPathname)
-      //   } else {
-      //     this.props.router.replace('/home')
-      //   }
-      // })
-      //We will check to see if they are logged in with the auth functionality
+      $.ajax({
+        method: 'GET',
+        url: '/api/users/',
+        dataType: 'json',
+        success: (data) => {
+          console.log('DATA: ', data);
+        },
+        error: (error) => {
+          console.log('ERROR: ', error);
+        }
+      });
     },
-
 
     render() {
       return (
@@ -87,13 +51,3 @@ const SignIn = withRouter(
 );
 
 export default SignIn;
-// () =>
-//     <div>
-//       <h1>SIGN IN</h1>
-//       <h4>Username</h4>
-//       <input type="text" />
-//       <h4>Password</h4>
-//       <input type="password" />
-//       <input type="submit" />
-//       <Link to="signup">Register</Link>
-//     </div>;

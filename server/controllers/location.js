@@ -1,4 +1,5 @@
 const Location = require('../models/locationModel');
+const https = require('https');
 
 const locationController = {
   getAll(req, res) {
@@ -19,6 +20,34 @@ const locationController = {
       .then((location) => location.destroy())
       .then((data) => res.status(200).send(data))
       .catch((err) => res.status(500).send(err));
+  },
+
+  suggestions(req, res) {
+    const requestApiEndpoint
+      = '/maps/api/place/autocomplete/json'
+      + '?key=AIzaSyC1LzP_Enai38ao4P2ZIVbbgbPCpPuvxQA'
+      + `&input=${encodeURIComponent(req.body.search)}`;
+
+    const options = {
+      host: 'maps.googleapis.com',
+      path: requestApiEndpoint
+    };
+
+    const suggestionReq = https.request(options, (apiRes) => {
+      let apiResData = '';
+
+      apiRes.on('data', (data) => {
+        apiResData += data;
+      });
+
+      apiRes.on('end', () => {
+        apiResData = JSON.parse(apiResData)
+          .predictions.map((pred) => pred.description);
+        res.json(apiResData);
+      });
+    });
+
+    suggestionReq.end();
   }
 };
 

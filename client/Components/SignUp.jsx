@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import UserCreationError from './ErrorMessages.jsx';
-import $ from 'jquery'; 
+import $ from 'jquery';
 
 const SignUp = withRouter(
   React.createClass({
@@ -27,39 +27,36 @@ const SignUp = withRouter(
       this.setState({ confirmedPassword: event.target.value });
     },
 
-    contextTypes: {
-      router: React.PropTypes.object
-    },
+    contextTypes: { router: React.PropTypes.object },
 
     handleSubmit() {
-      console.log('YOU MADE IT INTO HANDLESUBMIT'); 
+      console.log('YOU MADE IT INTO HANDLESUBMIT');
       const path = '/';
-      this.context.router.push(path); 
+
+      this.context.router.push(path);
     },
 
     checkSignUpInfo(event) {
-      event.preventDefault(); 
+      event.preventDefault();
       $.ajax({
-        method: 'POST', 
-        url: '/api/users', 
-        dataType: 'json',  
+        method: 'POST',
+        url: '/api/users',
+        dataType: 'json',
         data: {
-          username: this.refs.username.value, 
+          username: this.refs.username.value,
           password: this.refs.password.value
-        }, 
-        success: (data) => {
+        },
+        success: () => {
           console.log('AJAX sent SUCCESS');
-          this.handleSubmit();  
-        }, 
+          this.handleSubmit();
+        },
         error: (error) => {
-          console.log('AJAX sent FAIL!!!', error); 
-          this.setState({ creationError: true }); 
-          this.setState({ username: '' }); 
+          console.log('AJAX sent FAIL!!!', error);
+          this.setState({ creationError: true });
+          this.setState({ username: '' });
         }
-      })
+      });
     },
-
-
 
     render() {
       return (
@@ -80,8 +77,9 @@ const SignUp = withRouter(
             <input type="password" onChange={this.confirmedPasswordChange} />
             <input type="submit" />
           </form>
-          { this.state.creationError ? <UserCreationError /> : null }
-          { this.props.children }
+          { this.state.creationError
+            ? <UserCreationError />
+            : null }
         </div>
       );
     }
