@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const Navbar = (props) => (
   <nav className="teal navbar">
     <div className="nav-wrapper">
-      <a href="#" className="brand-logo">Geostashing</a>
+      <a href="#" className="left brand-logo">Geostashing</a>
       <ul className="right hide-on-med-and-down">
         <li className={
             props.page === 'find'
@@ -32,7 +33,9 @@ const Navbar = (props) => (
             : ''}>
           <a href="#add"><i className="material-icons">add</i></a>
         </li>
-        <li>account...</li>
+        <li>
+           <Link to="/logout" >Click to logout</Link>
+        </li>
       </ul>
     </div>
   </nav>

@@ -1,7 +1,6 @@
 import React from 'react';
 import Product from './Product.jsx';
 import Map from './Map.jsx';
-import BuildSearch from './BuildSearch.jsx';
 
 class Catalog extends React.Component {
   constructor(props) {
@@ -9,7 +8,9 @@ class Catalog extends React.Component {
 
     this.state = {
       products: [],
-      filter: null
+      filter: null,
+      center: null,
+      show: false
     };
 
     const getProducts = new Request('/api/products');
@@ -48,19 +49,22 @@ class Catalog extends React.Component {
   }
 
   render() {
+
     return (
       <div className="catalog">
-        <BuildSearch />
         <Map
           pins={this.state.products.map((product) => product.location)}
-          lat={37.7837678}
-          lng={-122.40914660000001} />
+          lat={this.props.center.lat}
+          lng={this.props.center.lng}
+          centerRadius={this.props.radius}
+          zoom={12}/>
         <input
-          onChange={() => this.updateFilter(this.refs.search.value)}
+          className="row"
+          onChange={this.updateFilter.bind(this)}
           ref="search"
           type="text"
           name="search"
-          placeholder="search"/>
+          placeholder="search terms"/>
         <ul className="products collection">
           {
             this.state.products
@@ -77,6 +81,10 @@ class Catalog extends React.Component {
   }
 }
 
-Catalog.propTypes = { showProduct: React.PropTypes.func };
+Catalog.propTypes = {
+  showProduct: React.PropTypes.func,
+  center: React.PropTypes.object,
+  radius: React.PropTypes.number
+};
 
 export default Catalog;
