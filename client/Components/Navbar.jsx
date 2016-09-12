@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const Navbar = (props) => (
   <nav className="teal navbar">
@@ -32,7 +33,9 @@ const Navbar = (props) => (
             : ''}>
           <a href="#add"><i className="material-icons">add</i></a>
         </li>
-        <li>account...</li>
+        <li>
+           <Link to="/logout" >Click to logout</Link>
+        </li>
       </ul>
     </div>
   </nav>
