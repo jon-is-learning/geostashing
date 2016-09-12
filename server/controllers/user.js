@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const db = require('../models/db.js'); 
 
 const userController = {
   getOne(req, res) {
@@ -9,17 +10,17 @@ const userController = {
   },
 
   addOne(req, res) {
-    console.log(req.body);
-    User
-      .create(req.body)
-      .then((user) => {
+    User.create({
+      name: req.body.username, 
+      password: req.body.password
+    })
+      .then(() => {
         console.log('It works!');
-        console.log(user.dataValues);
-        res.status(200).send(user.dataValues);
+        res.status(200).json('Test');
       })
       .catch((err) => {
         console.log('Not working...', err);
-        res.status(500).send(err);
+        res.status(400).send(err);
       });
   },
 

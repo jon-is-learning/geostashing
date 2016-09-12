@@ -23,14 +23,6 @@ class App extends React.Component {
 
   }
 
-  registerClick() {
-    /* <p>Username already in use.</p> */
-  }
-
-  signInClick() {
-      /* <p>Invalid username and/or password</p> */
-  }
-
   render() {
     return (
       <div>

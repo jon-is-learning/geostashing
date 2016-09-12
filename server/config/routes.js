@@ -20,4 +20,9 @@ router.post('/api/products', product.addOne);
 
 router.post('/api/images', image.addOne);
 
+//router.get('*', send index.html)
+//put this at the end to handle error stuff
+//you want to handle errors on the front end
+//what ever you get to the backend just ship back index.html
+
 module.exports = router;

@@ -1,49 +1,7 @@
 import React from 'react';
-/* import { Router, Route, Link } from 'react-router'; */
-
-// class SignUp extends React.Component {
-//   submitNewUser(ev) {
-//     console.log('USERNAME: ', this.refs.username.value);
-//     ev.preventDefault();
-//     const newUser = {
-//       name: this.refs.username.value,
-//       password: this.refs.password.value
-//     };
-
-//     const userReq = new Request('/api/users', {
-//       method: 'POST',
-//       body: JSON.stringify(newUser),
-//       headers: { 'content-type': 'application/json' }
-//     });
-
-//     fetch(userReq).then(function(response) {
-//       console.log(response);
-//     });
-//   }
-//   render() {
-//     return (
-//       <div>
-//         <h1>Sign Up!</h1>
-//         <form>
-//           <h4>Username</h4>
-//           <input
-//             ref="username"
-//             type="text" />
-//           <h4>Password</h4>
-//           <input
-//             ref="password"
-//             type="password"/>
-//           <input
-//             type="submit"
-//             onClick={this.submitNewUser.bind(this)}/>
-//       </form>
-//       </div>
-//     );
-//   }
-
-// }
-
 import { withRouter } from 'react-router';
+import UserCreationError from './ErrorMessages.jsx';
+import $ from 'jquery'; 
 
 const SignUp = withRouter(
   React.createClass({
@@ -52,7 +10,8 @@ const SignUp = withRouter(
         error: false,
         username: '',
         password: '',
-        confirmedPassword: ''
+        confirmedPassword: '',
+        creationError: false
       };
     },
 
@@ -68,10 +27,39 @@ const SignUp = withRouter(
       this.setState({ confirmedPassword: event.target.value });
     },
 
-    checkSignUpInfo(event) {
-      event.preventDefault();
-
+    contextTypes: {
+      router: React.PropTypes.object
     },
+
+    handleSubmit() {
+      console.log('YOU MADE IT INTO HANDLESUBMIT'); 
+      const path = '/';
+      this.context.router.push(path); 
+    },
+
+    checkSignUpInfo(event) {
+      event.preventDefault(); 
+      $.ajax({
+        method: 'POST', 
+        url: '/api/users', 
+        dataType: 'json',  
+        data: {
+          username: this.refs.username.value, 
+          password: this.refs.password.value
+        }, 
+        success: (data) => {
+          console.log('AJAX sent SUCCESS');
+          this.handleSubmit();  
+        }, 
+        error: (error) => {
+          console.log('AJAX sent FAIL!!!', error); 
+          this.setState({ creationError: true }); 
+          this.setState({ username: '' }); 
+        }
+      })
+    },
+
+
 
     render() {
       return (
@@ -79,13 +67,21 @@ const SignUp = withRouter(
           <h1>JOIN THE ADVENTURE</h1>
           <form onSubmit={this.checkSignUpInfo}>
             <h4>Username</h4>
-            <input type="text" onChange={this.userNameInfoChange} />
+            <input
+            type="text"
+            ref="username"
+            onChange={this.userNameInfoChange} />
             <h4>Password</h4>
-            <input type="password" onChange={this.userPasswordChange} />
+            <input
+            type="password"
+            ref="password"
+            onChange={this.userPasswordChange} />
             <h4>Confirm Password</h4>
             <input type="password" onChange={this.confirmedPasswordChange} />
             <input type="submit" />
           </form>
+          { this.state.creationError ? <UserCreationError /> : null }
+          { this.props.children }
         </div>
       );
     }
