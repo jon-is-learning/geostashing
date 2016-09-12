@@ -1,23 +1,39 @@
 import React from 'react';
+import Moment from 'moment';
 
 const Product = (props) => (
-  <li className="catalog">
-      <img src={
+  <li
+    onClick={props.show.bind(null, props.info.id)}
+    className="collection-item avatar product">
+    <img
+      src={
         props.info.images[0]
         ? props.info.images[0].url
-        : '/default-image.svg'
-      } />
-      <h3>${props.info.price} - {props.info.name}</h3>
-      <p>{props.info.description}</p>
-      <p>{props.info.seller.name} (rating...)</p>
-      <p>
-        {props.info.location.name} (
-          {props.info.location.lng},
-          {props.info.location.lat})
-      </p>
+        : '/default-image.svg'}
+      className="responsive-img circle" alt=""/>
+    <span className="title">{props.info.name}</span>
+    <p>
+      <span className="price">${props.info.price}</span><br/>
+      by {props.info.seller.name}
+      <span title={props.info.createdAt}>
+        {Moment().from(props.info.createdAt)} ago
+      </span>
+      <br/>
+      {props.info.description}
+    </p>
+    <a href="#!" className="secondary-content">
+      <i className="material-icons">location_on</i>
+      {
+        /*props.info.location.lng}, {props.info.location.lat*/
+      }
+      12mi
+    </a>
   </li>
 );
 
-Product.propTypes = { info: React.PropTypes.object };
+Product.propTypes = {
+  info: React.PropTypes.object,
+  show: React.PropTypes.func
+};
 
 export default Product;
