@@ -26,7 +26,6 @@ const locationController = {
     const requestApiEndpoint
       = '/maps/api/place/autocomplete/json'
       + '?key=AIzaSyC1LzP_Enai38ao4P2ZIVbbgbPCpPuvxQA'
-      + '&types=(regions)'
       + `&input=${encodeURIComponent(req.body.search)}`;
 
     const options = {

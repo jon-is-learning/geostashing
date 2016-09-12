@@ -4,11 +4,38 @@ class BuildSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { search: '' };
+    this.state = {
+      search: '',
+      radius: 5
+    };
+  }
+
+  componentDidMount() {
+    /* global $ */
+
+    $('input.location').autocomplete({
+      source: (search, result) => {
+        const suggestionReqest = new Request('/api/locations/suggestions/', {
+          method: 'POST',
+          body: JSON.stringify({ search: search.term }),
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        fetch(suggestionReqest)
+          .then((res) => res.json())
+          .then((res) => result(res))
+          .catch((err) => console.log(err));
+      },
+      delay: 100
+    });
   }
 
   searchFor() {
     this.setState({ search: this.refs.search.value });
+  }
+
+  radiusTo() {
+    this.setState({ radius: this.refs.radius.value });
   }
 
   render() {
@@ -21,55 +48,26 @@ class BuildSearch extends React.Component {
           className="autocomplete location"
           onChange={this.searchFor.bind(this)}
           placeholder="enter location name or coordinates"/>
-        <LocationSuggest search={this.state.search} />
+        <div className="row">
+          <p className="col s1 center">radius:</p>
+          <input
+            className="col s1"
+            type="text"
+            value={`${this.state.radius}mi`}
+            readOnly={true}/>
+          <p className="range-field col s10">
+            <input
+              ref="radius"
+              onChange={this.radiusTo.bind(this)}
+              type="range"
+              defaultValue="5"
+              max="25"
+              step="0.1"/>
+          </p>
+        </div>
       </form>
     );
   }
 }
-
-
-class LocationSuggest extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { results: [] };
-  }
-
-  getSuggestions(search) {
-    if (search.length === 0) {
-      this.setState({ results: [] });
-
-      return;
-    }
-
-    const suggestionReqest = new Request('/api/locations/suggestions/', {
-      method: 'POST',
-      body: JSON.stringify({ search }),
-      headers: { 'Content-Type': 'application/json' }
-    });
-
-    fetch(suggestionReqest)
-      .then((res) => res.json())
-      .then((res) => this.setState({ results: res }))
-      .catch((err) => console.log(err));
-  }
-
-
-  componentWillReceiveProps(newProps) {
-    this.getSuggestions(newProps.search);
-  }
-
-  render() {
-    return (
-      <datalist id="location-list">
-        {
-          this.state.results.map((sugg, index) =>
-            <option key={index}>{sugg}</option>)
-        }
-      </datalist>
-    );
-  }
-}
-
-LocationSuggest.propTypes = { search: React.PropTypes.string };
 
 export default BuildSearch;
