@@ -6,11 +6,13 @@ import $ from 'jquery';
 import auth from './../auth.js';
 
 class SignUp extends React.Component {
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       error: false,
       creationError: false
-    };
+    }
   }
 
   checkSignUpInfo(event) {
@@ -26,7 +28,10 @@ class SignUp extends React.Component {
         if (!loggedIn) {
           console.log('Not loggedin');
 
-          return this.setState({ error: true });
+          return this.setState({
+            error: true,
+            creationError: true
+          });
         }
 
         const { location } = this.props;
@@ -40,15 +45,14 @@ class SignUp extends React.Component {
     }
   }
 
-  handleSubmit() {
-    console.log('YOU MADE IT INTO HANDLESUBMIT');
-    const path = '/';
+  // handleSubmit() {
+  //   console.log('YOU MADE IT INTO HANDLESUBMIT');
+  //   const path = '/';
 
-    this.context.router.push(path);
-  }
+  //   this.context.router.push(path);
+  // }
 
   // checkSignUpInfo(event) {
-  //   event.preventDefault();
   //   $.ajax({
   //     method: 'POST',
   //     url: '/api/users',

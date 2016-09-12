@@ -4,8 +4,12 @@ import auth from './../auth.js';
 import $ from 'jquery';
 
 class SignIn extends React.Component {
-  getInitialState() {
-    return { error: false };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      error: false
+    }
   }
 
   checkLoginInfo(event) {
@@ -31,21 +35,6 @@ class SignIn extends React.Component {
     });
   }
 
-  // checkLoginInfo(event) {
-  //   event.preventDefault();
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: '/api/users/',
-  //     dataType: 'json',
-  //     success: (data) => {
-  //       console.log('DATA: ', data);
-  //     },
-  //     error: (error) => {
-  //       console.log('ERROR: ', error);
-  //     }
-  //   });
-  // }
-
   render() {
     return (
       <div>
@@ -61,6 +50,7 @@ class SignIn extends React.Component {
       </div>
     );
   }
+};
 
 SignIn.propTypes = {
   location: React.PropTypes.object,
@@ -68,15 +58,3 @@ SignIn.propTypes = {
 };
 
 export default withRouter(SignIn);
-
-// () =>
-//     <div>
-//       <h1>SIGN IN</h1>
-//       <h4>Username</h4>
-//       <input type="text" />
-//       <h4>Password</h4>
-//       <input type="password" />
-//       <input type="submit" />
-//       <Link to="signup">Register</Link>
-//     </div>;
-

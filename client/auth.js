@@ -21,8 +21,9 @@ module.exports = {
     $.ajax({
       url: endpoint,
       method: 'POST',
+      dataType: 'json',
       data: {
-        user: username,
+        username: username,
         password: pass
       },
       success: () => {
@@ -66,8 +67,12 @@ module.exports = {
     $.ajax({
       url: endpoint,
       method: 'POST',
+      dataType: 'json',
+      data: {
+        username: username,
+        password: pass
+      },
       success: (user) => {
-        console.log(user);
         if (cb) {
           cb(true);
 
@@ -76,7 +81,7 @@ module.exports = {
         this.onChange(true);
       },
       error: (err) => {
-        console.log(err);
+        console.log('This is the error within login Auth', err);
         if (cb) {
           cb(false);
 
@@ -84,29 +89,6 @@ module.exports = {
         }
       }
     });
-
-    // const usersSignIn = new Request(endpoint,
-    //   {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       username: username,
-    //       password: pass
-    //     }),
-    //     headers: { 'content-type': 'application/json' }
-    //   });
-
-    // fetch(usersSignIn)
-    //   .then((dbuser) => {
-    //     localStorage.token = dbuser;
-    //     if(cb) { cb(true); }
-    //     this.onChange(true);
-    //   })
-    //   .catch((err)=> {
-    //     if(cb) { cb(false); }
-    //     this.onChange(false);
-    //   })
-
-
   },
 
   getToken() {

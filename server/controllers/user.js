@@ -3,14 +3,14 @@ const User = require('../models/userModel');
 
 const userController = {
   getOne(req, res) {
-    console.log(req.params);
 
     User
       .findOne({ where: req.params })
       .then((user) => {
-        if (user) {
+        // console.log(user.dataValues);
+        if (user.dataValues.password === req.body.password) {
           req.session.user = user;
-          res.send();
+          res.json('Your user exists!');
         } else {
           res.status(401).send('Your user does not exist!');
         }
@@ -30,7 +30,7 @@ const userController = {
       })
       .catch((err) => {
         console.log('Not working...', err);
-        res.status(400).send(err);
+        res.status(401).send(err);
       });
   },
     // console.log(req.body);
@@ -47,7 +47,6 @@ const userController = {
     //     }
     //   })
     //   .catch((err) => res.status(500).send(err));
-  },
 
   signOut(req, res) {
     req.session = null;
