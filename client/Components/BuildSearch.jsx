@@ -6,7 +6,7 @@ class BuildSearch extends React.Component {
 
     this.state = {
       location: '',
-      radius: 5
+      radius: props.radius
     };
   }
 
@@ -87,7 +87,8 @@ class BuildSearch extends React.Component {
 BuildSearch.propTypes = {
   updateSearch: React.PropTypes.func,
   updateCenter: React.PropTypes.func,
-  updateRadius: React.PropTypes.func
+  updateRadius: React.PropTypes.func,
+  radius: React.PropTypes.number
 };
 
 export default BuildSearch;

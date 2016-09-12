@@ -72,12 +72,14 @@ class App extends React.Component {
           page={this.state.page}/>
         <BuildSearch
           updateCenter={this.updateCenter.bind(this)}
-          updateRadius={this.updateRadius.bind(this)}/>
+          updateRadius={this.updateRadius.bind(this)}
+          radius={this.state.radius}/>
         {
           this.state.searchStage === 'results'
           ? <Catalog
               showProduct={this.showProduct.bind(this)}
-              center={this.state.center}/>
+              center={this.state.center}
+              radius={this.state.radius}/>
           : ''
         }
         {

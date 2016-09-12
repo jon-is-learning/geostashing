@@ -10,8 +10,7 @@ class Catalog extends React.Component {
       products: [],
       filter: null,
       center: null,
-      show: false,
-      radius: 5
+      show: false
     };
 
     const getProducts = new Request('/api/products');
@@ -57,6 +56,7 @@ class Catalog extends React.Component {
           pins={this.state.products.map((product) => product.location)}
           lat={this.props.center.lat}
           lng={this.props.center.lng}
+          centerRadius={this.props.radius}
           zoom={12}/>
         <input
           className="row"
@@ -83,7 +83,8 @@ class Catalog extends React.Component {
 
 Catalog.propTypes = {
   showProduct: React.PropTypes.func,
-  center: React.PropTypes.object
+  center: React.PropTypes.object,
+  radius: React.PropTypes.number
 };
 
 export default Catalog;
