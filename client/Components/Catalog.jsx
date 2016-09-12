@@ -49,29 +49,15 @@ class Catalog extends React.Component {
       ).match(this.state.filter);
   }
 
-  updateCenter(location) {
-    console.log('centering around', location);
-    this.setState({ center: location, show: true });
-  }
-
-  updateRadius(distance) {
-    console.log('max distance', distance, 'mi');
-    this.setState({ radius: distance });
-  }
-
   render() {
 
     return (
       <div className="catalog">
         <Map
-          //pins={this.state.products.map((product) => product.location)}
-          pins={[{
-            lng: this.state.center.lng,
-            lat: this.state.center.lat
-          }]}
-          lat={this.state.center.lat}
-          zoom={12}
-          lng={this.state.center.lng} />,
+          pins={this.state.products.map((product) => product.location)}
+          lat={this.props.center.lat}
+          lng={this.props.center.lng}
+          zoom={12}/>,
         <input
           className="row"
           onChange={this.updateFilter.bind(this)}
@@ -95,6 +81,9 @@ class Catalog extends React.Component {
   }
 }
 
-Catalog.propTypes = { showProduct: React.PropTypes.func };
+Catalog.propTypes = {
+  showProduct: React.PropTypes.func,
+  center: React.PropTypes.object
+};
 
 export default Catalog;

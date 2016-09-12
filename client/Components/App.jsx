@@ -47,7 +47,10 @@ class App extends React.Component {
   }
 
   updateCenter(location) {
-    this.setState({ location });
+    this.setState({
+      center: location,
+      searchStage: 'results'
+    });
   }
 
   updateRadius(distance) {
@@ -66,7 +69,9 @@ class App extends React.Component {
           updateRadius={this.updateRadius.bind(this)}/>
         {
           this.state.searchStage === 'results'
-          ? <Catalog showProduct={this.showProduct.bind(this)}/>
+          ? <Catalog
+              showProduct={this.showProduct.bind(this)}
+              center={this.state.center}/>
           : ''
         }
         {
