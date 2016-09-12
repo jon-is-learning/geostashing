@@ -54,8 +54,6 @@ const locationController = {
   },
 
   details(req, res) {
-    console.log('wew');
-
     const requestApiEndpoint
       = '/maps/api/place/details/json'
       + `?key=${mapsApiKey}`

@@ -9,7 +9,9 @@ class Catalog extends React.Component {
 
     this.state = {
       products: [],
-      filter: null
+      filter: null,
+      center: null,
+      radius: 5
     };
 
     const getProducts = new Request('/api/products');
@@ -47,14 +49,36 @@ class Catalog extends React.Component {
       ).match(this.state.filter);
   }
 
+  updateCenter(location) {
+    console.log('centering around', location);
+    this.setState({ center: location });
+  }
+
+  updateRadius(distance) {
+    console.log('max distance', distance, 'mi');
+    this.setState({ radius: distance });
+  }
+
   render() {
     return (
       <div className="catalog">
-        <Map
-          pins={this.state.products.map((product) => product.location)}
-          lat={37.7837678}
-          lng={-122.40914660000001} />
-        <BuildSearch />
+        <BuildSearch
+          updateCenter={this.updateCenter.bind(this)}
+          updateRadius={this.updateRadius.bind(this)}
+          updateSearch={this.updateFilter.bind(this)}/>
+        {
+          this.state.center
+            ? <Map
+              //pins={this.state.products.map((product) => product.location)}
+              pins={[{
+                lng: this.state.center.lng,
+                lat: this.state.center.lat
+              }]}
+              lat={this.state.center.lat}
+              zoom={12}
+              lng={this.state.center.lng} />
+            : ''
+        }
         <ul className="products collection">
           {
             this.state.products

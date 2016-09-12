@@ -126,6 +126,14 @@ class Map extends React.Component {
       this.setState({ pins: newProps.pins });
     }
 
+    if (newProps.lat !== this.props.lat || newProps.lng !== this.props.lng) {
+      this.data.map.panTo({ lat: newProps.lat, lng: newProps.lng });
+    }
+
+    if (newProps.zoom !== this.props.zoom) {
+      this.data.map.setZoom(Math.floor(parseFloat(newProps.zoom)));
+    }
+
     if (newState.currentPin !== this.state.currentPin) {
       console.log('changing current pin');
       this.updateCurrentPin(newState);
