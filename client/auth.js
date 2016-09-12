@@ -1,5 +1,5 @@
 module.exports = {
-  signup(username, pass, callback) {
+  signup(username, password, callback) {
     const cb = callback;
 
     if (document.cookie) {
@@ -23,8 +23,8 @@ module.exports = {
       method: 'POST',
       dataType: 'json',
       data: {
-        username: username,
-        password: pass
+        username,
+        password
       },
       success: () => {
         if (cb) {
@@ -46,7 +46,7 @@ module.exports = {
 
   },
 
-  login(username, pass, callback) {
+  login(username, password, callback) {
     const cb = callback;
 
     //Look to see if a session(cookie) is assigned
@@ -69,10 +69,10 @@ module.exports = {
       method: 'POST',
       dataType: 'json',
       data: {
-        username: username,
-        password: pass
+        username,
+        password
       },
-      success: (user) => {
+      success: () => {
         if (cb) {
           cb(true);
 

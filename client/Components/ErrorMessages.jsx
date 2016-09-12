@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserCreationError = () => 
+const UserCreationError = () =>
   <div>
     <p>Username already exists. Please try again.</p>
   </div>;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import UserCreationError from './ErrorMessages.jsx';
-import $ from 'jquery';
 
 import auth from './../auth.js';
 
@@ -12,7 +11,7 @@ class SignUp extends React.Component {
     this.state = {
       error: false,
       creationError: false
-    }
+    };
   }
 
   checkSignUpInfo(event) {

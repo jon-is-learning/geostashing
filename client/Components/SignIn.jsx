@@ -1,15 +1,12 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
 import auth from './../auth.js';
-import $ from 'jquery';
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      error: false
-    }
+    this.state = { error: false };
   }
 
   checkLoginInfo(event) {
@@ -50,7 +47,7 @@ class SignIn extends React.Component {
       </div>
     );
   }
-};
+}
 
 SignIn.propTypes = {
   location: React.PropTypes.object,
