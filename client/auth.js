@@ -2,7 +2,7 @@ module.exports = {
   signup(username, pass, callback) {
     const cb = callback;
 
-    if (localStorage.token) {
+    if (document.cookie) {
       console.log('There is a token!');
       if (cb) {
         console.log('There is a callback!');
@@ -15,6 +15,25 @@ module.exports = {
 
       return;
     }
+
+    const endpoint = `/api/users`;
+
+    $.ajax({
+      url: endpoint,
+      method: 'POST',
+      data: {
+        user: username,
+        password: pass
+      },
+      success: (user) => {
+        if(cb) { cb(true); }
+        this.onChange(true);
+      },
+      error: function(err) {
+        console.log(err);
+        if(cb) { cb(false); }
+      }
+    });
 
 
     // const usersSignUp = new Request ('api/users', {
@@ -46,15 +65,18 @@ module.exports = {
     const endpoint = `/api/users/${username}`;
 
     $.ajax({
-          url: endpoint,
-          method: 'POST',
-          success: (dbuser) => {
-            
-          },
-          error: function(err) {
-            console.log(err);
-          }
-        });
+      url: endpoint,
+      method: 'POST',
+      success: (user) => {
+        console.log(user);
+        if(cb) { cb(true); }
+        this.onChange(true);
+      },
+      error: function(err) {
+        console.log(err);
+        if(cb) { cb(false); }
+      }
+    });
 
     // const usersSignIn = new Request(endpoint,
     //   {

@@ -37,6 +37,7 @@ class App extends React.Component {
           url: '/api/users/signOut',
           method: 'GET',
           success: (data) => {
+            console.log(data);
             console.log('It went to the logout endpoint');
           },
           error: function(err) {

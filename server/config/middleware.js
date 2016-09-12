@@ -7,7 +7,11 @@ module.exports = (app, express) => {
     secret: '12345abcde',
     resave: true,
     saveUninitialized: false,
-    cookie: { secure: false, httpOnly: false, maxAge: 5000 }
+    cookie: { 
+      secure: false,
+      httpOnly: false,
+      expires: new Date(Date.now() + (30 * 86400 * 1000))
+    }
   }));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));

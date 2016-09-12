@@ -2,21 +2,37 @@ const User = require('../models/userModel');
 
 const userController = {
   getOne(req, res) {
+    console.log(req.params);
 
     User
       .findOne({ where: req.params })
       .then((user) => {
-        req.session.user = user;
-        res.send();
+        if(user) {
+          req.session.user = user;
+          res.send();
+        } else {
+          res.status(401).send('Your user does not exist!');
+        }
       })
       .catch((err) => res.status(500).send(err));
   },
 
   addOne(req, res) {
-    User
-      .create(req.body)
-      .then((user) => res.status(200).send(user.dataValues))
-      .catch((err) => res.status(500).send(err));
+    
+    console.log(req.body);
+    req.session.user = req.body.user;
+    res.send();
+    // User
+    //   .create(req.body)
+    //   .then((user) => {
+    //     if (user) {
+    //       req.session.user = req.body.user;
+    //       res.send(user.dataValues);
+    //     } else {
+    //       res.status(404).send('That user already exists!')
+    //     }
+    //   })
+    //   .catch((err) => res.status(500).send(err));
   },
 
   signOut(req, res) {
