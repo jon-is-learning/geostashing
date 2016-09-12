@@ -6,6 +6,11 @@
   height: 200px;
 }
 
+.product-details .price{
+  font-size: 2em;
+  font-weight: bold;
+}
+
 .sidebar .title{
   font-size: 1.75em;
   text-align: center;
@@ -68,6 +73,9 @@
   overflow-y: scroll;
 
   background: #fff;
+
+  max-width: 100%;
+  width: 30em;
 }
 
 .ui-autocomplete{

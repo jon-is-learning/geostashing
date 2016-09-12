@@ -10,17 +10,17 @@ const ProductDetails = (props) => (
         className="material-icons back-arrow">arrow_back</i>
       <p className="title">{props.info.name}</p>
     </div>
-    <div className="main-image-wrapper">
+    <div className="main-image-wrapper row">
       <img className="main-image" src={props.info.images[0].url} />
     </div>
-    <div className="row">{props.info.description}</div>
-    <div className="row price">${props.info.price}</div>
     <div className="row">
+      {props.info.description}<br/>
       by {props.info.seller.name}
       <span title={props.info.createdAt}>
         {Moment().from(props.info.createdAt)} ago
       </span>
     </div>
+    <div className="row price">${props.info.price}</div>
     <div className="row">
       <Map
         lng={parseFloat(props.info.location.lng)}
@@ -30,8 +30,17 @@ const ProductDetails = (props) => (
           lng: parseFloat(props.info.location.lng),
           lat: parseFloat(props.info.location.lat)
         }]}/>
-      approximate location
-      <span>{props.info.location.lng}, {props.info.location.lat}</span>
+      <span>
+        (≈{props.info.location.lng}, {props.info.location.lat})
+      </span>
+      <div className="row purchase-wrapper">
+        <a
+          onClick={props.onPurchase.bind(null, props.info)}
+          className="waves-effect waves-light btn">
+          purchase
+          <i className="material-icons left">add_shopping_cart</i>
+        </a>
+      </div>
     </div>
     <div className="row">{console.log(props.info)}</div>
   </div>
@@ -39,7 +48,8 @@ const ProductDetails = (props) => (
 
 ProductDetails.propTypes = {
   info: React.PropTypes.object,
-  onClose: React.PropTypes.func
+  onClose: React.PropTypes.func,
+  onPurchase: React.PropTypes.func
 };
 
 export default ProductDetails;

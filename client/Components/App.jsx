@@ -36,6 +36,10 @@ class App extends React.Component {
     });
   }
 
+  purchase(item) {
+    console.log('purchasing', item);
+  }
+
   render() {
     return (
       <div>
@@ -56,7 +60,8 @@ class App extends React.Component {
           ? <div className="sidebar z-depth-1">
               <ProductDetails
                 onClose={this.findProduct.bind(this)}
-                info={this.state.currentProduct}/>
+                info={this.state.currentProduct}
+                onPurchase={this.purchase.bind(this)}/>
             </div>
           : null
         }
