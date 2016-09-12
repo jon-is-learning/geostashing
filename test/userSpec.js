@@ -14,7 +14,7 @@ describe('user api endpoint (/api/users)', () => {
   describe('get user', () => {
     xit('should get all users (/api/users)');
 
-    it('should get a single user (/api/users/:name)', (done) => {
+    xit('should get a single user (/api/users/:name)', (done) => {
       chai.request(server)
         .get('/api/users/testOne')
         .then((res) => {
