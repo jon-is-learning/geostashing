@@ -77,7 +77,8 @@ class Map extends React.Component {
 
       this.data.centerRadius.marker = new google.maps.Marker({
         map: this.data.map,
-        position: pos
+        position: pos,
+        visible: false
       });
 
       this.data.centerRadius.shape = new google.maps.Circle({
