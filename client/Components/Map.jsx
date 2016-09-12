@@ -116,7 +116,7 @@ class Map extends React.Component {
     }
   }
 
-  componentWillUpdate(newProps, newState) {
+  checkPins(newProps, newState) {
     if (newState.pins !== this.state.pins) {
       console.log('redrawing all pins from state');
       this.drawPins(newState.pins);
@@ -125,6 +125,10 @@ class Map extends React.Component {
       this.drawPins(newProps.pins);
       this.setState({ pins: newProps.pins });
     }
+  }
+
+  componentWillUpdate(newProps, newState) {
+    this.checkPins(newProps, newState);
 
     if (newProps.lat !== this.props.lat || newProps.lng !== this.props.lng) {
       this.data.map.panTo({ lat: newProps.lat, lng: newProps.lng });

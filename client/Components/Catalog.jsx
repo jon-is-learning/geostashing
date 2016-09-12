@@ -57,14 +57,14 @@ class Catalog extends React.Component {
           pins={this.state.products.map((product) => product.location)}
           lat={this.props.center.lat}
           lng={this.props.center.lng}
-          zoom={12}/>,
+          zoom={12}/>
         <input
           className="row"
           onChange={this.updateFilter.bind(this)}
           ref="search"
           type="text"
           name="search"
-          placeholder="search terms"/>,
+          placeholder="search terms"/>
         <ul className="products collection">
           {
             this.state.products

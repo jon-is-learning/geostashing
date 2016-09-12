@@ -12,13 +12,20 @@ class App extends React.Component {
       page: 'find',
       radius: 5,
       center: null,
-      searchStage: 'location'
+      searchStage: 'location',
+      pins: [],
+      products: []
     };
+
+    const getPins = new Request('/api/locations');
+
+    fetch(getPins)
+      .then((res) => res.json())
+      .then((res) => this.setState({ pins: res }));
   }
 
   addProduct(ev) {
     ev.preventDefault();
-
     this.setState({
       page: this.state.page === 'create'
         ? 'find'
@@ -28,7 +35,6 @@ class App extends React.Component {
 
   findProduct(ev) {
     ev.preventDefault();
-
     console.log('finding...');
     this.setState({ page: 'find' });
   }
