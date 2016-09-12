@@ -69,7 +69,6 @@ const Welcome = () => (
 
   <div className="container">
     <div className="section">
-
       <div className="row">
         <div className="col s12 center">
           <h3><i className="mdi-content-send brown-text"></i></h3>
@@ -77,7 +76,6 @@ const Welcome = () => (
           <p className="left-align light">Just kidding.</p>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -87,26 +85,6 @@ const Welcome = () => (
         <div className="col l6 s12">
           <h5 className="white-text">Company Bio</h5>
           <p className="grey-text text-lighten-4">If you're allergic to biographies then this is a bio-hazard.</p>
-
-
-        </div>
-        <div className="col l3 s12">
-          <h5 className="white-text">Settings</h5>
-          <ul>
-            <li><a className="white-text" href="#!">Link 1</a></li>
-            <li><a className="white-text" href="#!">Link 2</a></li>
-            <li><a className="white-text" href="#!">Link 3</a></li>
-            <li><a className="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-        <div className="col l3 s12">
-          <h5 className="white-text">Connect</h5>
-          <ul>
-            <li><a className="white-text" href="#!">Link 1</a></li>
-            <li><a className="white-text" href="#!">Link 2</a></li>
-            <li><a className="white-text" href="#!">Link 3</a></li>
-            <li><a className="white-text" href="#!">Link 4</a></li>
-          </ul>
         </div>
       </div>
     </div>
