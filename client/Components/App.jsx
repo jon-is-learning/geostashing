@@ -60,7 +60,7 @@ class App extends React.Component {
   }
 
   updateRadius(distance) {
-    this.setState({ radius: distance });
+    this.setState({ radius: parseFloat(distance) });
   }
 
   render() {

@@ -144,10 +144,11 @@ class Map extends React.Component {
   }
 
   checkPins(newProps, newState) {
-    if (newState.pins !== this.state.pins) {
+    if (JSON.stringify(newState.pins) !== JSON.stringify(this.state.pins)) {
       console.log('redrawing all pins from state');
       this.drawPins(newState.pins);
-    } else if (newProps.pins !== this.props.pins) {
+    } else if (
+        JSON.stringify(newProps.pins) !== JSON.stringify(this.props.pins)) {
       console.log('redrawing all pins from props');
       this.drawPins(newProps.pins);
       this.setState({ pins: newProps.pins });
@@ -164,6 +165,7 @@ class Map extends React.Component {
         lat: newProps.lat,
         lng: newProps.lng
       });
+      this.data.centerRadius.shape.setRadius(oneMile * this.props.centerRadius);
     }
   }
 
