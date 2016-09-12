@@ -143,7 +143,7 @@
         "no-loop-func": "error",
         "no-magic-numbers": [
           "error",
-          { "ignore": [0, 1, 200, 301, 302, 400, 500] }
+          { "ignore": [0, 1, 200, 301, 302, 400, 401, 500] }
         ],
         "no-mixed-operators": "error",
         "no-mixed-requires": "error",
