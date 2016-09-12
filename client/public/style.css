@@ -1,3 +1,7 @@
+body{
+  background: #eee;
+}
+
 .map{
   height: 300px;
 }
@@ -110,5 +114,10 @@
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  padding: 1em;
+}
+
+@media (min-width: 600px){
+  .catalog{
+    padding: 1em;
+  }
 }

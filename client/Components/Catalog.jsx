@@ -50,17 +50,11 @@ class Catalog extends React.Component {
   render() {
     return (
       <div className="catalog">
-        <BuildSearch />
         <Map
           pins={this.state.products.map((product) => product.location)}
           lat={37.7837678}
           lng={-122.40914660000001} />
-        <input
-          onChange={() => this.updateFilter(this.refs.search.value)}
-          ref="search"
-          type="text"
-          name="search"
-          placeholder="search"/>
+        <BuildSearch />
         <ul className="products collection">
           {
             this.state.products

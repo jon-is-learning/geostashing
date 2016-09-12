@@ -1,5 +1,7 @@
 const Location = require('../models/locationModel');
 const https = require('https');
+const mapsApiKey = 'AIzaSyC1LzP_Enai38ao4P2ZIVbbgbPCpPuvxQA';
+const mapsApiHost = 'maps.googleapis.com';
 
 const locationController = {
   getAll(req, res) {
@@ -25,11 +27,11 @@ const locationController = {
   suggestions(req, res) {
     const requestApiEndpoint
       = '/maps/api/place/autocomplete/json'
-      + '?key=AIzaSyC1LzP_Enai38ao4P2ZIVbbgbPCpPuvxQA'
+      + `?key=${mapsApiKey}`
       + `&input=${encodeURIComponent(req.body.search)}`;
 
     const options = {
-      host: 'maps.googleapis.com',
+      host: mapsApiHost,
       path: requestApiEndpoint
     };
 
@@ -42,7 +44,8 @@ const locationController = {
 
       apiRes.on('end', () => {
         apiResData = JSON.parse(apiResData)
-          .predictions.map((pred) => pred.description);
+          .predictions.map((pred) =>
+            ({ label: pred.description, value: pred.place_id }));
         res.json(apiResData);
       });
     });
@@ -51,7 +54,35 @@ const locationController = {
   },
 
   details(req, res) {
-    res.json(req.body);
+    console.log('wew');
+
+    const requestApiEndpoint
+      = '/maps/api/place/details/json'
+      + `?key=${mapsApiKey}`
+      + `&placeid=${encodeURIComponent(req.body.id)}`;
+
+    const options = {
+      host: mapsApiHost,
+      path: requestApiEndpoint
+    };
+
+    const detailsReq = https.request(options, (apiRes) => {
+      let apiResData = '';
+
+      apiRes.on('data', (data) => {
+        apiResData += data;
+      });
+
+      apiRes.on('end', () => {
+        try {
+          res.json(JSON.parse(apiResData).result.geometry.location);
+        } catch (err) {
+          res.status(400).end();
+        }
+      });
+    });
+
+    detailsReq.end();
   }
 };
 

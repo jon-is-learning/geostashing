@@ -5,7 +5,7 @@ class BuildSearch extends React.Component {
     super(props);
 
     this.state = {
-      search: '',
+      location: '',
       radius: 5
     };
   }
@@ -26,27 +26,45 @@ class BuildSearch extends React.Component {
           .then((res) => result(res))
           .catch((err) => console.log(err));
       },
-      delay: 100
+      delay: 100,
+      select: (event, ui) => {
+        this.getLocationData(ui.item.value)
+          .then((loc) => this.props.updateCenter(loc));
+
+        ui.item.value = ui.item.label;
+      }
     });
   }
 
-  searchFor() {
-    this.setState({ search: this.refs.search.value });
+  getLocationData(id) {
+    const detailReq = new Request('/api/locations/details/', {
+      method: 'POST',
+      body: JSON.stringify({ id }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    return fetch(detailReq)
+      .then((res) => res.json());
+  }
+
+  locationChange() {
+    this.setState({ location: this.refs.location.value });
   }
 
   radiusTo() {
     this.setState({ radius: this.refs.radius.value });
+    this.props.updateRadius(this.refs.radius.value);
   }
 
   render() {
     return (
-      <form>
+      <form className="build-search card-panel">
         <input
           type="text"
           list="location-list"
-          ref="search"
+          ref="location"
           className="autocomplete location"
-          onChange={this.searchFor.bind(this)}
+          onChange={this.locationChange.bind(this)}
           placeholder="enter location name or coordinates"/>
         <div className="row">
           <p className="col s4 center">radius: {this.state.radius} mi</p>
@@ -60,9 +78,22 @@ class BuildSearch extends React.Component {
               step="0.1"/>
           </p>
         </div>
+        <input
+          className="row"
+          onChange={() => this.props.updateSearch(this.refs.search.value)}
+          ref="search"
+          type="text"
+          name="search"
+          placeholder="search terms"/>
       </form>
     );
   }
 }
+
+BuildSearch.propTypes = {
+  updateSearch: React.PropTypes.func,
+  updateCenter: React.PropTypes.func,
+  updateRadius: React.PropTypes.func
+};
 
 export default BuildSearch;
