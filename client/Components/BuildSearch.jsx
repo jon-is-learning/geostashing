@@ -55,7 +55,7 @@ class BuildSearch extends React.Component {
             type="text"
             value={`${this.state.radius}mi`}
             readOnly={true}/>
-          <p className="range-field col s9">
+          <p className="range-field col s10">
             <input
               ref="radius"
               onChange={this.radiusTo.bind(this)}
