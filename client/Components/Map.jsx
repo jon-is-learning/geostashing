@@ -164,10 +164,6 @@ class Map extends React.Component {
         lat: newProps.lat,
         lng: newProps.lng
       });
-      //this.data.centerRadius.shape.bindTo(
-        //'center',
-        //this.data.centerRadius.marker,
-        //'position');
     }
   }
 
