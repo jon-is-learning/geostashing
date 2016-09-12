@@ -18,7 +18,7 @@ const userController = {
   },
 
   addOne(req, res) {
-    
+
     console.log(req.body);
     req.session.user = req.body.user;
     res.send();
@@ -36,13 +36,8 @@ const userController = {
   },
 
   signOut(req, res) {
-    req.session.destroy((err) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.send('Hopefully this worked?');
-      }
-    })
+    req.session = null;
+    res.send('DIS SHIT HAS BEEN DELETED');
   }
   // ,
 

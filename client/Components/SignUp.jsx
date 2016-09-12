@@ -34,7 +34,7 @@ const SignUp = withRouter(
 
             return;
           } else {
-            this.props.router.replace('/home');
+            this.props.router.replace('/signIn');
 
             return;
           }
