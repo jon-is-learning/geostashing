@@ -48,6 +48,10 @@ const locationController = {
     });
 
     suggestionReq.end();
+  },
+
+  details(req, res) {
+    res.json(req.body);
   }
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import Catalog from './Catalog.jsx';
 import AddProduct from './AddProduct.jsx';
 import Navbar from './Navbar.jsx';
+import ProductDetails from './ProductDetails.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -26,10 +27,13 @@ class App extends React.Component {
     this.setState({ page: 'find' });
   }
 
-  showProduct(prodId) {
+  showProduct(prod) {
 
-    console.log('showing product with id ', prodId);
-    this.setState({ page: 'show' });
+    console.log('showing product with id ', prod);
+    this.setState({
+      page: 'show',
+      currentProduct: prod
+    });
   }
 
   render() {
@@ -44,6 +48,15 @@ class App extends React.Component {
           this.state.page === 'create'
           ? <div className="sidebar z-depth-1">
               <AddProduct onClose={this.addProduct.bind(this)}/>
+            </div>
+          : null
+        }
+        {
+          this.state.page === 'show'
+          ? <div className="sidebar z-depth-1">
+              <ProductDetails
+                onClose={this.findProduct.bind(this)}
+                info={this.state.currentProduct}/>
             </div>
           : null
         }
