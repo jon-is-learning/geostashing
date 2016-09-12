@@ -3,11 +3,17 @@ import Catalog from './Catalog.jsx';
 import AddProduct from './AddProduct.jsx';
 import Navbar from './Navbar.jsx';
 import ProductDetails from './ProductDetails.jsx';
+import BuildSearch from './BuildSearch.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { page: 'find' };
+    this.state = {
+      page: 'find',
+      radius: 5,
+      center: null,
+      searchStage: 'location'
+    };
   }
 
   addProduct(ev) {
@@ -40,6 +46,14 @@ class App extends React.Component {
     console.log('purchasing', item);
   }
 
+  updateCenter(location) {
+    this.setState({ location });
+  }
+
+  updateRadius(distance) {
+    this.setState({ radius: distance });
+  }
+
   render() {
     return (
       <div>
@@ -47,7 +61,14 @@ class App extends React.Component {
           gotoCreate={this.addProduct.bind(this)}
           gotoFind={this.findProduct.bind(this)}
           page={this.state.page}/>
-        <Catalog showProduct={this.showProduct.bind(this)}/>
+        <BuildSearch
+          updateCenter={this.updateCenter.bind(this)}
+          updateRadius={this.updateRadius.bind(this)}/>
+        {
+          this.state.searchStage === 'results'
+          ? <Catalog showProduct={this.showProduct.bind(this)}/>
+          : ''
+        }
         {
           this.state.page === 'create'
           ? <div className="sidebar z-depth-1">

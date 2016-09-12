@@ -1,7 +1,6 @@
 import React from 'react';
 import Product from './Product.jsx';
 import Map from './Map.jsx';
-import BuildSearch from './BuildSearch.jsx';
 
 class Catalog extends React.Component {
   constructor(props) {
@@ -11,6 +10,7 @@ class Catalog extends React.Component {
       products: [],
       filter: null,
       center: null,
+      show: false,
       radius: 5
     };
 
@@ -51,7 +51,7 @@ class Catalog extends React.Component {
 
   updateCenter(location) {
     console.log('centering around', location);
-    this.setState({ center: location });
+    this.setState({ center: location, show: true });
   }
 
   updateRadius(distance) {
@@ -60,25 +60,25 @@ class Catalog extends React.Component {
   }
 
   render() {
+
     return (
       <div className="catalog">
-        <BuildSearch
-          updateCenter={this.updateCenter.bind(this)}
-          updateRadius={this.updateRadius.bind(this)}
-          updateSearch={this.updateFilter.bind(this)}/>
-        {
-          this.state.center
-            ? <Map
-              //pins={this.state.products.map((product) => product.location)}
-              pins={[{
-                lng: this.state.center.lng,
-                lat: this.state.center.lat
-              }]}
-              lat={this.state.center.lat}
-              zoom={12}
-              lng={this.state.center.lng} />
-            : ''
-        }
+        <Map
+          //pins={this.state.products.map((product) => product.location)}
+          pins={[{
+            lng: this.state.center.lng,
+            lat: this.state.center.lat
+          }]}
+          lat={this.state.center.lat}
+          zoom={12}
+          lng={this.state.center.lng} />,
+        <input
+          className="row"
+          onChange={this.updateFilter.bind(this)}
+          ref="search"
+          type="text"
+          name="search"
+          placeholder="search terms"/>,
         <ul className="products collection">
           {
             this.state.products

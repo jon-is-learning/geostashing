@@ -58,7 +58,7 @@ class BuildSearch extends React.Component {
 
   render() {
     return (
-      <form className="build-search card-panel">
+      <form className="card-panel build-search">
         <input
           type="text"
           list="location-list"
@@ -67,8 +67,8 @@ class BuildSearch extends React.Component {
           onChange={this.locationChange.bind(this)}
           placeholder="enter location name or coordinates"/>
         <div className="row">
-          <p className="col s4 center">radius: {this.state.radius} mi</p>
-          <p className="range-field col s8">
+          <p className="radius col s2 center">radius: {this.state.radius} mi</p>
+          <p className="range-field col s10">
             <input
               ref="radius"
               onChange={this.radiusTo.bind(this)}
@@ -78,13 +78,7 @@ class BuildSearch extends React.Component {
               step="0.1"/>
           </p>
         </div>
-        <input
-          className="row"
-          onChange={() => this.props.updateSearch(this.refs.search.value)}
-          ref="search"
-          type="text"
-          name="search"
-          placeholder="search terms"/>
+        <a className="waves-effect waves-light btn right">search</a>
       </form>
     );
   }

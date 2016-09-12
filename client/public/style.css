@@ -2,6 +2,21 @@ body{
   background: #eee;
 }
 
+.build-search{
+  max-width: 600px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  overflow: hidden;
+}
+
+.ui-helper-hidden-accessible{
+  display: none;
+}
+
+.build-search .radius{
+  white-space: nowrap;
+}
+
 .map{
   height: 300px;
 }

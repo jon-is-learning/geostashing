@@ -16,7 +16,7 @@ const Product = (props) => (
       <span className="price">${props.info.price}</span><br/>
       by {props.info.seller.name}
       <span title={props.info.createdAt}>
-        {Moment().from(props.info.createdAt)} ago
+        &nbsp;{Moment().from(props.info.createdAt)} ago
       </span>
       <br/>
       {props.info.description}
