@@ -49,13 +49,8 @@ class BuildSearch extends React.Component {
           onChange={this.searchFor.bind(this)}
           placeholder="enter location name or coordinates"/>
         <div className="row">
-          <p className="col s1 center">radius:</p>
-          <input
-            className="col s1"
-            type="text"
-            value={`${this.state.radius}mi`}
-            readOnly={true}/>
-          <p className="range-field col s10">
+          <p className="col s4 center">radius: {this.state.radius} mi</p>
+          <p className="range-field col s8">
             <input
               ref="radius"
               onChange={this.radiusTo.bind(this)}
