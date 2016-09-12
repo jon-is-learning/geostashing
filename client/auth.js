@@ -3,7 +3,6 @@ module.exports = {
     const cb = callback;
 
     if (document.cookie) {
-      console.log('There is a token!');
       if (cb) {
         console.log('There is a callback!');
         cb(true);
@@ -16,8 +15,9 @@ module.exports = {
       return;
     }
 
-    const endpoint = `/api/users`;
+    const endpoint = '/api/users';
 
+    /*global $*/
     $.ajax({
       url: endpoint,
       method: 'POST',
@@ -25,25 +25,24 @@ module.exports = {
         user: username,
         password: pass
       },
-      success: (user) => {
-        if(cb) { cb(true); }
+      success: () => {
+        if (cb) {
+          cb(true);
+
+          return;
+        }
         this.onChange(true);
       },
-      error: function(err) {
+      error: (err) => {
         console.log(err);
-        if(cb) { cb(false); }
+        if (cb) {
+          cb(false);
+
+          return;
+        }
       }
     });
 
-
-    // const usersSignUp = new Request ('api/users', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     username: username,
-    //     password: pass
-    //   }),
-    //   headers: { 'content-type' : 'application/json' }
-    // })
   },
 
   login(username, pass, callback) {
@@ -69,12 +68,20 @@ module.exports = {
       method: 'POST',
       success: (user) => {
         console.log(user);
-        if(cb) { cb(true); }
+        if (cb) {
+          cb(true);
+
+          return;
+        }
         this.onChange(true);
       },
-      error: function(err) {
+      error: (err) => {
         console.log(err);
-        if(cb) { cb(false); }
+        if (cb) {
+          cb(false);
+
+          return;
+        }
       }
     });
 
@@ -121,17 +128,22 @@ module.exports = {
 
   loggedIn() {
     //document.cookie instead of localStorage
-    return !!document.cookie;
+    return Boolean(document.cookie);
   },
 
   deleteAllCookies() {
-      var cookies = document.cookie.split(";");
+    const cookies = document.cookie.split(';');
 
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        var eqPos = cookie.indexOf("=");
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      }
+    for (let index = 0; index < cookies.length; index += index + 1) {
+      const cookie = cookies[index];
+      const eqPos = cookie.indexOf('=');
+      const notFound = -1;
+
+      const name = eqPos > notFound
+        ? cookie.substr(0, eqPos)
+        : cookie;
+
+      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+    }
   }
 };
