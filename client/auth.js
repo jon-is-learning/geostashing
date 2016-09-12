@@ -1,8 +1,9 @@
 module.exports = {
-  signup(username, password, callback) {
+  signup(username, pass, callback) {
     const cb = callback;
 
-    if (document.cookie) {
+    if (localStorage.token) {
+      console.log('There is a token!');
       if (cb) {
         console.log('There is a callback!');
         cb(true);
@@ -15,43 +16,24 @@ module.exports = {
       return;
     }
 
-    const endpoint = '/api/users';
 
-    /*global $*/
-    $.ajax({
-      url: endpoint,
-      method: 'POST',
-      dataType: 'json',
-      data: {
-        username,
-        password
-      },
-      success: () => {
-        if (cb) {
-          cb(true);
-
-          return;
-        }
-        this.onChange(true);
-      },
-      error: (err) => {
-        console.log(err);
-        if (cb) {
-          cb(false);
-
-          return;
-        }
-      }
-    });
-
+    // const usersSignUp = new Request ('api/users', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     username: username,
+    //     password: pass
+    //   }),
+    //   headers: { 'content-type' : 'application/json' }
+    // })
   },
 
-  login(username, password, callback) {
+  login(username, pass, callback) {
     const cb = callback;
 
-    //Look to see if a session(cookie) is assigned
-    if (document.cookie) {
+    if (localStorage.token) {
+      console.log('There is a token!');
       if (cb) {
+        console.log('There is a callback!');
         cb(true);
 
         return;
@@ -61,43 +43,36 @@ module.exports = {
       return;
     }
 
-    //Make a request to endpoint /api/users/:name
-    const endpoint = `/api/users/${username}`;
+    // const usersSignIn = new Request('/api/users',
+    // {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     username: username,
+    //     password: pass
+    //   }),
+    //   headers: { 'content-type': 'application/json'}
+    // });
 
-    $.ajax({
-      url: endpoint,
-      method: 'POST',
-      dataType: 'json',
-      data: {
-        username,
-        password
-      },
-      success: () => {
-        if (cb) {
-          cb(true);
+    // fetch(usersSignIn)
+    //   .then((dbuser) => {
+    //     localStorage.token = dbuser;
+    //     if(cb) { cb(true); }
+    //     this.onChange(true);
+    //   })
+    //   .catch((err)=> {
+    //     if(cb) { cb(false); }
+    //     this.onChange(false);
+    //   })
 
-          return;
-        }
-        this.onChange(true);
-      },
-      error: (err) => {
-        console.log('This is the error within login Auth', err);
-        if (cb) {
-          cb(false);
 
-          return;
-        }
-      }
-    });
   },
 
   getToken() {
-    //This will be get session cookie
-    return document.cookie;
+    return localStorage.token;
   },
 
   logout(cb) {
-    this.deleteAllCookies();
+    // delete localStorage.token;
     if (cb) {
       cb();
 
@@ -110,22 +85,6 @@ module.exports = {
 
   loggedIn() {
     //document.cookie instead of localStorage
-    return Boolean(document.cookie);
-  },
-
-  deleteAllCookies() {
-    const cookies = document.cookie.split(';');
-
-    for (let index = 0; index < cookies.length; index += index + 1) {
-      const cookie = cookies[index];
-      const eqPos = cookie.indexOf('=');
-      const notFound = -1;
-
-      const name = eqPos > notFound
-        ? cookie.substr(0, eqPos)
-        : cookie;
-
-      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-    }
+    // return !!localStorage.token;
   }
 };

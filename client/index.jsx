@@ -6,7 +6,6 @@ import App from './Components/App.jsx';
 import Welcome from './Components/Welcome.jsx';
 import SignIn from './Components/SignIn.jsx';
 import SignUp from './Components/SignUp.jsx';
-import Logout from './Components/Logout.jsx';
 
 import auth from './auth.js';
 
@@ -29,7 +28,6 @@ class AppRouter extends React.Component {
         }
         <Route path="/dash" component={App}></Route>
         <Route path="/home" component={App} onEnter={requireAuth}></Route>
-        <Route path="/logout" component={Logout}></Route>
         <Route path="/signIn" component={SignIn}></Route>
         <Route path="/signUp" component={SignUp}></Route>
       </Router>

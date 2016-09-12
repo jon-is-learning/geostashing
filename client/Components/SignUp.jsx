@@ -1,101 +1,89 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import UserCreationError from './ErrorMessages.jsx';
+import $ from 'jquery';
 
-import auth from './../auth.js';
+const SignUp = withRouter(
+  React.createClass({
+    getInitialState() {
+      return {
+        error: false,
+        username: '',
+        password: '',
+        confirmedPassword: '',
+        creationError: false
+      };
+    },
 
-class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
+    userNameInfoChange(event) {
+      this.setState({ username: event.target.value });
+    },
 
-    this.state = {
-      error: false,
-      creationError: false
-    };
-  }
+    userPasswordChange(event) {
+      this.setState({ password: event.target.value });
+    },
 
-  checkSignUpInfo(event) {
+    confirmedPasswordChange(event) {
+      this.setState({ confirmedPassword: event.target.value });
+    },
 
-    event.preventDefault();
+    contextTypes: { router: React.PropTypes.object },
 
-    const username = this.refs.username.value;
-    const password = this.refs.password.value;
-    const confirmPassword = this.refs.confirmPassword.value;
+    handleSubmit() {
+      console.log('YOU MADE IT INTO HANDLESUBMIT');
+      const path = '/';
 
-    if (confirmPassword === password) {
-      auth.signup(username, password, (loggedIn) => {
-        if (!loggedIn) {
-          console.log('Not loggedin');
+      this.context.router.push(path);
+    },
 
-          return this.setState({
-            error: true,
-            creationError: true
-          });
+    checkSignUpInfo(event) {
+      event.preventDefault();
+      $.ajax({
+        method: 'POST',
+        url: '/api/users',
+        dataType: 'json',
+        data: {
+          username: this.refs.username.value,
+          password: this.refs.password.value
+        },
+        success: () => {
+          console.log('AJAX sent SUCCESS');
+          this.handleSubmit();
+        },
+        error: (error) => {
+          console.log('AJAX sent FAIL!!!', error);
+          this.setState({ creationError: true });
+          this.setState({ username: '' });
         }
-
-        const { location } = this.props;
-
-        if (location.state && location.state.nextPathname) {
-          return this.props.router.replace(location.state.nextPathname);
-        }
-
-        return this.props.router.replace('/signIn');
       });
+    },
+
+    render() {
+      return (
+        <div>
+          <h1>JOIN THE ADVENTURE</h1>
+          <form onSubmit={this.checkSignUpInfo}>
+            <h4>Username</h4>
+            <input
+            type="text"
+            ref="username"
+            onChange={this.userNameInfoChange} />
+            <h4>Password</h4>
+            <input
+            type="password"
+            ref="password"
+            onChange={this.userPasswordChange} />
+            <h4>Confirm Password</h4>
+            <input type="password" onChange={this.confirmedPasswordChange} />
+            <input type="submit" />
+          </form>
+          { this.state.creationError
+            ? <UserCreationError />
+            : null }
+        </div>
+      );
     }
-  }
+  })
+);
 
-  // handleSubmit() {
-  //   console.log('YOU MADE IT INTO HANDLESUBMIT');
-  //   const path = '/';
-
-  //   this.context.router.push(path);
-  // }
-
-  // checkSignUpInfo(event) {
-  //   $.ajax({
-  //     method: 'POST',
-  //     url: '/api/users',
-  //     dataType: 'json',
-  //     data: {
-  //       username: this.refs.username.value,
-  //       password: this.refs.password.value
-  //     },
-  //     success: () => {
-  //       console.log('AJAX sent SUCCESS');
-  //       this.handleSubmit();
-  //     },
-  //     error: (error) => {
-  //       console.log('AJAX sent FAIL!!!', error);
-  //       this.setState({ creationError: true });
-  //       this.setState({ username: '' });
-  //     }
-  //   });
-  // }
-
-  render() {
-    return (
-      <div>
-        <h1>JOIN THE ADVENTURE</h1>
-        <form onSubmit={this.checkSignUpInfo.bind(this)}>
-          <h4>Username</h4>
-          <input type="text" ref="username" />
-          <h4>Password</h4>
-          <input type="password" ref="password" />
-          <h4>Confirm Password</h4>
-          <input type="password" ref="confirmPassword" />
-          <input type="submit" />
-        </form>
-        { this.state.creationError
-          ? <UserCreationError />
-          : null }
-      </div>
-    );
-  }
-}
-
-SignUp.propTypes = {
-  location: React.PropTypes.object,
-  router: React.PropTypes.object
-};
-
-export default withRouter(SignUp);
+export default SignUp;
