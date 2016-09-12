@@ -6,12 +6,21 @@ import Navbar from './Navbar.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { page: 'find' };
+    this.state = {
+      pins: [],
+      products: [],
+      page: 'find'
+    };
+
+    const getPins = new Request('/api/locations');
+
+    fetch(getPins)
+      .then((res) => res.json())
+      .then((res) => this.setState({ pins: res }));
   }
 
   addProduct(ev) {
     ev.preventDefault();
-
     this.setState({
       page: this.state.page === 'create'
         ? 'find'
@@ -21,7 +30,6 @@ class App extends React.Component {
 
   findProduct(ev) {
     ev.preventDefault();
-
     console.log('finding...');
     this.setState({ page: 'find' });
   }

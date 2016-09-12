@@ -1,11 +1,16 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import UserCreationError from './ErrorMessages.jsx';
+import $ from 'jquery';
 
 import auth from './../auth.js';
 
 class SignUp extends React.Component {
   getInitialState() {
-    return { error: false };
+    return {
+      error: false,
+      creationError: false
+    };
   }
 
   checkSignUpInfo(event) {
@@ -35,6 +40,35 @@ class SignUp extends React.Component {
     }
   }
 
+  handleSubmit() {
+    console.log('YOU MADE IT INTO HANDLESUBMIT');
+    const path = '/';
+
+    this.context.router.push(path);
+  }
+
+  // checkSignUpInfo(event) {
+  //   event.preventDefault();
+  //   $.ajax({
+  //     method: 'POST',
+  //     url: '/api/users',
+  //     dataType: 'json',
+  //     data: {
+  //       username: this.refs.username.value,
+  //       password: this.refs.password.value
+  //     },
+  //     success: () => {
+  //       console.log('AJAX sent SUCCESS');
+  //       this.handleSubmit();
+  //     },
+  //     error: (error) => {
+  //       console.log('AJAX sent FAIL!!!', error);
+  //       this.setState({ creationError: true });
+  //       this.setState({ username: '' });
+  //     }
+  //   });
+  // }
+
   render() {
     return (
       <div>
@@ -48,6 +82,9 @@ class SignUp extends React.Component {
           <input type="password" ref="confirmPassword" />
           <input type="submit" />
         </form>
+        { this.state.creationError
+          ? <UserCreationError />
+          : null }
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const Navbar = (props) => (
-  <nav className="teal">
+  <nav className="teal navbar">
     <div className="nav-wrapper">
       <a href="#" className="brand-logo">Geostashing</a>
       <ul className="right hide-on-med-and-down">

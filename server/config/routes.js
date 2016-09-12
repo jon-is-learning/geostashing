@@ -9,6 +9,7 @@ const image = require('../controllers/image');
 router.get('/api/locations', locations.getAll);
 router.post('/api/locations', locations.addOne);
 router.delete('/api/locations/:name', locations.deleteOne);
+router.post('/api/locations/suggestions/', locations.suggestions);
 
 // router.post('/api/users', user.getAll);
 router.post('/api/users/:name', user.getOne);
@@ -20,5 +21,10 @@ router.get('/api/products', product.getAll);
 router.post('/api/products', product.addOne);
 
 router.post('/api/images', image.addOne);
+
+//router.get('*', send index.html)
+//put this at the end to handle error stuff
+//you want to handle errors on the front end
+//what ever you get to the backend just ship back index.html
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+// const db = require('../models/db.js');
 
 const userController = {
   getOne(req, res) {
@@ -18,10 +19,23 @@ const userController = {
   },
 
   addOne(req, res) {
-
-    console.log(req.body);
-    req.session.user = req.body.user;
-    res.send();
+    User.create({
+      name: req.body.username,
+      password: req.body.password
+    })
+      .then(() => {
+        console.log('It works!');
+        req.session.user = req.body.user;
+        res.status(200).json('Test');
+      })
+      .catch((err) => {
+        console.log('Not working...', err);
+        res.status(400).send(err);
+      });
+  },
+    // console.log(req.body);
+    // req.session.user = req.body.user;
+    // res.send();
     // User
     //   .create(req.body)
     //   .then((user) => {
@@ -37,7 +51,7 @@ const userController = {
 
   signOut(req, res) {
     req.session = null;
-    res.send('DIS SHIT HAS BEEN DELETED');
+    res.send('Your session has been destroyed!');
   }
   // ,
 

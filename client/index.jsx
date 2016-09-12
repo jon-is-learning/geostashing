@@ -38,3 +38,7 @@ class AppRouter extends React.Component {
 }
 
 ReactDOM.render(<AppRouter />, document.getElementById('app'));
+
+//IndexRoute is th e default route
+//BrowserHistory instead of hash history
+//<Route path="*" component={Error}></Route> makesure to put on bottom

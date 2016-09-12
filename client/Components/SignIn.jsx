@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
-
 import auth from './../auth.js';
+import $ from 'jquery';
 
 class SignIn extends React.Component {
   getInitialState() {
@@ -31,6 +31,21 @@ class SignIn extends React.Component {
     });
   }
 
+  // checkLoginInfo(event) {
+  //   event.preventDefault();
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: '/api/users/',
+  //     dataType: 'json',
+  //     success: (data) => {
+  //       console.log('DATA: ', data);
+  //     },
+  //     error: (error) => {
+  //       console.log('ERROR: ', error);
+  //     }
+  //   });
+  // }
+
   render() {
     return (
       <div>
@@ -46,8 +61,6 @@ class SignIn extends React.Component {
       </div>
     );
   }
-
-}
 
 SignIn.propTypes = {
   location: React.PropTypes.object,
@@ -66,3 +79,4 @@ export default withRouter(SignIn);
 //       <input type="submit" />
 //       <Link to="signup">Register</Link>
 //     </div>;
+
