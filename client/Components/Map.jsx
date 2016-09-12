@@ -1,5 +1,7 @@
 import React from 'react';
 
+const oneMile = 1609.3;
+
 //the map component basically wraps around the google maps api
 //it can take a list of pins (in format specified by api) and display them
 //through the google maps api.
@@ -38,7 +40,9 @@ class Map extends React.Component {
       currentPin: null,
 
       //holds the google maps map object
-      map: null
+      map: null,
+
+      centerRadius: null
     };
   }
 
@@ -67,6 +71,30 @@ class Map extends React.Component {
         }
       });
     });
+
+    if (this.props.centerRadius) {
+      this.data.centerRadius = {};
+
+      this.data.centerRadius.marker = new google.maps.Marker({
+        map: this.data.map,
+        position: pos,
+        visible: false
+      });
+
+      this.data.centerRadius.shape = new google.maps.Circle({
+        map: this.data.map,
+        radius: oneMile * this.props.centerRadius,
+        fillColor: '#000000',
+        fillOpacity: 0,
+        strokeColor: '#448888',
+        strokeOpacity: 0.5
+      });
+
+      this.data.centerRadius.shape.bindTo(
+        'center',
+        this.data.centerRadius.marker,
+        'position');
+    }
 
     this.drawPins(this.state.pins);
   }
@@ -117,25 +145,37 @@ class Map extends React.Component {
   }
 
   checkPins(newProps, newState) {
-    if (newState.pins !== this.state.pins) {
+    if (JSON.stringify(newState.pins) !== JSON.stringify(this.state.pins)) {
       console.log('redrawing all pins from state');
       this.drawPins(newState.pins);
-    } else if (newProps.pins !== this.props.pins) {
+    } else if (
+        JSON.stringify(newProps.pins) !== JSON.stringify(this.props.pins)) {
       console.log('redrawing all pins from props');
       this.drawPins(newProps.pins);
       this.setState({ pins: newProps.pins });
     }
   }
 
+  checkCenter(newProps) {
+    if (newProps.zoom !== this.props.zoom) {
+      this.data.map.setZoom(Math.floor(parseFloat(newProps.zoom)));
+    }
+
+    if (this.props.centerRadius) {
+      this.data.centerRadius.marker.setPosition({
+        lat: newProps.lat,
+        lng: newProps.lng
+      });
+      this.data.centerRadius.shape.setRadius(oneMile * this.props.centerRadius);
+    }
+  }
+
   componentWillUpdate(newProps, newState) {
     this.checkPins(newProps, newState);
+    this.checkCenter(newProps);
 
     if (newProps.lat !== this.props.lat || newProps.lng !== this.props.lng) {
       this.data.map.panTo({ lat: newProps.lat, lng: newProps.lng });
-    }
-
-    if (newProps.zoom !== this.props.zoom) {
-      this.data.map.setZoom(Math.floor(parseFloat(newProps.zoom)));
     }
 
     if (newState.currentPin !== this.state.currentPin) {
@@ -162,14 +202,16 @@ Map.propTypes = {
   lng: React.PropTypes.number,
   zoom: React.PropTypes.number,
   pins: React.PropTypes.array,
-  selectCoords: React.PropTypes.func
+  selectCoords: React.PropTypes.func,
+  centerRadius: React.PropTypes.number
 };
 
 Map.defaultProps = {
   lat: 0,
   lng: 0,
   zoom: 8,
-  pins: []
+  pins: [],
+  centerRadius: null
 };
 
 export default Map;
