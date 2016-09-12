@@ -42,7 +42,7 @@ const SignIn = withRouter(
             <input ref="password" type="password" />
             <input type="submit" />
           </form>
-          <Link to="signup">Register</Link>
+          <Link to="signup" className="link">Register</Link>
         </div>
       );
     }
