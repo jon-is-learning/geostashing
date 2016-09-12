@@ -2,19 +2,19 @@ import React from 'react';
 
 const Welcome = () => (
   <div>
+  <a href="#/signin">signin</a>|<a href="#/signup">signup</a>
   <div id="index-banner" className="parallax-container">
     <div className="section no-pad-bot">
       <div className="container">
 
         <h1 className="card-panel teal header center white-text">Geostash</h1>
         <div className="row center">
-          <h5 className="card-panel white header col s3 center teal-text light">Don't just buy. Hunt.</h5>
+          <h5 className="card-panel white header col s3 center light">Don't just buy. Hunt.</h5>
         </div>
         <div className="row center">
           <a href="/#/dash" className="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
         </div>
 
-        <a href="#/signin">signin</a>|<a href="#/signup">signup</a>
       </div>
     </div>
     <div className="parallax"><img src="./media/city.jpg" alt="Unsplashed background img 1" /></div>
@@ -27,27 +27,27 @@ const Welcome = () => (
         <div className="col s12 m4">
           <div className="icon-block">
             <h2 className="center brown-text"><i className="material-icons">flash_on</i></h2>
-            <h5 className="center">Speeds up development</h5>
+            <h5 className="center">Lightning is Cool</h5>
 
-            <p className="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+            <p className="light">So is treasure hunting. Buy random treasures and they'll be hidden just for you. Category based purchasing ensures you get a pleasant surprise every time.</p>
           </div>
         </div>
 
         <div className="col s12 m4">
           <div className="icon-block">
             <h2 className="center brown-text"><i className="material-icons">group</i></h2>
-            <h5 className="center">User Experience Focused</h5>
+            <h5 className="center">Buy and Sell Anonymously</h5>
 
-            <p className="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+            <p className="light">Upload product types you would like to sell. We will notify you when someone chooses one of your categories. Location based searches ensure you never have to travel far to start an adventure.</p>
           </div>
         </div>
 
         <div className="col s12 m4">
           <div className="icon-block">
             <h2 className="center brown-text"><i className="material-icons">wb_sunny</i></h2>
-            <h5 className="center">Easy to work with</h5>
+            <h5 className="center">The Sun is Above You.</h5>
 
-            <p className="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+            <p className="light">Get out and enjoy the world while continuing to participate in a capitalist society.</p>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@ const Welcome = () => (
     <div className="section no-pad-bot">
       <div className="container">
         <div className="row center">
-          <h5 className="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+          <h5 className="card panel white header col s12 light">Shopping + Exploring = Shoxploring. Start shoxploring now!</h5>
         </div>
       </div>
     </div>
@@ -74,23 +74,11 @@ const Welcome = () => (
         <div className="col s12 center">
           <h3><i className="mdi-content-send brown-text"></i></h3>
           <h4>Contact Us</h4>
-          <p className="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+          <p className="left-align light">Just kidding.</p>
         </div>
       </div>
 
     </div>
-  </div>
-
-
-  <div className="parallax-container valign-wrapper">
-    <div className="section no-pad-bot">
-      <div className="container">
-        <div className="row center">
-          <h5 className="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-      </div>
-    </div>
-    <div className="parallax"><img src="background3.jpg" alt="Unsplashed background img 3" /></div>
   </div>
 
   <footer className="page-footer teal">
@@ -98,7 +86,7 @@ const Welcome = () => (
       <div className="row">
         <div className="col l6 s12">
           <h5 className="white-text">Company Bio</h5>
-          <p className="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+          <p className="grey-text text-lighten-4">If you're allergic to biographies then this is a bio-hazard.</p>
 
 
         </div>
@@ -124,7 +112,7 @@ const Welcome = () => (
     </div>
     <div className="footer-copyright">
       <div className="container">
-      Made by <a className="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      Made by <a className="brown-text text-lighten-3" href="https://github.com/clueless-cello">Clueless Cello</a>
       </div>
     </div>
   </footer>
