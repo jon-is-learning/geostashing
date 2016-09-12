@@ -3,64 +3,59 @@ import { withRouter } from 'react-router';
 
 import auth from './../auth.js';
 
-const SignUp = withRouter(
-  React.createClass({
-    getInitialState() {
-      return {
-        error: false,
-      };
-    },
+class SignUp extends React.Component {
+  getInitialState() {
+    return { error: false };
+  }
 
-    checkSignUpInfo(event) {
+  checkSignUpInfo(event) {
 
-      event.preventDefault();
+    event.preventDefault();
 
-      const username = this.refs.username.value;
-      const password = this.refs.password.value;
-      const confirmPassword = this.refs.confirmPassword.value;
+    const username = this.refs.username.value;
+    const password = this.refs.password.value;
+    const confirmPassword = this.refs.confirmPassword.value;
 
-      if (confirmPassword === password) {
-        auth.signup(username, password, (loggedIn) => {
-          if (!loggedIn) {
-            console.log('Not loggedin');
+    if (confirmPassword === password) {
+      auth.signup(username, password, (loggedIn) => {
+        if (!loggedIn) {
+          console.log('Not loggedin');
 
-            return this.setState({ error: true });
-          }
+          return this.setState({ error: true });
+        }
 
-          const { location } = this.props;
+        const { location } = this.props;
 
-          if (location.state && location.state.nextPathname) {
-            this.props.router.replace(location.state.nextPathname);
+        if (location.state && location.state.nextPathname) {
+          return this.props.router.replace(location.state.nextPathname);
+        }
 
-            return;
-          } else {
-            this.props.router.replace('/signIn');
-
-            return;
-          }
-        });
-      }
-        
-    },
-
-
-    render() {
-      return (
-        <div>
-          <h1>JOIN THE ADVENTURE</h1>
-          <form onSubmit={this.checkSignUpInfo}>
-            <h4>Username</h4>
-            <input type="text" ref='username' />
-            <h4>Password</h4>
-            <input type="password" ref='password' />
-            <h4>Confirm Password</h4>
-            <input type="password" ref='confirmPassword' />
-            <input type="submit" />
-          </form>
-        </div>
-      );
+        return this.props.router.replace('/signIn');
+      });
     }
-  })
-);
+  }
 
-export default SignUp;
+  render() {
+    return (
+      <div>
+        <h1>JOIN THE ADVENTURE</h1>
+        <form onSubmit={this.checkSignUpInfo.bind(this)}>
+          <h4>Username</h4>
+          <input type="text" ref="username" />
+          <h4>Password</h4>
+          <input type="password" ref="password" />
+          <h4>Confirm Password</h4>
+          <input type="password" ref="confirmPassword" />
+          <input type="submit" />
+        </form>
+      </div>
+    );
+  }
+}
+
+SignUp.propTypes = {
+  location: React.PropTypes.object,
+  router: React.PropTypes.object
+};
+
+export default withRouter(SignUp);

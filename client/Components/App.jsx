@@ -3,10 +3,6 @@ import Catalog from './Catalog.jsx';
 import AddProduct from './AddProduct.jsx';
 import Navbar from './Navbar.jsx';
 
-import auth from './../auth.js';
-import { Link } from 'react-router'
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);

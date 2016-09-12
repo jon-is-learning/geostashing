@@ -7,7 +7,7 @@ const userController = {
     User
       .findOne({ where: req.params })
       .then((user) => {
-        if(user) {
+        if (user) {
           req.session.user = user;
           res.send();
         } else {

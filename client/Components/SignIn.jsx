@@ -3,64 +3,58 @@ import { Link, withRouter } from 'react-router';
 
 import auth from './../auth.js';
 
-const SignIn = withRouter(
-  React.createClass({
-    getInitialState() {
-      return { error: false };
-    },
+class SignIn extends React.Component {
+  getInitialState() {
+    return { error: false };
+  }
 
-    checkLoginInfo(event) {
+  checkLoginInfo(event) {
 
-      event.preventDefault();
-      const username = this.refs.username.value;
-      const password = this.refs.password.value;
+    event.preventDefault();
+    const username = this.refs.username.value;
+    const password = this.refs.password.value;
 
-      auth.login(username, password, (loggedIn) => {
-        if (!loggedIn) {
-          console.log('Not loggedin');
+    auth.login(username, password, (loggedIn) => {
+      if (!loggedIn) {
+        console.log('Not loggedin');
 
-          return this.setState({ error: true });
-        }
+        return this.setState({ error: true });
+      }
 
-        const { location } = this.props;
+      const { location } = this.props;
 
-        if (location.state && location.state.nextPathname) {
-          this.props.router.replace(location.state.nextPathname);
+      if (location.state && location.state.nextPathname) {
+        return this.props.router.replace(location.state.nextPathname);
+      }
 
-          return;
-        } else {
-          this.props.router.replace('/home');
+      return this.props.router.replace('/home');
+    });
+  }
 
-          return;
-        }
-      });
-    },
+  render() {
+    return (
+      <div>
+        <h1>SIGN IN</h1>
+        <form onSubmit={this.checkLoginInfo.bind(this)}>
+          <h4>Username</h4>
+          <input ref="username" type="text" />
+          <h4>Password</h4>
+          <input ref="password" type="password" />
+          <input type="submit" />
+        </form>
+        <Link to="signup">Register</Link>
+      </div>
+    );
+  }
 
-    render() {
-      return (
-        <div>
-          <h1>SIGN IN</h1>
-          <form onSubmit={this.checkLoginInfo}>
-            <h4>Username</h4>
-            <input ref="username" type="text" />
-            <h4>Password</h4>
-            <input ref="password" type="password" />
-            <input type="submit" />
-          </form>
-          <Link to="signup">Register</Link>
-        </div>
-      );
-    }
-  })
-
-);
+}
 
 SignIn.propTypes = {
   location: React.PropTypes.object,
   router: React.PropTypes.object
 };
 
-export default SignIn;
+export default withRouter(SignIn);
 
 // () =>
 //     <div>

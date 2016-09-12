@@ -1,5 +1,6 @@
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const expirationMS = 100000;
 
 module.exports = (app, express) => {
   app.use(express.static('client/public'));
@@ -7,10 +8,10 @@ module.exports = (app, express) => {
     secret: '12345abcde',
     resave: true,
     saveUninitialized: false,
-    cookie: { 
+    cookie: {
       secure: false,
       httpOnly: false,
-      expires: new Date(Date.now() + (30 * 86400 * 1000))
+      expires: new Date(Date.now() + expirationMS)
     }
   }));
   app.use(bodyParser.json());
