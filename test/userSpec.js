@@ -68,7 +68,7 @@ describe('user api endpoint (/api/users)', () => {
       });
   });
 
-  describe('delete user', () => {
+  xdescribe('delete user', () => {
     it('should a user with name queried (DELETE /api/users/:name)', (done) => {
       chai.request(server)
         .delete('/api/users/testUser')
