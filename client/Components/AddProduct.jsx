@@ -16,7 +16,12 @@ class AddProduct extends React.Component {
   render() {
     return (
       <form method="POST" action="/api/locations" className="new-product row">
-        <h5>create new product</h5>
+        <div className="row">
+          <i
+            onClick={this.props.onClose}
+            className="material-icons back-arrow">arrow_back</i>
+          <p className="title">Create a new stash</p>
+        </div>
         <div className="row">
           <Map
             selectCoords={this.selectCoords.bind(this)}
@@ -152,8 +157,8 @@ class AddProduct extends React.Component {
 
 AddProduct.propTypes = {
   lat: React.PropTypes.number,
-  lng: React.PropTypes.number
+  lng: React.PropTypes.number,
+  onClose: React.PropTypes.func
 };
-
 
 export default AddProduct;
