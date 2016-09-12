@@ -3,7 +3,7 @@ import Moment from 'moment';
 
 const Product = (props) => (
   <li
-    onClick={props.show.bind(null, props.info.id)}
+    onClick={props.show.bind(null, props.info)}
     className="collection-item avatar product">
     <img
       src={
@@ -16,16 +16,13 @@ const Product = (props) => (
       <span className="price">${props.info.price}</span><br/>
       by {props.info.seller.name}
       <span title={props.info.createdAt}>
-        {Moment().from(props.info.createdAt)} ago
+        &nbsp;{Moment().from(props.info.createdAt)} ago
       </span>
       <br/>
       {props.info.description}
     </p>
     <a href="#!" className="secondary-content">
       <i className="material-icons">location_on</i>
-      {
-        /*props.info.location.lng}, {props.info.location.lat*/
-      }
       12mi
     </a>
   </li>

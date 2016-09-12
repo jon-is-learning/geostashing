@@ -3,7 +3,7 @@ import React from 'react';
 const Navbar = (props) => (
   <nav className="teal navbar">
     <div className="nav-wrapper">
-      <a href="#" className="brand-logo">Geostashing</a>
+      <a href="#" className="left brand-logo">Geostashing</a>
       <ul className="right hide-on-med-and-down">
         <li className={
             props.page === 'find'
