@@ -1,57 +1,53 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
-import auth from './../auth.js';
+import $ from 'jquery';
 
-class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
+const SignIn = withRouter(
+  React.createClass({
+    getInitialState() {
+      return {
+        error: false,
+        username: '',
+        password: ''
+      };
+    },
 
-    this.state = { error: false };
-  }
+    userPasswordChange(event) {
+      this.setState({ password: event.target.value });
+    },
 
-  checkLoginInfo(event) {
+    checkLoginInfo(event) {
+      event.preventDefault();
+      $.ajax({
+        method: 'GET',
+        url: '/api/users/',
+        dataType: 'json',
+        success: (data) => {
+          console.log('DATA: ', data);
+        },
+        error: (error) => {
+          console.log('ERROR: ', error);
+        }
+      });
+    },
 
-    event.preventDefault();
-    const username = this.refs.username.value;
-    const password = this.refs.password.value;
+    render() {
+      return (
+        <div>
+          <h1>SIGN IN</h1>
+          <form onSubmit={this.checkLoginInfo}>
+            <h4>Username</h4>
+            <input ref="username" type="text" />
+            <h4>Password</h4>
+            <input ref="password" type="password" />
+            <input type="submit" />
+          </form>
+          <Link to="signup" className="link">Register</Link>
+        </div>
+      );
+    }
+  })
 
-    auth.login(username, password, (loggedIn) => {
-      if (!loggedIn) {
-        console.log('Not loggedin');
+);
 
-        return this.setState({ error: true });
-      }
-
-      const { location } = this.props;
-
-      if (location.state && location.state.nextPathname) {
-        return this.props.router.replace(location.state.nextPathname);
-      }
-
-      return this.props.router.replace('/home');
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>SIGN IN</h1>
-        <form onSubmit={this.checkLoginInfo.bind(this)}>
-          <h4>Username</h4>
-          <input ref="username" type="text" />
-          <h4>Password</h4>
-          <input ref="password" type="password" />
-          <input type="submit" />
-        </form>
-        <Link to="signup">Register</Link>
-      </div>
-    );
-  }
-}
-
-SignIn.propTypes = {
-  location: React.PropTypes.object,
-  router: React.PropTypes.object
-};
-
-export default withRouter(SignIn);
+export default SignIn;
