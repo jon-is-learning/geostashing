@@ -10,6 +10,7 @@ router.get('/api/locations', locations.getAll);
 router.post('/api/locations', locations.addOne);
 router.delete('/api/locations/:name', locations.deleteOne);
 router.post('/api/locations/suggestions/', locations.suggestions);
+router.post('/api/locations/details/', locations.details);
 
 // router.post('/api/users', user.getAll);
 router.post('/api/users/:name', user.getOne);

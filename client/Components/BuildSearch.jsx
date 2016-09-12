@@ -5,7 +5,7 @@ class BuildSearch extends React.Component {
     super(props);
 
     this.state = {
-      search: '',
+      location: '',
       radius: 5
     };
   }
@@ -26,35 +26,48 @@ class BuildSearch extends React.Component {
           .then((res) => result(res))
           .catch((err) => console.log(err));
       },
-      delay: 100
+      delay: 100,
+      select: (event, ui) => {
+        this.getLocationData(ui.item.value)
+          .then((loc) => this.props.updateCenter(loc));
+
+        ui.item.value = ui.item.label;
+      }
     });
   }
 
-  searchFor() {
-    this.setState({ search: this.refs.search.value });
+  getLocationData(id) {
+    const detailReq = new Request('/api/locations/details/', {
+      method: 'POST',
+      body: JSON.stringify({ id }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    return fetch(detailReq)
+      .then((res) => res.json());
+  }
+
+  locationChange() {
+    this.setState({ location: this.refs.location.value });
   }
 
   radiusTo() {
     this.setState({ radius: this.refs.radius.value });
+    this.props.updateRadius(this.refs.radius.value);
   }
 
   render() {
     return (
-      <form>
+      <form className="card-panel build-search">
         <input
           type="text"
           list="location-list"
-          ref="search"
+          ref="location"
           className="autocomplete location"
-          onChange={this.searchFor.bind(this)}
+          onChange={this.locationChange.bind(this)}
           placeholder="enter location name or coordinates"/>
         <div className="row">
-          <p className="col s1 center">radius:</p>
-          <input
-            className="col s1"
-            type="text"
-            value={`${this.state.radius}mi`}
-            readOnly={true}/>
+          <p className="radius col s2 center">radius: {this.state.radius} mi</p>
           <p className="range-field col s10">
             <input
               ref="radius"
@@ -65,9 +78,16 @@ class BuildSearch extends React.Component {
               step="0.1"/>
           </p>
         </div>
+        <a className="waves-effect waves-light btn right">search</a>
       </form>
     );
   }
 }
+
+BuildSearch.propTypes = {
+  updateSearch: React.PropTypes.func,
+  updateCenter: React.PropTypes.func,
+  updateRadius: React.PropTypes.func
+};
 
 export default BuildSearch;
